@@ -15,7 +15,7 @@ Meteor.methods({
 });
 
 Accounts.emailTemplates.siteName = 'KM_edu';
-Accounts.emailTemplates.siteName = 'KM_edu Administrator <accounts@km_edu.com>';
+Accounts.emailTemplates.siteName = 'KM_edu Administrator <accounts@km-application.com>';
 Accounts.emailTemplates.enrollAccount = {
     subject: function () {
         return 'Enrollment email for KM Edu';
