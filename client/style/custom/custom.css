@@ -1,0 +1,31 @@
+.Absolute-Center{
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+.Absolute-Center h1,h2,h3{
+    text-align: center;
+}
+
+.login{
+    border-radius: 10px;
+    background: #151c2d;
+    color: #F28914;
+}
+
+.Absolute-Center.is-Responsive {
+    width: 50%;
+    height: 50%;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 40px;
+}
+
+.lang-picker{
+    color: #151c2d;
+    position: fixed;
+    top: 1px;
+    right: 1px;
+    width: 100px;
+    height: 10px;
+}

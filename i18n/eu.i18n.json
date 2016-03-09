@@ -1,0 +1,14 @@
+{
+  "application_name": "KEdu",
+  "welcome": "Ongi etorri!",
+  "login": "Sartu",
+  "username": "Erabiltzaile izena",
+  "password": "Pasahitza",
+  "email": "Posta elektronikoa",
+  "forgot_pwd": "Pasahitza ahaztu ahal duzu?",
+  "invite_users": "Erabiltzaileak gonbidatu",
+  "management_portal": "Kudeaketa",
+  "new_users": "Erabiltzaile berriak",
+  "empty_list": "Zerrenda hutsik dago",
+  "people_to_invite": "Gondbidatu zerrenda"
+}

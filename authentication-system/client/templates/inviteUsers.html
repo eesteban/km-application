@@ -1,0 +1,37 @@
+<template name="inviteUsers" xmlns="http://www.w3.org/1999/html">
+    <h3>{{_ "new_users"}}</h3>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{_ "people_to_invite"}}
+            <form id="inviteUserForm">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="{{_ "email"}}">
+                <span class="input-group-btn ">
+                    <button type="submit" class="btn btn-primary">
+                        <i class=" glyphicon glyphicon-plus" ></i>
+                    </button>
+                </span>
+                </div>
+                <div id="errorMessage"> </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            {{#if emailList}}
+                <ul class="list-group">
+                    {{#each emailList}}
+                        <li id="{{this}}" class="list-group-item">
+                            {{this}}
+                            <a href="#" class="delete-user pull-right">
+                                <span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+                <input type="button" id="inviteUsers" class="btn btn-block btn-primary" value="{{_ "invite_users"}}"/>
+            {{else}}
+                {{_ "empty_list"}}
+            {{/if}}
+        </div>
+    </div>
+</template>

@@ -1,0 +1,19 @@
+<template name="login">
+    <div class="Absolute-Center is-Responsive login">
+        <h2>{{_ "login"}}</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="inputUsername">{{_ "username"}}</label>
+                <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="{{_ "username"}}">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">{{_ "password"}}</label>
+                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="{{_ "password"}}">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-block" value="Log In"/>
+                <a href="">{{_ "forgot_pwd"}}</a>
+            </div>
+        </form>
+    </div>
+</template>
