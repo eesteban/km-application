@@ -7,20 +7,18 @@ Router.route('/', function(){
 });
 
 Router.route('/personalProfile', function(){
-    this.layout('mainLayout');
-    this.render('personalProfile')
+    //this.layout('mainLayout');
+    /*if(Meteor.user().updated){*/
+        this.render('personalProfile');
+    /*}else{
+        this.render('enrollment');
+    }*/
 });
 
 Router.route('/managementPortal', function(){
-    /*Change for management portal when finished*/
     this.render('administrationPanel');
 });
 
-Router.route('/enrollment/:token', function(){
-    var token = this.params.token;
-    this.render('enrollment', {
-        data: {
-            token: token
-        }
-    });
+Router.route('/enrollment', function(){
+    this.render('enrollment');
 });

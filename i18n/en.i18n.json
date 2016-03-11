@@ -1,14 +1,22 @@
 {
   "application_name": "KEdu",
   "welcome": "Welcome!",
+
   "login": "Login",
   "username": "Username",
   "password": "Password",
   "email": "Email",
+  "name": "Name",
+  "surname": "Surname",
+
   "forgot_pwd": "Forgot your password?",
   "invite_users": "Invite users",
   "management_portal": "Management portal",
   "new_users": "New users",
   "empty_list": "The list is empty",
-  "people_to_invite": "People to invite"
+  "people_to_invite": "People to invite",
+
+  "enrollment": "Enrollment",
+  "password_confirmation": "Confirm Password",
+  "enroll": "Enroll"
 }

@@ -1,4 +1,8 @@
 <template name="home">
     {{> languagePicker}}
-    {{> login}}
+    {{#unless enrollmentToken}}
+        {{> login}}
+    {{else}}
+        {{> enrollment}}
+    {{/unless}}
 </template>

@@ -40,7 +40,6 @@ Template.login.onRendered(function(){
 
 Template.login.events({
     'submit form': function (event) {
-        // Prevent default browser form submit
         event.preventDefault();
     }
 });

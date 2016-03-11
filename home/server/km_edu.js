@@ -4,11 +4,10 @@ Meteor.startup(function () {
     var admin = {
       username: 'administrator',
       password: 'km_admin',
-      profile: {
-        type: 'admin'
-      }
+      type: 'admin'
     };
 
-    Accounts.createUser(admin);
+    var userID = Accounts.createUser(admin);
+    console.log('createAdministrator - ID: ' + userID);
   }
 });
