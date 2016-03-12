@@ -1,0 +1,32 @@
+<template name="headerNav">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            /*Logo*/
+        </a>
+        <button type="button" class="navbar-toggle collapsed btn btn-primary" data-toggle="collapse" data-target="#sideNav">
+            <span>
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+            </span>
+        </button>
+    </div>
+    <div class="nav navbar-left top-nav">
+        <form class="navbar-form" role="search">
+            <div class="input-group search">
+                <input type="text" class="form-control input-sm" id="inputSearch" placeholder="{{_ "search"}}">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class=" glyphicon glyphicon-search" ></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <ul class="nav navbar-right top-nav">
+        <li>
+            <a href="/personalProfile" class="navbar-link">{{currentUser.username}}</a>
+        </li>
+        <li>
+            /*Picture*/
+        </li>
+    </ul>
+</template>

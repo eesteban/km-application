@@ -1,0 +1,20 @@
+<template name="sideNav">
+    <div id="sideNav" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+
+            <li>
+                <a href="/"><i class="glyphicon glyphicon-user"></i> {{_ "myProfile"}} </a>
+            </li>
+            <li>
+                <a href="/"><i class="glyphicon glyphicon-globe"></i> {{_ "communities"}} </a>
+            </li>
+            <li>
+                <a href="/"><i class="glyphicon glyphicon-education"></i> {{_ "managementPortal"}} </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+                {{> i18n_buttons}}
+            </li>
+        </ul>
+    </div>
+</template>
