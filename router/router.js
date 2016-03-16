@@ -2,17 +2,13 @@ Router.route('/', function(){
     if(!Meteor.userId()){
         this.render('home');
     }else{
-        Router.go('/personalProfile');
+        Router.go('/myProfile');
     }
 });
 
-Router.route('/personalProfile', function(){
+Router.route('/myProfile', function(){
     this.layout('mainLayout');
-    /*if(Meteor.user().updated){*/
-        this.render('personalProfile');
-    /*}else{
-        this.render('enrollment');
-    }*/
+    this.render('myProfile');
 });
 
 Router.route('/managementPortal', function(){

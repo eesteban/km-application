@@ -1,0 +1,56 @@
+<template name="aboutMe">
+    <div class="row">
+        <h3>{{_ "aboutMe"}}</h3>
+        <form id="aboutMeForm">
+            <div class="input-group">
+                <textarea class="form-control" id="aboutMeInput" name="aboutMe" rows="10">{{#if userData.aboutMe}}{{userData.aboutMe}}{{else}}{{_ "not_AboutMe"}}{{/if}}</textarea>
+                <button type="submit" class="btn btn-primary">{{_ "update"}}</button>
+            </div>
+            <div id="errorMessageAboutMe"> </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <h3>{{_ "skills"}}</h3>
+        <ul class="tag-bar">
+            {{#each userData.skills}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{_ "not_skills"}}</li>
+            {{/each}}
+        </ul>
+        <form id="newSkill">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" id="skill" name="skill" placeholder="{{_ "skill"}}">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class=" glyphicon glyphicon-plus" ></i>
+                        </button>
+                    </span>
+            </div>
+            <div id="errorMessageSkill"> </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <h3>{{_ "interests"}}</h3>
+        <ul class="tag-bar">
+            {{#each userData.interests}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{_ "not_interests"}}</li>
+            {{/each}}
+        </ul>
+        <form id="newInterest">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" id="interest" name="interest" placeholder="{{_ "interest"}}">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class=" glyphicon glyphicon-plus" ></i>
+                        </button>
+                    </span>
+            </div>
+            <div id="errorMessageInterest"> </div>
+        </form>
+    </div>
+</template>

@@ -41,7 +41,6 @@ Template.inviteUsers.events({
                 Bert.alert(error.reason);
             }
         });
-
     }
 });
 

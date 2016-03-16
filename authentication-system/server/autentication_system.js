@@ -10,14 +10,6 @@ Meteor.methods({
             Accounts.sendEnrollmentEmail(userId);
         }
     },
-    /*updateUsername: function (username){
-        var userId = Meteor.userId();
-        if(userId){
-            Meteor.users.update(userId, {$set: {username: username}});
-        }else{
-            throw new Meteor.Error('Not user Loged In');
-        }
-    },*/
     updateUser: function (profile, username){
         var userID = Meteor.userId();
         if(userID){

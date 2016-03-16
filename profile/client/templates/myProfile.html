@@ -1,0 +1,84 @@
+<template name="myProfile">
+    <div class="row">
+        <div class="col col-sm-3">
+            <h2>{{userData.profile.name}} {{userData.profile.surname}}</h2>
+            <div>
+                /*Picture*/
+            </div>
+            <h3>Contact Information</h3>
+            <ul class="profile-details">
+                <div><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
+                {{#each userData.phones}}
+                    <li>
+                        {{this}}
+                        <a class="removePhone" href="#">
+                            <i class="glyphicon glyphicon-remove-sign text-danger"></i>
+                        </a>
+                    </li>
+                {{else}}
+                    <li>
+                        {{_ "not_Phone"}}
+                    </li>
+                {{/each}}
+                <li>
+                    <form id="newPhone">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="phone" name="phone" placeholder="{{_ "phone"}}">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class=" glyphicon glyphicon-plus" ></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div id="errorMessagePhone"> </div>
+                    </form>
+                </li>
+                <div><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
+                {{#each userData.emails}}
+                    <li>
+                        {{this.address}}
+                        <a class="removeEmail" href="#">
+                            <i class="glyphicon glyphicon-remove-sign text-danger"></i>
+                        </a>
+                    </li>
+                {{/each}}
+                <li>
+                    <form id="newEmail">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="email" name="email" placeholder="{{_ "email"}}">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class=" glyphicon glyphicon-plus" ></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div id="errorMessageEmail"> </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="col col-sm-9">
+            <ul class="nav nav-tabs" id="profile/tabs">
+                <li class="active"><a href="/myProfile#aboutMe">{{_ "aboutMe"}}</a></li>
+                <li><a href="/myProfile#blog">{{_ "blog"}}</a></li>
+                <li><a href="/myProfile#communities">{{_ "communities"}}</a></li>
+                <li><a href="/myProfile#messages">{{_ "messages"}}</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="aboutMe">
+                    {{> aboutMe}}
+                </div>
+                <div class="tab-pane" id="blog">
+                    <!--{{> blogMain}}-->
+                </div>
+                <div class="tab-pane" id="communities">
+                    <!--{{> communities}}-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <!--{{> messages}}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
