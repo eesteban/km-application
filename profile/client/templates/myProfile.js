@@ -5,6 +5,8 @@ Accounts.onEmailVerificationLink(function(token, done){
 });
 
 Template.myProfile.onRendered(function(){
+    Meteor.subscribe("userData");
+
     $("#newPhone").validate({
         rules:{
             phone: {
@@ -18,14 +20,15 @@ Template.myProfile.onRendered(function(){
         },
         submitHandler: function() {
             var phone = $('#phone').val();
-            if(Meteor.user().phones){
-                if(Meteor.user().phones.indexOf(phone)<0){
-                    Meteor.users.update(Meteor.userId(), {$push: {phones: phone}})
+            var userPhones = Meteor.user().profile.phones;
+            if(userPhones){
+                if(userPhones.indexOf(phone)<0){
+                    Meteor.users.update(Meteor.userId(), {$push: {'profile.phones': phone}})
                 }else{
                     Bert.alert('That phone is already in the list', 'danger')
                 }
             }else{
-                Meteor.users.update(Meteor.userId(), {$set: {phones: [phone]}})
+                Meteor.users.update(Meteor.userId(), {$set: {'profile.phones': [phone]}})
             }
 
         },
@@ -50,6 +53,12 @@ Template.myProfile.onRendered(function(){
         },
         errorLabelContainer: '#errorMessageEmail'
     });
+});
+
+Template.myProfile.helpers({
+    "userData": function(){
+        return Meteor.users.findOne(Meteor.userId());
+    }
 });
 
 Template.myProfile.events({

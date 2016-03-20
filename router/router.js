@@ -7,13 +7,30 @@ Router.route('/', function(){
 });
 
 Router.route('/myProfile', function(){
-    this.layout('mainLayout');
-    this.render('myProfile');
+    if(!Meteor.userId()){
+        Router.go('/');
+    }else{
+        this.layout('mainLayout');
+        this.render('myProfile');
+    }
 });
 
 Router.route('/managementPortal', function(){
-    this.layout('mainLayout');
-    this.render('administrationPanel');
+    if(!Meteor.userId()){
+        Router.go('/');
+    }else{
+        this.layout('mainLayout');
+        this.render('administrationPanel');
+    }
+});
+
+Router.route('/communities', function(){
+    if(!Meteor.userId()){
+        Router.go('/');
+    }else {
+        this.layout('mainLayout');
+        this.render('createCommunity');
+    }
 });
 
 Router.route('/enrollment', function(){

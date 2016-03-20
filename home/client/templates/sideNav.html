@@ -3,10 +3,10 @@
         <ul class="nav navbar-nav side-nav">
 
             <li>
-                <a href="/myProfile"><i class="glyphicon glyphicon-user"></i> {{_ "myProfile"}} </a>
+                <a href="/myProfile"><i class="glyphicon glyphicon-user"></i> {{_ "my_profile"}} </a>
             </li>
             <li>
-                <a href="/"><i class="glyphicon glyphicon-globe"></i> {{_ "communities"}} </a>
+                <a href="/communities"><i class="glyphicon glyphicon-globe"></i> {{_ "communities"}} </a>
             </li>
             <li>
                 <a href="/managementPortal"><i class="glyphicon glyphicon-education"></i> {{_ "managementPortal"}} </a>
@@ -14,6 +14,11 @@
             <li role="separator" class="divider"></li>
             <li>
                 {{> i18n_buttons}}
+            </li>
+            <li>
+                <button class="btn btn-sm btn-primary" id="logout">
+                    {{_ "logout"}}
+                </button>
             </li>
         </ul>
     </div>

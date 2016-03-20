@@ -58,7 +58,7 @@ Template.enrollment.onRendered(function(){
                         if(error){
                             Bert.alert(error.reason, 'danger');
                         }else{
-                            Router.go('/personalProfile');
+                            Router.go('/myProfile');
                         }
                     });
                 }

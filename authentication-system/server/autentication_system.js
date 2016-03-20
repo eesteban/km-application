@@ -5,7 +5,6 @@ Meteor.methods({
                 email: emailList[i],
                 type: 'staff'
             };
-            console.log(JSON.stringify(user));
             var userId = Accounts.createUser(user);
             Accounts.sendEnrollmentEmail(userId);
         }
@@ -13,9 +12,6 @@ Meteor.methods({
     updateUser: function (profile, username){
         var userID = Meteor.userId();
         if(userID){
-            console.log('Update user (' + userID + ')');
-            console.log('Update user (' + userID + ') - Profile:' + JSON.stringify(profile));
-            console.log('Update user (' + userID + ') - Username:' + username);
             if(profile && username){
                 Meteor.users.update(userID, {$set: {username: username, profile: profile, updated: true}});
             }else if(profile){
@@ -34,6 +30,7 @@ Meteor.methods({
 Accounts.onCreateUser(function(options, user){
     console.log('onCreateUser');
     user.type = options.type;
+    user.profile = options.profile;
     user.createdAt = new Date();
     user.updated = false;
     return user;

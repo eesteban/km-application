@@ -5,10 +5,10 @@
             <div>
                 /*Picture*/
             </div>
-            <h3>Contact Information</h3>
+            <h3>{{_ "contact_information"}}</h3>
             <ul class="profile-details">
                 <div><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
-                {{#each userData.phones}}
+                {{#each userData.profile.phones}}
                     <li>
                         {{this}}
                         <a class="removePhone" href="#">
@@ -17,7 +17,7 @@
                     </li>
                 {{else}}
                     <li>
-                        {{_ "not_Phone"}}
+                        {{_ "not_phone"}}
                     </li>
                 {{/each}}
                 <li>
@@ -59,7 +59,7 @@
         </div>
         <div class="col col-sm-9">
             <ul class="nav nav-tabs" id="profile/tabs">
-                <li class="active"><a href="/myProfile#aboutMe">{{_ "aboutMe"}}</a></li>
+                <li class="active"><a href="/myProfile#aboutMe">{{_ "about_me"}}</a></li>
                 <li><a href="/myProfile#blog">{{_ "blog"}}</a></li>
                 <li><a href="/myProfile#communities">{{_ "communities"}}</a></li>
                 <li><a href="/myProfile#messages">{{_ "messages"}}</a></li>
@@ -67,7 +67,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="aboutMe">
-                    {{> aboutMe}}
+                    {{> aboutMe profile=userData.profile}}
                 </div>
                 <div class="tab-pane" id="blog">
                     <!--{{> blogMain}}-->

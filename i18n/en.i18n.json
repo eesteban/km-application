@@ -9,6 +9,9 @@
   "name": "Name",
   "surname": "Surname",
 
+  "update": "Update",
+  "search": "Search",
+
   "forgot_pwd": "Forgot your password?",
   "invite_users": "Invite users",
   "management_portal": "Management portal",
@@ -18,5 +21,26 @@
 
   "enrollment": "Enrollment",
   "password_confirmation": "Confirm Password",
-  "enroll": "Enroll"
+  "enroll": "Enroll",
+
+  "my_profile": "My Profile",
+  "contact_information": "Contact Information",
+  "phone": "Phone",
+  "not_phone": "No Phone available",
+  "about_me": "About Me",
+  "skills": "Skills",
+  "skill": "Skill",
+  "skill_in_list": "That skill is already in the list",
+  "interests": "Interests",
+  "interest": "Interest",
+  "messages": "Messages",
+  "message": "Message",
+  "professional": "Professional community",
+  "activity": "Activity community",
+  "student": "Student group",
+
+  "communities": "Communities",
+
+  "blog": "Blog"
+
 }

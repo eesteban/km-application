@@ -1,0 +1,49 @@
+<template name="createCommunity">
+    <form id="createCommunity">
+
+        <div class="form-group">
+            <label for="inputCommunityName">{{_ "communityName"}}</label>
+            <input type="text" class="form-control" id="inputCommunityName" name="inputCommunityName" placeholder="{{_ "communityName"}}">
+        </div>
+
+        <div class="form-group">
+            <label for="inputCommunityType">{{_ "communityType"}}</label>
+            <select class="form-control" id="inputCommunityType" name="inputCommunityType">
+                <option value="profesional">{{_ "professional"}}</option>
+                <option value="activity">{{_ "activity"}}</option>
+                {{#if equals userData.type 'admin'}}
+                    <option value="student">{{_ "student"}}</option>
+                {{/if}}
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="inputAvailableUsers">{{_ "invite_Users"}}</label>
+            <select class="form-control" id="inputAvailableUsers" name="inputAvailableUsers" multiple>
+                {{#each availableUsers}}
+                    <option value="{{_id}}"> {{profile.name}} {{profile.surname}} </option>
+                {{/each}}
+            </select>
+        </div>
+
+        {{#if invitedUsers}}
+            <ul class="list-group">
+                {{#each invitedUsers}}
+                    <li id="{{_id}}" class="list-group-item" value="{{_id}}">
+                        {{profile.name}} {{profile.surname}}
+                        <a href="#" class="delete-user pull-right" id="{{_id}}">
+                            <span class="glyphicon glyphicon-remove-sign text-danger" id="{{_id}}"></span>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            {{_ "empty_list"}}
+        {{/if}}
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-block" value="{{_ "createCommunity"}}"/>
+        </div>
+
+    </form>
+</template>

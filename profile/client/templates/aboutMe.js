@@ -12,8 +12,7 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function(){
             var aboutMe = $('#aboutMeInput').val();
-            console.log(aboutMe);
-            Meteor.users.update(Meteor.userId(), {$set: {aboutMe: aboutMe}}, function(error){
+            Meteor.users.update(Meteor.userId(), {$set: {'profile.aboutMe': aboutMe}}, function(error){
                 if(error){
                     Bert.alert('Error updating the personal information', 'danger');
                 }else{
@@ -36,14 +35,10 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function() {
             var interest = $('#interest').val();
-            if(Meteor.user().interests){
-                if(Meteor.user().interests.indexOf(interest)<0){
-                    Meteor.users.update(Meteor.userId(), {$push: {interests: interest}})
-                }else{
-                    Bert.alert('That interest is already in the list', 'danger')
-                }
+            if(! Meteor.user().profile.interests.indexOf(interest)>=0){
+                Meteor.users.update(Meteor.userId(), {$push: {'profile.interests': interest}})
             }else{
-                Meteor.users.update(Meteor.userId(), {$set: {interests: [interest]}})
+                Bert.alert(TAPi18n.__('duplicated_interest'), 'danger')
             }
         },
         errorLabelContainer: '#errorMessageInterest'
@@ -56,19 +51,15 @@ Template.aboutMe.onRendered(function () {
         },
         messages: {
             skill: {
-                required: "Please specify a new skill"
+                required: TAPi18n.__('specify_skill')
             }
         },
         submitHandler: function() {
             var skill = $('#skill').val();
-            if(Meteor.user().skills){
-                if(Meteor.user().skills.indexOf(skill)<0){
-                    Meteor.users.update(Meteor.userId(), {$push: {skills: skill}})
-                }else{
-                    Bert.alert('That skill is already in the list', 'danger')
-                }
+            if(! Meteor.user().profile.skills.indexOf(skill)>=0){
+                Meteor.users.update(Meteor.userId(), {$push: {'profile.skills': skill}})
             }else{
-                Meteor.users.update(Meteor.userId(), {$set: {skills: [skill]}})
+                Bert.alert(TAPi18n.__('duplicated_skill'), 'danger')
             }
         },
         errorLabelContainer: '#errorMessageSkill'
@@ -83,13 +74,13 @@ Template.aboutMe.events({
     },
     'click .removeInterest': function (event){
         event.preventDefault();
-        Meteor.users.update(Meteor.userId(), {$pull: {interests: this.toString()}});
+        Meteor.users.update(Meteor.userId(), {$pull: {'profile.interests': this.toString()}});
     },
     'submit #newSkill': function (event) {
         event.preventDefault();
     },
     'click .removeSkill': function (event){
         event.preventDefault();
-        Meteor.users.update(Meteor.userId(), {$pull: {skills: this.toString()}});
+        Meteor.users.update(Meteor.userId(), {$pull: {'profile.skills': this.toString()}});
     }
 });

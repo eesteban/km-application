@@ -9,6 +9,9 @@
   "name": "Izena",
   "surname": "Abizena",
 
+  "update": "Eguneratu",
+  "search": "Bilatu",
+
   "forgot_pwd": "Pasahitza ahaztu ahal duzu?",
   "invite_users": "Erabiltzaileak gonbidatu",
   "management_portal": "Kudeaketa",
@@ -16,7 +19,27 @@
   "empty_list": "Zerrenda hutsik dago",
   "people_to_invite": "Gondbidatu zerrenda",
 
+  "my_profile": "Nire Profila",
   "enrollment": "Izen ematea",
   "enroll": "Izena eman",
-  "password_confirmation": "Pasahitza berretsi"
+  "password_confirmation": "Pasahitza berretsi",
+
+  "contact_information": "Kontaktu Informazioa",
+  "phone": "Telefonoa",
+  "not_phone": "Ez da telefonorik zehaztu",
+  "about_me": "Niri Buruz",
+  "skills": "Trebetasunak",
+  "skill": "Tebetasuna",
+  "skill_in_list": "Trebetasun hori zerrendan dago",
+  "interests": "Zaletasunak",
+  "interest": "Zaletasuna",
+  "messages": "Mezuak",
+  "message": "Mezua",
+
+  "communities": "Taldeak",
+  "professional": "Aditu taldea",
+  "activity": "Ekintza taldea",
+  "student": "Ikasle taldea",
+
+  "blog": "Bloga"
 }
