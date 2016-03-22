@@ -1,30 +1,5 @@
 Communities = new Mongo.Collection("communities");
 
-Communities.allow({
-    insert: function (userId, community) {
-        if(Communities.find({name: community.name}).count() < 1){
-            return true
-        }{
-            throw new Meteor.Error('create-community', TAPi18n.__("community_name_used"));
-        }
-    },
-    update: function (userId, user, fields, modifier) {
-        if(Meteor.user().type==="admin"){
-            return true;
-        }else{
-            /*If the change modifies the user type deny the change*/
-            if(fields.indexOf('type')<0){
-                return userId===user._id;
-            }else{
-                return false
-            }
-        }
-    },
-    remove:function(){
-        return Meteor.user().type==="admin";
-    }
-});
-
 Meteor.publish("communitiesBasic", function () {
     var userId = this.userId;
     var communities =  Communities.find(
@@ -60,8 +35,44 @@ Meteor.publish("communitiesComplete", function () {
     return this.ready();
 });
 
+Meteor.publish("studentGroups", function () {
+    var communities =  Communities.find(
+        {type: 'student'},
+        {fields: {
+            'name': 1,
+            'users': 1,
+        }}
+    );
+
+    if(communities){
+        return communities;
+    }
+
+    return this.ready();
+});
+
+Communities.allow({
+    insert: function (userId, community) {
+        if(Communities.find({name: community.name}).count() < 1){
+            return true
+        }{
+            throw new Meteor.Error('create-community', TAPi18n.__("community_name_used"));
+        }
+    },
+    update: function (userId, community, fields, modifier) {
+        if(Meteor.user().type==="admin"){
+            return true;
+        }else{
+            //Only allow users to modify
+        }
+    },
+    remove:function(){
+        return Meteor.user().type==="admin";
+    }
+});
+
 Meteor.methods({
-    createCommunity: function(community){
+    insertCommunity: function(community){
         var userId = Meteor.userId();
         if(userId){
             if(Communities.find({name: community.name}).count() < 1){

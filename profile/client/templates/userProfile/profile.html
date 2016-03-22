@@ -1,0 +1,52 @@
+<template name="profile">
+    <div class="row profile">
+        <div class="col col-sm-3">
+            <h2>{{user.profile.name}} {{user.profile.surname}}</h2>
+            <div>
+                /*Picture*/
+            </div>
+            <h3>{{_ "contact_information"}}</h3>
+            <ul class="profile-details">
+                <div><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
+                {{#each user.profile.phones}}
+                    <li class="detail-info">
+                        {{this}}
+                    </li>
+                {{else}}
+                    <li>
+                        {{_ "not_phone"}}
+                    </li>
+                {{/each}}
+                <div><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
+                {{#each user.emails}}
+                    <li>
+                        {{this.address}}
+                    </li>
+                {{else}}
+                    <li>
+                        {{_ "not_email"}}
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col col-sm-9">
+            <ul class="nav nav-tabs" id="tabs">
+                <li class="{{activeAbout}}"><a href="#" id="aboutMe_tab">{{_ "about_me"}}</a></li>
+                <li class="{{activeBlog}}"><a href="#" id="blog_tab">{{_ "blog"}}</a></li>
+                <li class="{{activeCommunities}}"><a href="#" id="communities_tab">{{_ "communities"}}</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane {{activeAbout}}" id="aboutMe">
+                    {{> aboutUser profile=user.profile}}
+                </div>
+                <div class="tab-pane {{activeBlog}}" id="blog">
+                    {{> blogMain}}
+                </div>
+                <div class="tab-pane {{activeCommunities}}" id="communities">
+                    <!--{{> communities}}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

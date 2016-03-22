@@ -1,0 +1,32 @@
+<template name="aboutUser">
+    <div class="row">
+        <h3>{{_ "about_me"}}</h3>
+        {{#if profile.aboutMe}}
+            {{profile.aboutMe}}
+        {{else}}
+            {{_ "not_about_user"}}
+        {{/if}}
+    </div>
+
+    <div class="row">
+        <h3>{{_ "skills"}}</h3>
+        <ul class="tag-bar">
+            {{#each profile.skills}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{_ "not_skills"}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="row">
+        <h3>{{_ "interests"}}</h3>
+        <ul class="tag-bar">
+            {{#each profile.interests}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{_ "not_interests"}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</template>

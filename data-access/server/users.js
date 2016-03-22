@@ -19,6 +19,21 @@ Meteor.users.allow({
     }
 });
 
+Meteor.publish("user", function (userId) {
+    var user =  Meteor.users.find(
+        {_id: userId},
+        {fields: {
+            'emails': 1,
+            'profile': 1
+        }}
+    );
+
+    if(user){
+        return user;
+    }
+    return this.ready();
+});
+
 Meteor.publish("userData", function () {
     var userId =  this.userId;
     var currentUser =  Meteor.users.find(
@@ -34,7 +49,6 @@ Meteor.publish("userData", function () {
     if(currentUser){
         return currentUser;
     }
-
     return this.ready();
 });
 

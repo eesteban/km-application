@@ -4,5 +4,4 @@ Template.sideNav.events({
             Router.go('/');
         })
     }
-
 });

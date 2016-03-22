@@ -23,11 +23,11 @@ Template.createCommunity.onRendered(function(){
                 users: userArray
             };
 
-            Meteor.call('createCommunity', community, function(error){
+            Meteor.call('insertCommunity', community, function(error){
                 if(error){
-                    Bert.alert(error.reason, 'danger');
+                    Bert.alert(TAPi18n.__('insert_community_failure'), 'danger');
                 }else{
-                    Bert.alert(TAPi18n.__('community_success'), 'success');
+                    Bert.alert(TAPi18n.__('insert_community_success'), 'success');
                 }
             });
         }

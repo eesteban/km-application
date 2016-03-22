@@ -1,5 +1,5 @@
 <template name="myProfile">
-    <div class="row">
+    <div class="row profile">
         <div class="col col-sm-3">
             <h2>{{userData.profile.name}} {{userData.profile.surname}}</h2>
             <div>
@@ -7,42 +7,48 @@
             </div>
             <h3>{{_ "contact_information"}}</h3>
             <ul class="profile-details">
-                <div><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
-                {{#each userData.profile.phones}}
-                    <li>
-                        {{this}}
-                        <a class="removePhone" href="#">
-                            <i class="glyphicon glyphicon-remove-sign text-danger"></i>
-                        </a>
-                    </li>
-                {{else}}
-                    <li>
-                        {{_ "not_phone"}}
-                    </li>
-                {{/each}}
                 <li>
-                    <form id="newPhone">
+                    <div class="detail-title"><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
+                    {{#each userData.profile.phones}}
+                        <div class="detail-info">
+                            {{this}}
+                            <a class="removePhone" href="#">
+                                <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
+                            </a>
+                        </div>
+                    {{else}}
+                        <div class="detail-info">
+                            {{_ "not_phone"}}
+                        </div>
+                    {{/each}}
+                        <form id="newPhone">
                         <div class="input-group">
                             <input type="text" class="form-control input-sm" id="phone" name="phone" placeholder="{{_ "phone"}}">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class=" glyphicon glyphicon-plus" ></i>
-                                </button>
-                            </span>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class=" glyphicon glyphicon-plus" ></i>
+                            </button>
+                        </span>
                         </div>
                         <div id="errorMessagePhone"> </div>
                     </form>
                 </li>
-                <div><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
+
+                <li>
+                <div class="detail-title"><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
                 {{#each userData.emails}}
-                    <li>
+                    <div class="detail-info">
                         {{this.address}}
                         <a class="removeEmail" href="#">
-                            <i class="glyphicon glyphicon-remove-sign text-danger"></i>
+                            <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
                         </a>
-                    </li>
+                    </div>
+                {{else}}
+                    <div class="detail-info">
+                        {{_ "not_email"}}
+                    </div>
                 {{/each}}
-                <li>
+                <div>
                     <form id="newEmail">
                         <div class="input-group">
                             <input type="text" class="form-control input-sm" id="email" name="email" placeholder="{{_ "email"}}">
@@ -54,6 +60,7 @@
                         </div>
                         <div id="errorMessageEmail"> </div>
                     </form>
+                </div>
                 </li>
             </ul>
         </div>

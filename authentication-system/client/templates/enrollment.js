@@ -47,7 +47,7 @@ Template.enrollment.onRendered(function(){
             var password = $('#inputPassword').val();
             Accounts.resetPassword(token, password, function(error){
                 if(error){
-                    Bert.alert(error.reason, 'danger');
+                    Bert.alert(TAPi18n.__('enrollment_failure'), 'danger');
                 }else{
                     var profile = {
                       name: $('#inputName').val(),
@@ -56,7 +56,7 @@ Template.enrollment.onRendered(function(){
                     var username = $('#inputUsername').val();
                     Meteor.call('updateUser', profile, username, function(error){
                         if(error){
-                            Bert.alert(error.reason, 'danger');
+                            Bert.alert('enrollment_failure', 'danger');
                         }else{
                             Router.go('/myProfile');
                         }

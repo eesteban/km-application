@@ -28,7 +28,6 @@ Template.inviteUsers.onRendered(function(){
 
 Template.inviteUsers.events({
     'submit form': function (event) {
-        // Prevent default browser form submit
         event.preventDefault();
     },
     'click .delete-user': function (event) {
@@ -38,7 +37,9 @@ Template.inviteUsers.events({
     'click #inviteUsers': function () {
         Meteor.call('inviteUsers', emailList.array(), function(error){
             if(error){
-                Bert.alert(error.reason);
+                Bert.alert(TAPi18n.__('user_not_invited'), 'danger');
+            }else{
+                Bert.alert(TAPi18n.__('user_invited'), 'success');
             }
         });
     }
