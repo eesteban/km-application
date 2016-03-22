@@ -35,11 +35,13 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function() {
             var interest = $('#interest').val();
-            if(! Meteor.user().profile.interests.indexOf(interest)>=0){
-                Meteor.users.update(Meteor.userId(), {$push: {'profile.interests': interest}})
-            }else{
-                Bert.alert(TAPi18n.__('duplicated_interest'), 'danger')
-            }
+            Meteor.call('addInterest', interest, function(error){
+                if(error){
+                    Bert.alert(TAPi18n.__('add_interest_failure'), 'danger')
+                }else{
+                    Bert.alert(TAPi18n.__('add_interest_success'), 'success')
+                }
+            });
         },
         errorLabelContainer: '#errorMessageInterest'
     });
@@ -56,11 +58,13 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function() {
             var skill = $('#skill').val();
-            if(! Meteor.user().profile.skills.indexOf(skill)>=0){
-                Meteor.users.update(Meteor.userId(), {$push: {'profile.skills': skill}})
-            }else{
-                Bert.alert(TAPi18n.__('duplicated_skill'), 'danger')
-            }
+            Meteor.call('addSkill', skill, function(error){
+                if(error){
+                    Bert.alert(TAPi18n.__('add_skill_failure'), 'danger')
+                }else{
+                    Bert.alert(TAPi18n.__('add_skill_success'), 'success')
+                }
+            });
         },
         errorLabelContainer: '#errorMessageSkill'
     });

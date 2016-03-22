@@ -24,7 +24,8 @@ Meteor.publish("user", function (userId) {
         {_id: userId},
         {fields: {
             'emails': 1,
-            'profile': 1
+            'profile': 1,
+            'blog': 1
         }}
     );
 
@@ -34,7 +35,7 @@ Meteor.publish("user", function (userId) {
     return this.ready();
 });
 
-Meteor.publish("userData", function () {
+Meteor.publish("userPrivate", function () {
     var userId =  this.userId;
     var currentUser =  Meteor.users.find(
         {_id: userId},
@@ -42,7 +43,8 @@ Meteor.publish("userData", function () {
             'username': 1,
             'emails': 1,
             'type': 1,
-            'profile': 1
+            'profile': 1,
+            'blog': 1
         }}
     );
 
@@ -86,4 +88,23 @@ Meteor.publish("otherUsersComplete", function () {
     }
 
     return this.ready();
+});
+
+Meteor.methods({
+    addSkill: function(skill){
+        var userId = Meteor.userId();
+        if(userId){
+            Meteor.users.update(userId, {$addToSet: {'profile.skills': skill}});
+        }else{
+            throw new Meteor.Error('logged-out', "The skill can't be added");
+        }
+    },
+    addInterest: function(interest){
+        var userId = Meteor.userId();
+        if(userId){
+            Meteor.users.update(userId, {$addToSet: {'profile.interests': interest}});
+        }else{
+            throw new Meteor.Error('logged-out', "The interest can't be added");
+        }
+    }
 });

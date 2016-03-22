@@ -3,6 +3,7 @@
   "welcome": "Ongi etorri!",
 
   "login": "Sartu",
+  "logout": "Irten",
   "username": "Erabiltzaile izena",
   "password": "Pasahitza",
   "email": "Posta elektronikoa",
@@ -40,6 +41,13 @@
   "professional": "Aditu taldea",
   "activity": "Ekintza taldea",
   "student": "Ikasle taldea",
+  "community_name": "Taldearen izena",
+  "community_type": "Talde mota",
+  "create_community": "Taldea sortu",
 
-  "blog": "Bloga"
+  "blog": "Bloga",
+
+  "Management": "Kudeaketa",
+  "new_student": "Ikasle berriak",
+  "add_student": "Ikaslea gehitu"
 }

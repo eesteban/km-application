@@ -1,5 +1,3 @@
-Communities = new Mongo.Collection("communities");
-
 Meteor.publish("communitiesBasic", function () {
     var userId = this.userId;
     var communities =  Communities.find(
@@ -16,15 +14,49 @@ Meteor.publish("communitiesBasic", function () {
     return this.ready();
 });
 
-Meteor.publish("communitiesComplete", function () {
-    var userId = this.userId;
+Meteor.publish("communitiesAll", function () {
+    var communities =  Communities.find(
+        {},
+        {fields: {
+            'name': 1,
+            'type': 1,
+            'users': 1
+        }}
+    );
+
+    if(communities){
+       return communities;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish("communitiesUser", function (userId) {
     var communities =  Communities.find(
         {users: userId},
         {fields: {
             'name': 1,
             'type': 1,
+            'users': 1
+        }}
+    );
+
+    if(communities){
+        return communities;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish("community", function (communityId) {
+    var communities =  Communities.find(
+        {_id: communityId},
+        {fields: {
+            'name': 1,
+            'type': 1,
             'users': 1,
-            'createdAt': 1
+            'createdAt': 1,
+            'forum': 1
         }}
     );
 
@@ -40,7 +72,7 @@ Meteor.publish("studentGroups", function () {
         {type: 'student'},
         {fields: {
             'name': 1,
-            'users': 1,
+            'users': 1
         }}
     );
 

@@ -1,8 +1,8 @@
 <template name="aboutUser">
     <div class="row">
         <h3>{{_ "about_me"}}</h3>
-        {{#if profile.aboutMe}}
-            {{profile.aboutMe}}
+        {{#if this.aboutMe}}
+            {{this.aboutMe}}
         {{else}}
             {{_ "not_about_user"}}
         {{/if}}
@@ -11,10 +11,10 @@
     <div class="row">
         <h3>{{_ "skills"}}</h3>
         <ul class="tag-bar">
-            {{#each profile.skills}}
-                <li>{{this}}</li>
+            {{#each this.skills}}
+                <li class="tag">{{this}}</li>
             {{else}}
-                <li>{{_ "not_skills"}}</li>
+                <li class="tag">{{_ "not_skills"}}</li>
             {{/each}}
         </ul>
     </div>
@@ -22,10 +22,10 @@
     <div class="row">
         <h3>{{_ "interests"}}</h3>
         <ul class="tag-bar">
-            {{#each profile.interests}}
-                <li>{{this}}</li>
+            {{#each this.interests}}
+                <li class="tag">{{this}}</li>
             {{else}}
-                <li>{{_ "not_interests"}}</li>
+                <li class="tag">{{_ "not_interests"}}</li>
             {{/each}}
         </ul>
     </div>

@@ -2,12 +2,12 @@
     <form id="createCommunity">
 
         <div class="form-group">
-            <label for="inputCommunityName">{{_ "communityName"}}</label>
-            <input type="text" class="form-control" id="inputCommunityName" name="inputCommunityName" placeholder="{{_ "communityName"}}">
+            <label for="inputCommunityName">{{_ "community_name"}}</label>
+            <input type="text" class="form-control" id="inputCommunityName" name="inputCommunityName" placeholder="{{_ "community_name"}}">
         </div>
 
         <div class="form-group">
-            <label for="inputCommunityType">{{_ "communityType"}}</label>
+            <label for="inputCommunityType">{{_ "community_type"}}</label>
             <select class="form-control" id="inputCommunityType" name="inputCommunityType">
                 <option value="profesional">{{_ "professional"}}</option>
                 <option value="activity">{{_ "activity"}}</option>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="input-group">
-            <label for="inputAvailableUsers">{{_ "invite_Users"}}</label>
+            <label for="inputAvailableUsers">{{_ "invite_users"}}</label>
             <select class="form-control" id="inputAvailableUsers" name="inputAvailableUsers" multiple>
                 {{#each availableUsers}}
                     <option value="{{_id}}"> {{profile.name}} {{profile.surname}} </option>
@@ -42,7 +42,7 @@
         {{/if}}
 
         <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-block" value="{{_ "createCommunity"}}"/>
+            <input type="submit" class="btn btn-primary btn-block" value="{{_ "create_community"}}"/>
         </div>
 
     </form>

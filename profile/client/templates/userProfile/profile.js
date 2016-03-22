@@ -1,45 +1,36 @@
-var activeAbout = new ReactiveVar('active');
-var activeBlog = new ReactiveVar('');
-var activeCommunities = new ReactiveVar('');
-
-Template.profile.onRendered(function(){
-    activeAbout.set('active');
-    activeBlog.set('');
-    activeCommunities.set('');
+Template.profile.onCreated(function(){
+    this.currentTab = new ReactiveVar('aboutUser');
 });
 
 Template.profile.events({
-    'click #aboutMe_tab': function(event){
-        event.preventDefault();
-        activeAbout.set('active');
-        activeBlog.set('');
-        activeCommunities.set('');
-    },
-    'click #blog_tab': function(event){
-        event.preventDefault();
-        activeAbout.set('');
-        activeBlog.set('active');
-        activeCommunities.set('');
-    },
-    'click #communities_tab': function(event){
-        event.preventDefault();
-        activeAbout.set('');
-        activeBlog.set('');
-        activeCommunities.set('active');
+    'click .nav-tabs li': function(event, template){
+        var currentTab = $(event.target).closest("li");
+
+        currentTab.addClass( "active" );
+        $(".nav-tabs li").not( currentTab ).removeClass( "active" );
+
+        template.currentTab.set(currentTab.data( "template" ));
     }
 
 });
 
 Template.profile.helpers({
-    activeAbout: function(){
-        return activeAbout.get();
+    tab: function() {
+        return Template.instance().currentTab.get();
     },
 
-    activeBlog: function(){
-        return activeBlog.get();
-    },
+    tabData: function(){
+        var tab = Template.instance().currentTab.get();
+        var user = Template.instance().data.user;
 
-    activeCommunities: function(){
-        return activeCommunities.get();
+        if(user){
+            if(tab==='aboutUser'){
+                return user.profile;
+            }else if(tab==='blog'){
+                return user.blog;
+            } else if(tab==='communityList'){
+                return user._id;
+            }
+        }
     }
 });

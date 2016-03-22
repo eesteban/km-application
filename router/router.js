@@ -36,7 +36,28 @@ Router.route('/profile/:_id', {
     }
 });
 
-Router.route('/managementPortal', function(){
+Router.route('/community/:_id', {
+    name: 'community',
+    template: 'community',
+    layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('community', this.params._id).wait();
+    },
+    data: function(){
+        return {
+            community: Communities.findOne(this.params._id)
+        }
+    },
+    action: function(){
+        if(!Meteor.userId()){
+            Router.go('/');
+        }else {
+            this.render();
+        }
+    }
+});
+
+Router.route('/management', function(){
     if(!Meteor.userId()){
         Router.go('/');
     }else{
@@ -50,7 +71,7 @@ Router.route('/communities', function(){
         Router.go('/');
     }else {
         this.layout('mainLayout');
-        this.render('createCommunity');
+        this.render('communities');
     }
 });
 

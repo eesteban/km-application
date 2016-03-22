@@ -1,16 +1,37 @@
 <template name="addStudent">
-    <h2>{{_ "add_student"}}</h2>
-    <form id="addStudentForm">
-        <div class="form-group">
-            <label for="inputName">{{_ "name"}}</label>
-            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="{{_ "name"}}">
+    <h2>{{_ "new_student"}}</h2>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="inputName">{{_ "name"}}</label>
+                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="{{_ "name"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputSurname">{{_ "surname"}}</label>
+                    <input type="text" class="form-control" id="inputSurname" name="inputSurname" placeholder="{{_ "surname"}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block" value="{{_ "add_student"}}"/>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="inputSurname">{{_ "surname"}}</label>
-            <input type="text" class="form-control" id="inputSurname" name="inputSurname" placeholder="{{_ "surname"}}">
+        <div class="panel-body">
+            {{#if emailList}}
+                <ul class="list-group">
+                    {{#each emailList}}
+                        <li id="{{this}}" class="list-group-item">
+                            {{this}}
+                            <a href="#" class="delete-user pull-right">
+                                <span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+                <input type="button" id="inviteUsers" class="btn btn-block btn-primary" value="{{_ "invite_users"}}"/>
+            {{else}}
+                {{_ "empty_list"}}
+            {{/if}}
         </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-block" value="{{_ "add_student"}}"/>
-        </div>
-    </form>
+    </div>
 </template>

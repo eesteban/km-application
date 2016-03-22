@@ -3,6 +3,7 @@
   "welcome": "Welcome!",
 
   "login": "Login",
+  "logout": "Logout",
   "username": "Username",
   "password": "Password",
   "email": "Email",
@@ -19,11 +20,11 @@
   "empty_list": "The list is empty",
   "people_to_invite": "People to invite",
 
-  "enrollment": "Enrollment",
-  "password_confirmation": "Confirm Password",
-  "enroll": "Enroll",
-
   "my_profile": "My Profile",
+  "enrollment": "Enrollment",
+  "enroll": "Enroll",
+  "password_confirmation": "Confirm password",
+
   "contact_information": "Contact Information",
   "phone": "Phone",
   "not_phone": "No Phone available",
@@ -35,12 +36,19 @@
   "interest": "Interest",
   "messages": "Messages",
   "message": "Message",
+
+  "communities": "Communities",
   "professional": "Professional community",
   "activity": "Activity community",
   "student": "Student group",
+  "community_name": "Community name",
+  "community_type": "Community type",
+  "create_community": "Create community",
 
-  "communities": "Communities",
+  "blog": "Blog",
 
-  "blog": "Blog"
+  "management": "Management",
+  "new_student": "New Student",
+  "add_student": "Add Student"
 
 }

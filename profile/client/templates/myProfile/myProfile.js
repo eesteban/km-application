@@ -4,9 +4,12 @@ Accounts.onEmailVerificationLink(function(token, done){
     });
 });
 
-Template.myProfile.onRendered(function(){
-    Meteor.subscribe("userData");
+Template.myProfile.onCreated(function(){
+    this.currentTab = new ReactiveVar("aboutMe");
+    Meteor.subscribe("userPrivate");
+});
 
+Template.myProfile.onRendered(function(){
     $("#newPhone").validate({
         rules:{
             phone: {
@@ -56,8 +59,29 @@ Template.myProfile.onRendered(function(){
 });
 
 Template.myProfile.helpers({
-    "userData": function(){
+    user: function(){
         return Meteor.users.findOne(Meteor.userId());
+    },
+
+    tab: function() {
+        return Template.instance().currentTab.get();
+    },
+
+    tabData: function(){
+        var tab =  Template.instance().currentTab.get();
+        var user = Meteor.users.findOne(Meteor.userId());
+
+        if(user){
+            if(tab==='aboutMe'){
+                return user.profile;
+            } else if(tab==='blog'){
+                return user.blog;
+            } else if(tab==='communityList'){
+                return user._id;
+            } else if(tab==='messages'){
+                return user.messages;
+            }
+        }
     }
 });
 
@@ -79,6 +103,15 @@ Template.myProfile.events({
         }else{
             Meteor.call('removeEmail', this.address);
         }
+    },
+
+    'click .nav-tabs li': function(event, template){
+        var currentTab = $(event.target).closest("li");
+
+        currentTab.addClass( "active" );
+        $(".nav-tabs li").not( currentTab ).removeClass( "active" );
+
+        template.currentTab.set(currentTab.data( "template" ));
     }
 });
 

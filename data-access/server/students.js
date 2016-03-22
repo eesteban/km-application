@@ -1,5 +1,3 @@
-Students = new Mongo.Collection("students");
-
 Meteor.publish('studentsComplete', function(){
     if(Meteor.user().type==="admin"){
         var students =  Students.find(

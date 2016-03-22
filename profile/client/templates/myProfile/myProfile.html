@@ -1,7 +1,7 @@
 <template name="myProfile">
     <div class="row profile">
         <div class="col col-sm-3">
-            <h2>{{userData.profile.name}} {{userData.profile.surname}}</h2>
+            <h2>{{user.profile.name}} {{user.profile.surname}}</h2>
             <div>
                 /*Picture*/
             </div>
@@ -9,7 +9,7 @@
             <ul class="profile-details">
                 <li>
                     <div class="detail-title"><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
-                    {{#each userData.profile.phones}}
+                    {{#each user.profile.phones}}
                         <div class="detail-info">
                             {{this}}
                             <a class="removePhone" href="#">
@@ -36,7 +36,7 @@
 
                 <li>
                 <div class="detail-title"><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
-                {{#each userData.emails}}
+                {{#each user.emails}}
                     <div class="detail-info">
                         {{this.address}}
                         <a class="removeEmail" href="#">
@@ -65,25 +65,16 @@
             </ul>
         </div>
         <div class="col col-sm-9">
-            <ul class="nav nav-tabs" id="profile/tabs">
-                <li class="active"><a href="/myProfile#aboutMe">{{_ "about_me"}}</a></li>
-                <li><a href="/myProfile#blog">{{_ "blog"}}</a></li>
-                <li><a href="/myProfile#communities">{{_ "communities"}}</a></li>
-                <li><a href="/myProfile#messages">{{_ "messages"}}</a></li>
+            <ul class="nav nav-tabs" id="tabs">
+                <li data-template="aboutMe" class="active"><a href="#" id="aboutMe">{{_ "about_me"}}</a></li>
+                <li data-template="blog"><a href="#" id="blog">{{_ "blog"}}</a></li>
+                <li data-template="communityList"><a href="#" id="communities">{{_ "communities"}}</a></li>
+                <li data-template="messages"><a href="#" id="messages">{{_ "messages"}}</a></li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane active" id="aboutMe">
-                    {{> aboutMe profile=userData.profile}}
-                </div>
-                <div class="tab-pane" id="blog">
-                    <!--{{> blogMain}}-->
-                </div>
-                <div class="tab-pane" id="communities">
-                    <!--{{> communities}}-->
-                </div>
-                <div class="tab-pane" id="messages">
-                    <!--{{> messages}}-->
+                <div class="tab-pane active">
+                    {{> Template.dynamic template=tab data=tabData}}
                 </div>
             </div>
         </div>
