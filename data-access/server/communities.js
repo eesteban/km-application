@@ -116,7 +116,10 @@ Meteor.methods({
                     community.users.forEach(function(userId){
                         Meteor.users.update(userId, {$push: {'communities': communityId}});
                         /*Send Messages to the invited user*/
+
                     });
+                    console.log('Community created: ' + communityId);
+                    return communityId;
                 }else{
                     throw new Meteor.Error('create-community', TAPi18n.__("community_not_created"));
                 }
@@ -124,7 +127,65 @@ Meteor.methods({
                 throw new Meteor.Error('create-community', TAPi18n.__("community_name_used"));
             }
         }else{
-            throw new Meteor.Error('logged-out', "The community can't be created");
+            throw new Meteor.Error('logged-out', TAPi18n.__("community_not_created"));
+        }
+    },
+    newTopic: function(communityId, topic, description, post){
+        var userId = Meteor.userId();
+        if(userId){
+            if(Communities.findOne({_id: communityId, users: userId})){
+                var newPost = {
+                    author: Meteor.user().profile.name + ' ' + Meteor.user().profile.surname,
+                    authorId: userId,
+                    post: post,
+                    createdAt: Date.now()
+                };
+                var newTopic = {
+                    topic: topic,
+                    description: description,
+                    posts: [newPost],
+                    createdAt: Date.now(),
+                    createdBy: userId
+                };
+                Communities.update(communityId, {$addToSet: {'forum': newTopic}}, function(error){
+                    if(error){
+                        throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
+                    }else{
+                        console.log('Topic created:' + topic);
+                    }
+                });
+            }else{
+                throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
+            }
+
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("topic_not_created"));
+        }
+    },
+    newPost: function(communityId, topicId, post){
+        var userId = Meteor.userId();
+        if(userId){
+            if(Communities.findOne({_id: communityId, users: userId}).count()>0){
+                var newPost = {
+                    author: Meteor.user().profile.name + ' ' + Meteor.user().profile.surname,
+                    authorId: userId,
+                    post: post,
+                    createdAt: Date.now()
+                };
+                var topicId = Communities.update(communityId, {$addToSet: {'forum': newTopic}});
+                if(topicId){
+                    community.users.forEach(function(userId){
+                        /*Send Messages to the community users*/
+                    });
+                }else{
+                    throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
+                }
+            }else{
+                throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
+            }
+
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("topic_not_created"));
         }
     }
 });

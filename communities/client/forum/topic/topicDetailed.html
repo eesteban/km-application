@@ -1,0 +1,21 @@
+<template name="topicDetailed">
+    <h4 class="forum-topic-header">{{topic}}</h4>
+    <div class="forum-topic-description">{{description}}</div>
+    <table class="table forum table-striped">
+        <thead>
+        <tr>
+            <th class="cell-stat hidden-xs hidden-sm">{{_ "author"}}</th>
+            <th class="cell-stat">{{_ "posts"}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each posts}}
+            <tr>
+                {{> postDetailed this}}
+            </tr>
+        {{else}}
+            {{_ "no_posts"}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>

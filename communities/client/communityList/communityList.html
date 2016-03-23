@@ -1,12 +1,12 @@
 <template name="communityList">
     <ul>
         {{#each communityList}}
-            <li class="media">
+            <li class="media community">
                 <div class="media-left">
                     {{translate type}}
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">{{name}}</h4>
+                    <a href="/community/{{_id}}"><h4 class="media-heading">{{name}}</h4></a>
                 </div>
             </li>
         {{else}}

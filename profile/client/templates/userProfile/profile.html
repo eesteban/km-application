@@ -19,7 +19,7 @@
                 {{/each}}
                 <div><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
                 {{#each user.emails}}
-                    <li>
+                    <li class="detail-info">
                         {{this.address}}
                     </li>
                 {{else}}
@@ -31,9 +31,9 @@
         </div>
         <div class="col col-sm-9">
             <ul class="nav nav-tabs" id="tabs">
-                <li data-template="aboutUser" class="active"><a href="#" id="aboutMe_tab">{{_ "about_me"}}</a></li>
-                <li data-template="blog"><a href="#" id="blog_tab">{{_ "blog"}}</a></li>
-                <li data-template="communityList"><a href="#" id="communities_tab">{{_ "communities"}}</a></li>
+                <li data-template="aboutUser" class="active"><a href="#">{{_ "about_me"}}</a></li>
+                <li data-template="blog"><a href="#">{{_ "blog"}}</a></li>
+                <li data-template="communityList"><a href="#">{{_ "communities"}}</a></li>
             </ul>
 
             <div class="tab-content">

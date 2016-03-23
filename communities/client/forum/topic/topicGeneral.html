@@ -1,0 +1,10 @@
+<template name="topicGeneral">
+    <td>
+        <h4 class="forum-topic-header"><a href="#">{{topic}}</a></h4>
+        <div class="forum-topic-description">{{description}}</div>
+    </td>
+    <td class="text-center hidden-xs hidden-sm"><a href="#">{{count posts}}</a></td>
+    <td class="hidden-xs hidden-sm">
+        {{> latestPost getLatestPost posts}}
+    </td>
+</template>

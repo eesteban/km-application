@@ -1,0 +1,29 @@
+<template name="forumMain">
+    <table class="table forum table-striped">
+        <thead>
+        <tr>
+            <th>
+                <h3>
+                    {{_ "topic"}}
+                    <button class="btn btn-primary btn-sm">
+                        <i class=" glyphicon glyphicon-plus" id="newTopic"></i>
+                        {{_ "new_topic"}}
+                    </button>
+                </h3>
+
+            </th>
+            <th class="cell-stat text-center hidden-xs hidden-sm">{{_ "posts"}}</th>
+            <th class="cell-stat-2x hidden-xs hidden-sm">{{_ "last_post"}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each topics}}
+            <tr>
+                {{> topicGeneral this}}
+            </tr>
+        {{else}}
+            {{_ "no_posts"}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
