@@ -1,11 +1,19 @@
 <template name="topicDetailed">
+    {{#with selectedTopic}}
     <h4 class="forum-topic-header">{{topic}}</h4>
     <div class="forum-topic-description">{{description}}</div>
     <table class="table forum table-striped">
         <thead>
         <tr>
             <th class="cell-stat hidden-xs hidden-sm">{{_ "author"}}</th>
-            <th class="cell-stat">{{_ "posts"}}</th>
+            <th class="cell-stat">
+                {{_ "posts"}}
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newPost">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    {{_ "new_post"}}
+                </button>
+            </th>
+            {{> newPost}}
         </tr>
         </thead>
         <tbody>
@@ -18,4 +26,5 @@
         {{/each}}
         </tbody>
     </table>
+    {{/with}}
 </template>

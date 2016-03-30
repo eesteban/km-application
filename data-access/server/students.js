@@ -1,10 +1,10 @@
 Meteor.publish('studentsComplete', function(){
-    if(Meteor.user().type==="admin"){
+    var userType = Meteor.users.findOne(this.userId, {type:1}).type;
+    if(userType==="admin"){
         var students =  Students.find(
             {},
             {fields: {
-                'name': 1,
-                'surname': 1,
+                'profile': 1,
                 'groups': 1
             }}
         );
@@ -12,27 +12,11 @@ Meteor.publish('studentsComplete', function(){
         if(students){
             return students;
         }
+        return this.ready();
     }else{
         return this.ready();
     }
 });
-
-Students.allow({
-    insert: function () {
-        return Meteor.user().type==="admin";
-    },
-    update: function (userId, student) {
-        if(Meteor.user().type==="admin"){
-            return true;
-        }else{
-            return $.inArray(userId, student.users)>=0;
-        }
-    },
-    remove:function(){
-        return Meteor.user().type==="admin";
-    }
-});
-
 
 Meteor.methods({
     insertStudent: function(student){

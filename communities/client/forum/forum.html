@@ -1,13 +1,13 @@
 <template name="forum">
     <ol class="breadcrumb">
         <li class="forumMainNav"><a><i class="glyphicon glyphicon-home"></i> {{_ "forum"}}</a></li>
-        {{#if selectedTopic}}
-            <li class="selectedTopicNav">{{selectedTopic.topic}}</li>
+        {{#if selectedTopicIndex}}
+            <li class="selectedTopicNav">{{_ "topic"}}</li>
         {{/if}}
     </ol>
-    {{#unless selectedTopic}}
+    {{#unless selectedTopicIndex}}
         {{> forumMain topics=this}}
     {{else}}
-        {{> topicDetailed selectedTopic}}
+        {{> topicDetailed }}
     {{/unless}}
 </template>

@@ -4,7 +4,7 @@
         <form id="aboutMeForm">
             <div class="input-group">
                 <textarea class="form-control" id="aboutMeInput" name="aboutMe" rows="10" placeholder="{{_ "not_AboutMe"}}">{{this.aboutMe}}</textarea>
-                <button type="submit" class="btn btn-primary">{{_ "update"}}</button>
+                <button type="submit" class="btn btn-primary pull-right" id="updateAboutMe">{{_ "update"}}</button>
             </div>
             <div id="errorMessageAboutMe"> </div>
         </form>
@@ -39,7 +39,7 @@
                 {{#each this.interests}}
                     <li class="tag">{{this}}</li>
                 {{else}}
-                    <li class="tag">{{_ "not_interests"}}</li>
+                    <li class="tag">{{_ "not_interests"}} <i class="glyphicon glyphicon-cross" ></i> </li>
                 {{/each}}
             </ul>
             <form id="newInterest">

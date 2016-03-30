@@ -5,13 +5,13 @@
             <th>
                 <h3>
                     {{_ "topic"}}
-                    <button class="btn btn-primary btn-sm">
-                        <i class=" glyphicon glyphicon-plus" id="newTopic"></i>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newTopic">
+                        <i class="glyphicon glyphicon-plus"></i>
                         {{_ "new_topic"}}
                     </button>
                 </h3>
-
             </th>
+            {{> newTopic}}
             <th class="cell-stat text-center hidden-xs hidden-sm">{{_ "posts"}}</th>
             <th class="cell-stat-2x hidden-xs hidden-sm">{{_ "last_post"}}</th>
         </tr>
@@ -19,7 +19,7 @@
         <tbody>
         {{#each topics}}
             <tr>
-                {{> topicGeneral this}}
+                {{> topicGeneral topicIndex=@index}}
             </tr>
         {{else}}
             {{_ "no_posts"}}

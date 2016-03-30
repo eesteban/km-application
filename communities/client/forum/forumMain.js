@@ -1,6 +1,6 @@
 Template.forumMain.events({
     'click #newTopic': function(){
-        event.preventDefault();
+
     }
 });
 

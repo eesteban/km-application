@@ -1,0 +1,22 @@
+<template name="selected">
+    <div class="user-list">
+        {{#if selectedOptions}}
+            <ul class="list-group">
+                {{#each selectedOptions}}
+                    <li id="{{_id}}" class="list-group-item" value="{{_id}}">
+                        {{#unless equals targetCollection 'studentGroups'}}
+                            {{profile.name}} {{profile.surname}}
+                        {{else}}
+                            {{name}}
+                        {{/unless}}
+                        <a href="#" class="remove pull-right" id="{{_id}}">
+                            <span class="glyphicon glyphicon-remove-sign text-danger" id="{{_id}}"></span>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            {{_ "empty_list"}}
+        {{/if}}
+    </div>
+</template>

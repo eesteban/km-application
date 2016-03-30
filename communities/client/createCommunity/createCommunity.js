@@ -1,6 +1,12 @@
-Template.createCommunity.onRendered(function(){
+Template.createCommunity.onCreated(function(){
+    this.currentCommunityType = new ReactiveVar('createProfessionalGroup');
+    Meteor.subscribe("userPrivate");
     Meteor.subscribe("otherUsersBasic");
     Meteor.subscribe("communitiesBasic");
+});
+
+Template.createCommunity.onRendered(function(){
+    var instance = this;
     $('#createCommunity').validate({
         rules:{
             inputCommunityName: {
@@ -13,15 +19,48 @@ Template.createCommunity.onRendered(function(){
             }
         },
         submitHandler: function() {
-            var userArray = [];
-            Meteor.users.find({status:'invited'}).forEach(function(user){
-                userArray.push(user._id);
-            });
             var community = {
-                name: $('#inputCommunityName').val(),
-                type: $('#inputCommunityType').val(),
-                users: userArray
+                name: String,
+                users: [],
+                type: String
             };
+            community.name =  $('#inputCommunityName').val();
+            Meteor.users.find({selected:true}, {_id: 1}).forEach(
+                function(user){
+                    community.users.push(user._id);
+                }
+            );
+
+            var currentCommunityType = instance.currentCommunityType.get();
+
+            if(currentCommunityType==='createProfessionalGroup'){
+                community.type = 'professional';
+                community.topics = Session.get('topics');
+            }else if(currentCommunityType==='createActivityGroup'){
+                community.type = 'activity';
+                community.activityType = $('#inputActivityType').val();
+                community.budget = {
+                    type: $('#inputBudgetType').val(),
+                    amount: $('#inputBudget').val()
+                };
+                community.location =  $('#inputLocation').val();
+                community.studentGroups = [ ];
+                Communities.find({type: 'student', selected: true}, {_id: 1}).forEach(
+                    function(studentGroup){
+                        community.studentGroups.push(studentGroup._id);
+                    }
+                );
+            }else if(currentCommunityType==='createStudentGroup'){
+                community.type = 'student';
+                community.students = [];
+                Students.find({selected: true}, {_id: 1}).forEach(
+                    function(student){
+                        community.students.push(student._id);
+                    }
+                );
+            }
+
+            console.log(community);
 
             Meteor.call('insertCommunity', community, function(error){
                 if(error){
@@ -35,33 +74,38 @@ Template.createCommunity.onRendered(function(){
 });
 
 Template.createCommunity.helpers({
+    communityType: function() {
+        return Template.instance().currentCommunityType.get();
+    },
     availableUsers: function(){
         return Meteor.users.find(
-            {_id: { $ne: Meteor.userId()}, status : { $exists : false }}
+            {_id: { $ne: Meteor.userId()}, invited : { $not : true }}
         );
     },
     invitedUsers: function(){
-        if(Meteor.users.find({status:'invited'}).count()<1){
-            return false
-        }else{
-            return Meteor.users.find({status:'invited'});
-        }
+        return Meteor.users.find({invited: true});
+    },
+    isAdmin: function(){
+        return Meteor.users.findOne({_id: Meteor.userId(), type: 'admin'});
     }
 });
 
 Template.createCommunity.events({
-    'change #inputAvailableUsers': function(event){
+    'change #inputCommunityType' : function(event, template){
+        template.currentCommunityType.set($(event.target).val());
+    },
+    'select #inputAvailableUsers': function(event){
         event.preventDefault();
         var userIdArray = $('#inputAvailableUsers').val();
         userIdArray.every(function(userId){
-            Meteor.users._collection.update({_id: userId}, {$set:{ status:'invited'}});
+            Meteor.users._collection.update({_id: userId}, {$set:{ invited: true}});
         });
     },
     'click .delete-user': function (event) {
         event.preventDefault();
         var userId = $(event.target).attr('id');
         console.log(userId);
-        Meteor.users._collection.update({_id: userId}, {$unset:{status:'invited'}});
+        Meteor.users._collection.update({_id: userId}, {$unset:{invited: true}});
     },
     'submit #createCommunity': function(event){
         event.preventDefault();

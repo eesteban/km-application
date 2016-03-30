@@ -16,22 +16,5 @@
                 </div>
             </form>
         </div>
-        <div class="panel-body">
-            {{#if emailList}}
-                <ul class="list-group">
-                    {{#each emailList}}
-                        <li id="{{this}}" class="list-group-item">
-                            {{this}}
-                            <a href="#" class="delete-user pull-right">
-                                <span class="glyphicon glyphicon-remove-sign text-danger"></span>
-                            </a>
-                        </li>
-                    {{/each}}
-                </ul>
-                <input type="button" id="inviteUsers" class="btn btn-block btn-primary" value="{{_ "invite_users"}}"/>
-            {{else}}
-                {{_ "empty_list"}}
-            {{/if}}
-        </div>
     </div>
 </template>

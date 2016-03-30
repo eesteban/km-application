@@ -1,4 +1,5 @@
 <template name="topicGeneral">
+    {{#with topicObject}}
     <td>
         <h4 class="forum-topic-header"><a href="#">{{topic}}</a></h4>
         <div class="forum-topic-description">{{description}}</div>
@@ -7,4 +8,5 @@
     <td class="hidden-xs hidden-sm">
         {{> latestPost getLatestPost posts}}
     </td>
+    {{/with}}
 </template>

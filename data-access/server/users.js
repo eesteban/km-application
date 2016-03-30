@@ -44,7 +44,8 @@ Meteor.publish("userPrivate", function () {
             'emails': 1,
             'type': 1,
             'profile': 1,
-            'blog': 1
+            'blog': 1,
+            'communities': 1
         }}
     );
 
@@ -54,12 +55,12 @@ Meteor.publish("userPrivate", function () {
     return this.ready();
 });
 
-
 Meteor.publish("otherUsersBasic", function () {
     var userId = this.userId;
     var otherUserBasic =  Meteor.users.find(
         {_id: { $ne: userId}},
         {fields: {
+            'profile.image': 1,
             'profile.name': 1,
             'profile.surname': 1
         }}
@@ -67,6 +68,25 @@ Meteor.publish("otherUsersBasic", function () {
 
     if(otherUserBasic){
         return otherUserBasic;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish("communityUsersBasic", function (communityId) {
+    var userId = this.userId;
+    var communityUsersBasic =  Meteor.users.find(
+        {communities: communityId},
+        {fields: {
+            'profile.image': 1,
+            'profile.name': 1,
+            'profile.surname': 1,
+            'communities': 1
+        }}
+    );
+
+    if(communityUsersBasic){
+        return communityUsersBasic;
     }
 
     return this.ready();

@@ -1,17 +1,33 @@
-Router.route('/', function(){
-    if(!Meteor.userId()){
-        this.render('home');
-    }else{
-        Router.go('/myProfile');
+Router.route('/', {
+    name: 'home',
+    template: 'home',
+    action:  function(){
+        if(!Meteor.userId()){
+            this.render();
+        }else{
+            Router.go('/myProfile');
+        }
     }
 });
 
-Router.route('/myProfile', function(){
-    if(!Meteor.userId()){
-        Router.go('/');
-    }else{
-        this.layout('mainLayout');
-        this.render('myProfile');
+Router.route('/myProfile',{
+    name: 'myProfile',
+    template: 'myProfile',
+    layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
+    data: function(){
+        return {
+            user: Meteor.users.findOne(Meteor.userId())
+        }
+    },
+    action:  function(){
+        if(!Meteor.userId()){
+            Router.go('/');
+        }else{
+            this.render();
+        }
     }
 });
 
@@ -52,6 +68,7 @@ Router.route('/community/:_id', {
         if(!Meteor.userId()){
             Router.go('/');
         }else {
+            Session.set('currentCommunity', this.params._id);
             this.render();
         }
     }
@@ -66,12 +83,16 @@ Router.route('/management', function(){
     }
 });
 
-Router.route('/communities', function(){
-    if(!Meteor.userId()){
-        Router.go('/');
-    }else {
-        this.layout('mainLayout');
-        this.render('communities');
+Router.route('/communities', {
+    name: 'communities',
+    template: 'communities',
+    layoutTemplate: 'mainLayout',
+    action: function(){
+        if(!Meteor.userId()){
+            Router.go('/');
+        }else {
+            this.render();
+        }
     }
 });
 

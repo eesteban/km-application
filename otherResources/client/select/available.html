@@ -1,0 +1,15 @@
+<template name="available">
+    <div class="input-group">
+        <select class="form-control" id="inputAvailableOptions" multiple>
+            {{#each availableOptions}}
+                <option value="{{_id}}">
+                    {{#unless equals targetCollection 'studentGroups'}}
+                        {{profile.name}} {{profile.surname}}
+                    {{else}}
+                        {{name}}
+                    {{/unless}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+</template>

@@ -59,10 +59,6 @@ Template.myProfile.onRendered(function(){
 });
 
 Template.myProfile.helpers({
-    user: function(){
-        return Meteor.users.findOne(Meteor.userId());
-    },
-
     tab: function() {
         return Template.instance().currentTab.get();
     },

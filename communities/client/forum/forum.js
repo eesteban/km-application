@@ -1,16 +1,16 @@
 Template.forum.onCreated(function (){
-    Session.set('selectedTopic', null)
+    Session.set('selectedTopicIndex', -1)
 });
 
 Template.forum.events({
     'click .forumMainNav': function(event){
         event.preventDefault();
-        Session.set('selectedTopic', null)
+        Session.set('selectedTopicIndex', -1)
     }
 });
 
 Template.forum.helpers({
-    selectedTopic: function(){
-        return Session.get('selectedTopic');
+    selectedTopicIndex: function(){
+        return Session.get('selectedTopicIndex')>=0;
     }
 });

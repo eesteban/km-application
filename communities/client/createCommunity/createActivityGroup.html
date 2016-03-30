@@ -1,0 +1,45 @@
+<template name="createActivityGroup">
+    <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="inputActivityType">{{_ "activity_type"}}</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="inputActivityType" name="inputActivityType">
+                <option value="sportive">{{_ "sportive"}}</option>
+                <option value="artistic">{{_ "artistic"}}</option>
+                <option value="scientific">{{_ "scientific"}}</option>
+                <option value="technological">{{_ "technological"}}</option>
+                <option value="multimedia">{{_ "multimedia"}}</option>
+                <option value="educative">{{_ "educative"}}</option>
+                <option value="other">{{_ "other"}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="inputBudget">{{_ "budget"}}</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="number" class="form-control" id="inputBudget" placeholder="{{_ "budget"}}">
+                <span class="input-group-btn">
+                    <select class="btn" id="inputBudgetType">
+                        <option value="perChild" selected> € {{_ "per_child"}}</option>
+                        <option value="total">€ {{_ "total"}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="inputLocation">{{_ "location"}}</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputLocation" placeholder="{{_ "location"}}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 form-control-label">{{_ "student_groups"}}</label>
+        <div class="col-sm-9">
+            {{> selectFromCollection targetCollection='studentGroups'}}
+        </div>
+    </div>
+</template>

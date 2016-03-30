@@ -1,0 +1,9 @@
+<template name="members">
+    <ul class="user-list">
+        {{#each memberList}}
+           <li>
+               {{> profileSmall this}}
+           </li>
+        {{/each}}
+    </ul>
+</template>

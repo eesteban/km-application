@@ -1,15 +1,16 @@
 <template name="myProfile">
     <div class="row profile">
+        {{#with user}}
         <div class="col col-sm-3">
-            <h2>{{user.profile.name}} {{user.profile.surname}}</h2>
-            <div>
-                /*Picture*/
+            <h2>{{profile.name}} {{profile.surname}}</h2>
+            <div class="profile-image">
+                <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image">
             </div>
             <h3>{{_ "contact_information"}}</h3>
             <ul class="profile-details">
                 <li>
                     <div class="detail-title"><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
-                    {{#each user.profile.phones}}
+                    {{#each profile.phones}}
                         <div class="detail-info">
                             {{this}}
                             <a class="removePhone" href="#">
@@ -36,7 +37,7 @@
 
                 <li>
                 <div class="detail-title"><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
-                {{#each user.emails}}
+                {{#each emails}}
                     <div class="detail-info">
                         {{this.address}}
                         <a class="removeEmail" href="#">
@@ -78,5 +79,6 @@
                 </div>
             </div>
         </div>
+        {{/with}}
     </div>
 </template>

@@ -20,8 +20,10 @@ Template.addStudent.onRendered(function(){
         },
         submitHandler: function() {
             var student = {
-                name:  $('#inputName').val(),
-                surname: $('#inputSurname').val()
+                profile: {
+                    name:  $('#inputName').val(),
+                    surname: $('#inputSurname').val()
+                }
             };
 
             Meteor.call('insertStudent', student, function(error){
@@ -30,7 +32,6 @@ Template.addStudent.onRendered(function(){
                 }else{
                     Bert.alert(TAPi18n.__('student_insert_sucess'), 'success')
                 }
-
             });
         }
     })

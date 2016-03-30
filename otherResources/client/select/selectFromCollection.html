@@ -1,0 +1,10 @@
+<template name="selectFromCollection">
+    <div class="row">
+        <div class="col col-sm-4">
+            {{> available targetCollection=this.targetCollection}}
+        </div>
+        <div class="col col-sm-8">
+            {{> selected targetCollection=this.targetCollection}}
+        </div>
+    </div>
+</template>

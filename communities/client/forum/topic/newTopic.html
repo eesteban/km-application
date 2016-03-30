@@ -1,0 +1,34 @@
+<template name="newTopic">
+    <div class="modal fade"  id="newTopic" role="dialog" aria-labelledby="New forum topic">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{_ "new_topic"}}
+                </div>
+                <div class="modal-body">
+                   <form id="newTopicForm">
+                       <div class="form-group">
+                           <label for="inputTopic">{{_ "topic"}}</label>
+                           <input type="text" class="form-control" id="inputTopic" name="inputTopic" placeholder="{{_ "topic"}}">
+                       </div>
+
+                       <div class="form-group">
+                            <label for="inputDescription">{{_ "description"}}</label>
+                            <textarea class="form-control" id="inputDescription" name="inputDescription" placeholder="{{_ "description"}}" rows="2"></textarea>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="inputPost">{{_ "post"}}</label>
+                           <textarea class="form-control" id="inputPost" name="inputPost" placeholder="{{_ "post"}}" rows="4"></textarea>
+                       </div>
+
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                           <button type="submit" class="btn btn-primary">{{_ "create_topic"}}</button>
+                       </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
