@@ -1,3 +1,35 @@
+Accounts.onCreateUser(function(options, user){
+    console.log('onCreateUser');
+    var date = new Date();
+    user.type = options.type;
+    user.profile = options.profile;
+    user.createdAt = date;
+    user.updated = false;
+    user.blog = {
+        entries: [
+            {
+                title: 'First blog Entry',
+                date: date,
+                body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
+                ' Nam porta tincidunt faucibus. Duis id est at dui volutpat luctus.' +
+                ' Fusce vel nunc libero. Nulla turpis ligula, rutrum et lacus vel, faucibus aliquet justo.' +
+                ' Curabitur ultrices eu ex sit amet tristique.' +
+                ' Nulla id sem tincidunt, pharetra velit efficitur, dictum risus.' +
+                ' Proin rutrum tempor tellus, sit amet rhoncus lectus fringilla lacinia.' +
+                ' Aenean vulputate mi at lacus consequat, at dapibus libero venenatis.' +
+                ' In hac habitasse platea dictumst.' +
+                ' Fusce pellentesque ligula ligula, ut eleifend ligula volutpat eget.' +
+                ' Nullam nec urna eget turpis bibendum gravida. Etiam eget ipsum non purus ultricies convallis.' +
+                ' Maecenas laoreet at ligula sed gravida.' +
+                ' Suspendisse ex sapien, molestie vitae tristique ac, sagittis ut dui. ' +
+                'Nunc lobortis mauris elit.',
+                comments: []
+            }
+        ]
+    };
+    return user;
+});
+
 Meteor.users.allow({
     insert: function () {
         return Meteor.user().type==="admin";
@@ -20,12 +52,13 @@ Meteor.users.allow({
 });
 
 Meteor.publish("user", function (userId) {
+    check(userId, String);
+
     var user =  Meteor.users.find(
         {_id: userId},
         {fields: {
             'emails': 1,
-            'profile': 1,
-            'blog': 1
+            'profile': 1
         }}
     );
 
@@ -37,6 +70,7 @@ Meteor.publish("user", function (userId) {
 
 Meteor.publish("userPrivate", function () {
     var userId =  this.userId;
+
     var currentUser =  Meteor.users.find(
         {_id: userId},
         {fields: {
@@ -44,7 +78,6 @@ Meteor.publish("userPrivate", function () {
             'emails': 1,
             'type': 1,
             'profile': 1,
-            'blog': 1,
             'communities': 1
         }}
     );
@@ -57,6 +90,7 @@ Meteor.publish("userPrivate", function () {
 
 Meteor.publish("otherUsersBasic", function () {
     var userId = this.userId;
+
     var otherUserBasic =  Meteor.users.find(
         {_id: { $ne: userId}},
         {fields: {
@@ -74,7 +108,7 @@ Meteor.publish("otherUsersBasic", function () {
 });
 
 Meteor.publish("communityUsersBasic", function (communityId) {
-    var userId = this.userId;
+    check(communityId, String);
     var communityUsersBasic =  Meteor.users.find(
         {communities: communityId},
         {fields: {
@@ -94,7 +128,6 @@ Meteor.publish("communityUsersBasic", function (communityId) {
 
 Meteor.publish("otherUsersComplete", function () {
     var userId = this.userId;
-    console.log(userId);
     var otherUserComplete =  Meteor.users.find(
         {_id: { $ne: userId}},
         {fields: {
@@ -105,6 +138,23 @@ Meteor.publish("otherUsersComplete", function () {
 
     if(otherUserComplete){
         return otherUserComplete;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish("blog", function (userId) {
+    check(userId, String);
+
+    var blog = Meteor.users.find(
+        {_id: userId},
+        {fields: {
+            blog: 1
+        }}
+    );
+
+    if(blog){
+        return blog;
     }
 
     return this.ready();
@@ -125,6 +175,24 @@ Meteor.methods({
             Meteor.users.update(userId, {$addToSet: {'profile.interests': interest}});
         }else{
             throw new Meteor.Error('logged-out', "The interest can't be added");
+        }
+    },
+    newEntry: function(title, body){
+        check(title, String);
+        check(body, String);
+
+        var entry = {
+            title: title,
+            body: body,
+            date: new Date(),
+            comments: []
+        };
+        var userId = Meteor.userId();
+
+        if(userId){
+            Meteor.users.update(userId, {$addToSet: {'blog.entries': entry}});
+        }else{
+            throw new Meteor.Error('logged-out', "The entry can't be added");
         }
     }
 });

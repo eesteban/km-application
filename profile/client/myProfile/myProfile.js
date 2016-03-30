@@ -1,4 +1,4 @@
-Accounts.onEmailVerificationLink(function(token, done){
+Accounts.onEmailVerificationLink(function(token){
     Accounts.verifyEmail(token, function(){
         Bert.alert('Email verified, thank you!', 'success');
     });
@@ -62,7 +62,6 @@ Template.myProfile.helpers({
     tab: function() {
         return Template.instance().currentTab.get();
     },
-
     tabData: function(){
         var tab =  Template.instance().currentTab.get();
         var user = Meteor.users.findOne(Meteor.userId());
@@ -71,7 +70,7 @@ Template.myProfile.helpers({
             if(tab==='aboutMe'){
                 return user.profile;
             } else if(tab==='blog'){
-                return user.blog;
+                return user._id;
             } else if(tab==='communityList'){
                 return user._id;
             } else if(tab==='messages'){

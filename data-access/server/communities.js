@@ -32,6 +32,7 @@ Meteor.publish("communitiesAll", function () {
 });
 
 Meteor.publish("communitiesUser", function (userId) {
+    check(userId, String);
     var communities =  Communities.find(
         {users: userId},
         {fields: {
@@ -49,6 +50,8 @@ Meteor.publish("communitiesUser", function (userId) {
 });
 
 Meteor.publish("community", function (communityId) {
+    check(communityId, String);
+
     var communities =  Communities.find(
         {_id: communityId},
         {fields: {

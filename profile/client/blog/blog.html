@@ -1,0 +1,19 @@
+<template name="blog">
+    {{#if Template.subscriptionsReady}}
+    <div class="row">
+        <div class="col-sm-8">
+            {{> blogBody entries=blogEntries}}
+        </div>
+        <div class="col-sm-4">
+            {{#if isOwner}}
+            <div class="row">
+                {{> blogPrivate}}
+            </div>
+            {{/if}}
+            <div class="row">
+                {{> blogNavigation}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</template>

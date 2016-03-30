@@ -27,15 +27,6 @@ Meteor.methods({
     }
 });
 
-Accounts.onCreateUser(function(options, user){
-    console.log('onCreateUser');
-    user.type = options.type;
-    user.profile = options.profile;
-    user.createdAt = new Date();
-    user.updated = false;
-    return user;
-});
-
 Accounts.emailTemplates.siteName = 'KM_edu';
 Accounts.emailTemplates.siteName = 'KM_edu Administrator <accounts@km-application.com>';
 Accounts.emailTemplates.enrollAccount = {

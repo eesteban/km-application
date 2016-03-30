@@ -18,7 +18,6 @@ Template.profile.helpers({
     tab: function() {
         return Template.instance().currentTab.get();
     },
-
     tabData: function(){
         var tab = Template.instance().currentTab.get();
         var user = Template.instance().data.user;
@@ -27,7 +26,7 @@ Template.profile.helpers({
             if(tab==='aboutUser'){
                 return user.profile;
             }else if(tab==='blog'){
-                return user.blog;
+                return user._id;
             } else if(tab==='communityList'){
                 return user._id;
             }

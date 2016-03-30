@@ -16,7 +16,7 @@ Template.registerHelper('formatDate', function(time){
        + (date.getMonth()+1)  + "/"
        + date.getFullYear() + " - "
        + date.getHours() + ":"
-       + date.getMinutes()
+       + (date.getMinutes()<10?'0':'') + date.getMinutes()
 });
 
 Template.registerHelper('count', function (array){
