@@ -1,3 +1,19 @@
+var communityPattern = {
+    name: String,
+    type: Match.OneOf('professional_group', 'activity_group','student_group'),
+    users: [String],
+    topics: Match.Optional([String]),
+    budget: Match.Optional({
+        amount: Number,
+        type: Match.OneOf('total', 'per_child')
+    }),
+    activityType: Match.Optional(Match.OneOf(['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'])),
+    location: Match.Optional(String),
+    studentGroups: Match.Optional([String]),
+    students: Match.Optional([String])
+
+};
+
 Meteor.publish("communitiesBasic", function () {
     var userId = this.userId;
     var communities =  Communities.find(
@@ -33,6 +49,7 @@ Meteor.publish("communitiesAll", function () {
 
 Meteor.publish("communitiesUser", function (userId) {
     check(userId, String);
+
     var communities =  Communities.find(
         {users: userId},
         {fields: {
@@ -58,7 +75,6 @@ Meteor.publish("community", function (communityId) {
             'name': 1,
             'type': 1,
             'users': 1,
-            'createdAt': 1,
             'forum': 1
         }}
     );
@@ -72,7 +88,7 @@ Meteor.publish("community", function (communityId) {
 
 Meteor.publish("studentGroups", function () {
     var communities =  Communities.find(
-        {type: 'student'},
+        {type: 'student_group'},
         {fields: {
             'name': 1,
             'users': 1,
@@ -87,31 +103,10 @@ Meteor.publish("studentGroups", function () {
     return this.ready();
 });
 
-Communities.allow({
-    insert: function (userId, community) {
-        if(Communities.find({name: community.name}).count() < 1){
-            return true
-        }{
-            throw new Meteor.Error('create-community', TAPi18n.__("community_name_used"));
-        }
-    },
-    update: function (userId, community, fields, modifier) {
-        console.log('onCommunityUpdate');
-        if(Meteor.user().type==="admin"){
-            return true;
-        }else{
-            //Only allow users to modify
-            return Communities.find({_id: community._id, users: userId});
-        }
-    },
-    remove:function(){
-        return Meteor.user().type==="admin";
-    }
-});
-
 Meteor.methods({
     insertCommunity: function(community){
         var userId = Meteor.userId();
+        check(community, communityPattern);
         if(userId){
             var communityName = community.name;
             if(communityName && Communities.find({name: communityName}).count() < 1){
@@ -124,22 +119,25 @@ Meteor.methods({
 
                 var communityType = community.type;
 
-                if(communityType==='professional'){
+                if(communityType==='professional_group'){
                     community.topics = unique(community.topics);
-                }else if(communityType==='activity'){
-                    if(!community.budget.amount){
-                        community.budget.amount = 0;
-                        community.budget.type = 'total';
+                }else if(communityType==='activity_group'){
+                    if(!community.budget){
+                        community.budget={
+                            amount: 0,
+                            type: 'total'
+                        }
                     }
                     var activityTypes = ['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'];
                     if(inArray(community.activityType, activityTypes)<0){
                         community.activityType = 'other';
                     }
-                    community.studentGroups =  verify(community.studentGroups, function(t) {
-                        return Communities.findOne({_id: t, type : 'student'});
-                    });
-                }else if(communityType==='student'){
-                    community.type = 'student';
+                    if(community.studentGroups){
+                        community.studentGroups =  verify(community.studentGroups, function(t) {
+                            return Communities.findOne({_id: t, type : 'student'});
+                        });
+                    }
+                }else if(communityType==='student_group'){
                     var students = community.students;
                     community.students = verify(students, function(t) {
                         return Students.findOne({_id: t})
@@ -152,11 +150,13 @@ Meteor.methods({
                         Meteor.users.update(userId, {$push: {'communities': communityId}});
                         /*Send Messages to the invited user*/
                     });
-                    if(communityType==='activity'){
-                        community.studentGroups.forEach(function(studentGroupID){
-                            Communities.update(studentGroupID, {$push: {'activities': communityId}});
-                        });
-                    }else if(communityType==='student'){
+                    if(communityType==='activity_group'){
+                        if(community.studentGroups){
+                            community.studentGroups.forEach(function(studentGroupID){
+                                Communities.update(studentGroupID, {$push: {'activities': communityId}});
+                            });
+                        }
+                    }else if(communityType==='student_group'){
                         community.students.forEach(function(studentId){
                             Students.update(studentId, {$push: {'groups': communityId}});
                         });
@@ -174,6 +174,10 @@ Meteor.methods({
         }
     },
     newTopic: function(communityId, topic, description, post){
+        check(topic, String);
+        check(description, String);
+        check(post, String);
+
         var userId = Meteor.userId();
         if(userId){
             if(Communities.findOne({_id: communityId, users: userId}) || Meteor.user().type==="admin"){
@@ -206,6 +210,10 @@ Meteor.methods({
         }
     },
     newPost: function(communityId, topicIndex, post){
+        check(communityId, String);
+        check(topicIndex, Number);
+        check(post, String);
+
         var userId = Meteor.userId();
         if(userId){
             if(Communities.findOne({_id: communityId, users: userId}) || Meteor.user().type==="admin"){

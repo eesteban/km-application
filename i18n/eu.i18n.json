@@ -1,53 +1,134 @@
 {
-  "application_name": "KEdu",
+  "application_name": "Principle 7",
   "welcome": "Ongi etorri!",
+  "close": "Itxi",
 
+  /*Authentication*/
   "login": "Sartu",
   "logout": "Irten",
-  "username": "Erabiltzaile izena",
-  "password": "Pasahitza",
-  "email": "Posta elektronikoa",
-  "name": "Izena",
-  "surname": "Abizena",
+  "login_failed": "Barkatu, erabilitako erabiltzaile izen eta pashitza ez dute bat egiten. Berriz saiatu mesedez.",
+  "not_logged_user": "Ez dago erabiltzailerik",
 
-  "update": "Eguneratu",
-  "search": "Bilatu",
+  /*User Profile*/
+  "username": "Erabiltzaile izena",
+  "username_required": "Mesedez, erabiltzaile izena zehaztu",
+  "username_length": "Erabiltzaile izenak gutxienez 6 karaktere izan behar ditu",
+
+  "password": "Pasahitza",
+  "password_required": "Mesedez, pasahitza zehaztu",
+  "password_length": "Pasahitzak gutxienez 6 karaktere izan behar ditu",
+  "password_confirmation": "Pasahitza berretsi",
+  "password_confirmation_fail": "Zure pasahitza eta berrespenak ez dute bat egiten",
+
+  "email": "Posta elektronikoa",
+  "email_required": "Mesedez, posta elektronikoa zehaztu",
+  "email_invalid": "Mesedez, balizoko posta elektronikoa erabili (email@adibidea.com)",
+  "email_in_list": "Posta elektroniko hori dagoeneko zerrendan dago",
+  "email_exist": "Posta elektroniko hori erabiltzaile bati dagokio",
+
+  "name": "Izena",
+  "name_required": "Mesedez, izena zehaztu",
+
+  "surname": "Abizena",
+  "surname_required": "Mesedez, abizena zehaztu",
+
+  "phone": "Telefonoa",
+  "phone_required": "Mesedez, telefonoa zehaztu",
+  "not_phone": "Ez da telefonorik zehaztu",
+
+  "skills": "Trebetasunak",
+  "skill_required": "Mesedez, trebetasuna zehaztu",
+  "skill": "Tebetasuna",
+  "skill_failure": "Barkatu, ezin izan da trebetasuna gehitu",
+  "skill_in_list": "Trebetasun hori zerrendan dago",
+
+  "interest": "Zaletasuna",
+  "interest_required": "Please, specify a interest",
+  "interests": "Zaletasunak",
+  "interest_failure": "Sorry, we could not add that interest",
+  "interest_in_list": "That interest is already in the list",
+
+  "my_profile": "Nire Profila",
+  "contact_information": "Kontaktu Informazioa",
+  "about_me": "Niri Buruz",
+  "messages": "Mezuak",
+  "message": "Mezua",
+  "blog": "Bloga",
+
+  "user_not_invited": "Ezin izan dugu erabiltzailea gonbidatu",
+  "user_invited": "Erabiltzailea gonbidatu dugu",
+
+  /*Communities*/
+  "community": "Taldea",
+  "communities": "Taldeak",
+  "new_community": "Talde berria",
+
+  "community_name": "Taldearen izena",
+
+  "invited_users": "Gonbidaturiko erabiltzaileak",
+
+  "community_type": "Talde mota",
+  "student_group": "Ikasle taldea",
+  "professional_group": "Aditu taldea",
+  "topic_comma_separated": "Gaiak komaz (,) banandurik",
+  "activity_group": "Jarduera taldea",
+  "budget": "Aurrekontua",
+  "total": "Guztira",
+  "per_child": "Ume bakoitzeko",
+  "location": "Kokapena",
+  "student_groups": "Ikasle taldeak",
+  "activity_type": "Jarduera mota",
+  "sportive": "Kirola",
+  "artistic": "Artea",
+  "scientific": "Zientzia",
+  "technological": "Teknologia",
+  "multimedia": "Multimedia",
+  "educative": "Heziketa",
+  "other": "Beste bat",
+
+  "members": "Kideak",
+
+  "community_information": "Taldearen informazioa",
+  "create_community": "Taldea sortu",
+
+  /*Forum*/
+  "forum": "Foroa",
+
+  "topic": "Gaia",
+  "topics": "Gaiak",
+  "new_topic": "Gai berria",
+  "create_topic": "Sortu gaia",
+  "no_topics": "Ez dago gairik momentuz, sortu bat!",
+  "description": "Azalpena",
+
+  "post": "Post",
+  "posts": "Post-ak",
+  "new_post_success": "Post berria sortu da!",
+  "new_post_failure": "Ezin izan da post berria sortu",
+  "new_post": "Post berria",
+  "last_post": "Azken posta",
+  "author": "Egilea",
+
+  /*Students*/
+  "student": "Ikaslea",
+  "students": "Ikasleak",
+  "new_student": "Ikasle berriak",
+  "add_student": "Ikaslea gehitu",
 
   "forgot_pwd": "Pasahitza ahaztu ahal duzu?",
   "invite_users": "Erabiltzaileak gonbidatu",
-  "management_portal": "Kudeaketa",
+  "management_portal": "Kudeaketa ataria",
   "new_users": "Erabiltzaile berriak",
   "empty_list": "Zerrenda hutsik dago",
   "people_to_invite": "Gondbidatu zerrenda",
 
-  "my_profile": "Nire Profila",
+  /*Enroll*/
   "enrollment": "Izen ematea",
   "enroll": "Izena eman",
-  "password_confirmation": "Pasahitza berretsi",
+  "enrollment_failed": "Barkatu, ezin izan dugu zure eskaera burutu, saiatu berriro edo administratzailearekin kontaktatu.",
 
-  "contact_information": "Kontaktu Informazioa",
-  "phone": "Telefonoa",
-  "not_phone": "Ez da telefonorik zehaztu",
-  "about_me": "Niri Buruz",
-  "skills": "Trebetasunak",
-  "skill": "Tebetasuna",
-  "skill_in_list": "Trebetasun hori zerrendan dago",
-  "interests": "Zaletasunak",
-  "interest": "Zaletasuna",
-  "messages": "Mezuak",
-  "message": "Mezua",
+  "management": "Kudeaketa",
 
-  "communities": "Taldeak",
-  "professional": "Aditu taldea",
-  "activity": "Ekintza taldea",
-  "student": "Ikasle taldea",
-  "community_name": "Taldearen izena",
-  "community_type": "Talde mota",
-  "create_community": "Taldea sortu",
-
-  "blog": "Bloga",
-
-  "Management": "Kudeaketa",
-  "new_student": "Ikasle berriak",
-  "add_student": "Ikaslea gehitu"
+  "update": "Eguneratu",
+  "search": "Bilatu"
 }

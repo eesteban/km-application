@@ -1,81 +1,88 @@
 <template name="myProfile">
     <div class="row profile">
         {{#with user}}
-        <div class="col col-sm-3">
-            <h2>{{profile.name}} {{profile.surname}}</h2>
-            <div class="profile-image">
-                <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image">
-            </div>
-            <h3>{{_ "contact_information"}}</h3>
-            <ul class="profile-details">
-                <li>
-                    <div class="detail-title"><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
-                    {{#each profile.phones}}
-                        <div class="detail-info">
-                            {{this}}
-                            <a class="removePhone" href="#">
-                                <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
-                            </a>
-                        </div>
-                    {{else}}
-                        <div class="detail-info">
-                            {{_ "not_phone"}}
-                        </div>
-                    {{/each}}
-                        <form id="newPhone">
-                        <div class="input-group">
-                            <input type="text" class="form-control input-sm" id="phone" name="phone" placeholder="{{_ "phone"}}">
+        <div class="col col-sm-3 nopadding">
+            <div class="panel panel-default">
+                <div  class="panel-body">
+                    <h2>{{profile.name}} {{profile.surname}}</h2>
+                    <div class="profile-image">
+                        <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image">
+                    </div>
+                    <h3>{{_ "contact_information"}}</h3>
+                    <ul class="profile-details">
+                        <li>
+                            <div class="detail-title"><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</div>
+                            {{#each profile.phones}}
+                                <div class="detail-info">
+                                    {{this}}
+                                    <a class="removePhone" href="#">
+                                        <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
+                                    </a>
+                                </div>
+                            {{else}}
+                                <div class="detail-info">
+                                    {{_ "not_phone"}}
+                                </div>
+                            {{/each}}
+                            <form id="newPhone">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="phone" name="phone" placeholder="{{_ "phone"}}">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class=" glyphicon glyphicon-plus" ></i>
                             </button>
                         </span>
-                        </div>
-                        <div id="errorMessagePhone"> </div>
-                    </form>
-                </li>
+                                </div>
+                                <div id="errorMessagePhone"> </div>
+                            </form>
+                        </li>
 
-                <li>
-                <div class="detail-title"><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
-                {{#each emails}}
-                    <div class="detail-info">
-                        {{this.address}}
-                        <a class="removeEmail" href="#">
-                            <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
-                        </a>
-                    </div>
-                {{else}}
-                    <div class="detail-info">
-                        {{_ "not_email"}}
-                    </div>
-                {{/each}}
-                <div>
-                    <form id="newEmail">
-                        <div class="input-group">
-                            <input type="text" class="form-control input-sm" id="email" name="email" placeholder="{{_ "email"}}">
+                        <li>
+                            <div class="detail-title"><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</div>
+                            {{#each emails}}
+                                <div class="detail-info">
+                                    {{this.address}}
+                                    <a class="removeEmail" href="#">
+                                        <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
+                                    </a>
+                                </div>
+                            {{else}}
+                                <div class="detail-info">
+                                    {{_ "not_email"}}
+                                </div>
+                            {{/each}}
+                            <div>
+                                <form id="newEmail">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" id="email" name="email" placeholder="{{_ "email"}}">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-primary btn-sm">
                                     <i class=" glyphicon glyphicon-plus" ></i>
                                 </button>
                             </span>
-                        </div>
-                        <div id="errorMessageEmail"> </div>
-                    </form>
+                                    </div>
+                                    <div id="errorMessageEmail"> </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                </li>
-            </ul>
+            </div>
         </div>
-        <div class="col col-sm-9">
-            <ul class="nav nav-tabs" id="tabs">
-                <li data-template="aboutMe" class="active"><a href="#" id="aboutMe">{{_ "about_me"}}</a></li>
-                <li data-template="blog"><a href="#" id="blog">{{_ "blog"}}</a></li>
-                <li data-template="communityList"><a href="#" id="communities">{{_ "communities"}}</a></li>
-                <li data-template="messages"><a href="#" id="messages">{{_ "messages"}}</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane active">
-                    {{> Template.dynamic template=tab data=tabData}}
+        <div class="col col-sm-9 nopadding">
+            <div class="panel panel-default">
+                <ul class="panel-heading nav nav-tabs" id="tabs">
+                    <li data-template="aboutMe" class="active"><a href="#" id="aboutMe">{{_ "about_me"}}</a></li>
+                    <li data-template="blog"><a href="#" id="blog">{{_ "blog"}}</a></li>
+                    <li data-template="communityList"><a href="#" id="communities">{{_ "communities"}}</a></li>
+                    <li data-template="messages"><a href="#" id="messages">{{_ "messages"}}</a></li>
+                </ul>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            {{> Template.dynamic template=tab data=tabData}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

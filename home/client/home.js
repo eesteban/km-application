@@ -1,5 +1,5 @@
 Template.home.helpers({
-    enrollmentToken: function() {
+    enrollmentToken: function(){
         return Session.get('enrollmentToken');
     }
 });

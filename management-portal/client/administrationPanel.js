@@ -1,6 +1,6 @@
-Template.administrationPanel.events({
+Template.managementDashboard.events({
     'click #setup': function(event){
         event.preventDefault();
-        Meteor.call('communitySetup');
+        Meteor.call('fastSetup');
     }
 });

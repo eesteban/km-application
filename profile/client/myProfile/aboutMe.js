@@ -30,18 +30,20 @@ Template.aboutMe.onRendered(function () {
         },
         messages: {
             interest: {
-                required: "Please specify a new interest"
+                required: TAPi18n.__('interest_required')
             }
         },
         submitHandler: function() {
             var interest = $('#interest').val();
-            Meteor.call('addInterest', interest, function(error){
-                if(error){
-                    Bert.alert(TAPi18n.__('add_interest_failure'), 'danger')
-                }else{
-                    Bert.alert(TAPi18n.__('add_interest_success'), 'success')
-                }
-            });
+            if(Meteor.user().profile.interests.indexOf(interest)<0) {
+                Meteor.call('addInterest', interest, function (error) {
+                    if (error) {
+                        Bert.alert(TAPi18n.__('interest_failure'), 'danger')
+                    }
+                });
+            }else{
+                Bert.alert(TAPi18n.__('interest_in_list'), 'warning')
+            }
         },
         errorLabelContainer: '#errorMessageInterest'
     });
@@ -53,18 +55,21 @@ Template.aboutMe.onRendered(function () {
         },
         messages: {
             skill: {
-                required: TAPi18n.__('specify_skill')
+                required: TAPi18n.__('skill_required')
             }
         },
         submitHandler: function() {
             var skill = $('#skill').val();
-            Meteor.call('addSkill', skill, function(error){
-                if(error){
-                    Bert.alert(TAPi18n.__('add_skill_failure'), 'danger')
-                }else{
-                    Bert.alert(TAPi18n.__('add_skill_success'), 'success')
-                }
-            });
+            if(Meteor.user().profile.skills.indexOf(skill)<0){
+                Meteor.call('addSkill', skill, function(error){
+                    if(error){
+                        Bert.alert(TAPi18n.__('skill_failure'), 'danger')
+                    }
+                });
+            }else{
+                Bert.alert(TAPi18n.__('skill_in_list'), 'warning')
+            }
+
         },
         errorLabelContainer: '#errorMessageSkill'
     });

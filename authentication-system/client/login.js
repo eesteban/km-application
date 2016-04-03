@@ -12,12 +12,12 @@ Template.login.onRendered(function(){
         },
         messages: {
             inputUsername:  {
-                required: "Please specify your Username",
-                minlength: "Your username should have at least 6 character"
+                required: TAPi18n.__("username_required"),
+                minlength: TAPi18n.__("username_length")
             },
             inputPassword: {
-                required: "We need your Password",
-                minlength: "Your password should have at least 8 character"
+                required: TAPi18n.__("password_required"),
+                minlength: TAPi18n.__("password_length")
             }
         },
         submitHandler: function() {
@@ -28,13 +28,12 @@ Template.login.onRendered(function(){
 
             Meteor.loginWithPassword(username, password, function(error){
                 if(error){
-                    Bert.alert('Incorrect login information', 'warning');
+                    Bert.alert(TAPi18n.__("login_failed"), 'warning');
                 }else{
-                    Router.go('/personalProfile');
+                    Router.go('/myProfile');
                 }
             })
-        },
-        success: "valid"
+        }
     })
 });
 

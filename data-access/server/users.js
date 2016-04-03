@@ -1,10 +1,17 @@
+Accounts.config({
+    forbidClientAccountCreation : true
+});
+
 Accounts.onCreateUser(function(options, user){
-    console.log('onCreateUser');
     var date = new Date();
+
     user.type = options.type;
-    user.profile = options.profile;
+    if(options.profile){
+        user.profile = options.profile;
+    }else{
+        user.profile = {}
+    }
     user.createdAt = date;
-    user.updated = false;
     user.blog = {
         entries: [
             {
@@ -21,32 +28,19 @@ Accounts.onCreateUser(function(options, user){
                 ' Fusce pellentesque ligula ligula, ut eleifend ligula volutpat eget.' +
                 ' Nullam nec urna eget turpis bibendum gravida. Etiam eget ipsum non purus ultricies convallis.' +
                 ' Maecenas laoreet at ligula sed gravida.' +
-                ' Suspendisse ex sapien, molestie vitae tristique ac, sagittis ut dui. ' +
-                'Nunc lobortis mauris elit.',
+                ' Suspendisse ex sapien, molestie vitae tristique ac, sagittis ut dui.' +
+                ' Nunc lobortis mauris elit.',
                 comments: []
             }
         ]
     };
+
+    console.log('User created: '+ user._id);
     return user;
 });
 
 Meteor.users.allow({
     insert: function () {
-        return Meteor.user().type==="admin";
-    },
-    update: function (userId, user, fields, modifier) {
-        if(Meteor.user().type==="admin"){
-            return true;
-        }else{
-            /*If the change modifies the user type deny the change*/
-            if(fields.indexOf('type')<0){
-                return userId===user._id;
-            }else{
-                return false
-            }
-        }
-    },
-    remove:function(){
         return Meteor.user().type==="admin";
     }
 });
@@ -88,6 +82,23 @@ Meteor.publish("userPrivate", function () {
     return this.ready();
 });
 
+Meteor.publish("otherUsersEmails", function () {
+    var userId = this.userId;
+
+    var otherUserBasic =  Meteor.users.find(
+        {_id: { $ne: userId}},
+        {fields: {
+            'emails': 1
+        }}
+    );
+
+    if(otherUserBasic){
+        return otherUserBasic;
+    }
+
+    return this.ready();
+});
+
 Meteor.publish("otherUsersBasic", function () {
     var userId = this.userId;
 
@@ -109,6 +120,7 @@ Meteor.publish("otherUsersBasic", function () {
 
 Meteor.publish("communityUsersBasic", function (communityId) {
     check(communityId, String);
+
     var communityUsersBasic =  Meteor.users.find(
         {communities: communityId},
         {fields: {
@@ -128,6 +140,7 @@ Meteor.publish("communityUsersBasic", function (communityId) {
 
 Meteor.publish("otherUsersComplete", function () {
     var userId = this.userId;
+
     var otherUserComplete =  Meteor.users.find(
         {_id: { $ne: userId}},
         {fields: {
@@ -161,8 +174,28 @@ Meteor.publish("blog", function (userId) {
 });
 
 Meteor.methods({
+    enrollUser: function (username, name, surname){
+        check(username, String);
+        check(name, String);
+        check(surname, String);
+
+        var userID = Meteor.userId();
+        if(userID){
+            Meteor.users.update(userID,
+                {$set: {
+                    username: username,
+                    'profile.name': name,
+                    'profile.surname': surname
+                }}
+            );
+        }else{
+            throw new Meteor.Error('logged-out');
+        }
+    },
     addSkill: function(skill){
         var userId = Meteor.userId();
+        check(skill, String);
+
         if(userId){
             Meteor.users.update(userId, {$addToSet: {'profile.skills': skill}});
         }else{
@@ -171,6 +204,8 @@ Meteor.methods({
     },
     addInterest: function(interest){
         var userId = Meteor.userId();
+        check(interest, String);
+
         if(userId){
             Meteor.users.update(userId, {$addToSet: {'profile.interests': interest}});
         }else{
@@ -194,5 +229,19 @@ Meteor.methods({
         }else{
             throw new Meteor.Error('logged-out', "The entry can't be added");
         }
+    },
+    inviteUsers: function (emailList){
+        check(emailList, [String]);
+        emailList.forEach(function(email){
+            var user = {
+                email: email,
+                type: 'staff'
+            };
+            var userId = Accounts.createUser(user);
+            Accounts.sendEnrollmentEmail(userId);
+        });
+    },
+    isAdmin: function () {
+        return Meteor.user().type==="admin"
     }
 });

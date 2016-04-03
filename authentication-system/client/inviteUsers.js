@@ -1,4 +1,8 @@
 var emailList = new ReactiveArray();
+Template.inviteUsers.onCreated(function(){
+    Meteor.subscribe("otherUsersEmails");
+});
+
 Template.inviteUsers.onRendered(function(){
     $("#inviteUserForm").validate({
         rules:{
@@ -9,19 +13,23 @@ Template.inviteUsers.onRendered(function(){
         },
         messages: {
             inputEmail: {
-                required: "Please specify an Email",
-                email: "Introduce a valid email address please (email@example.com)"
+                required: TAPi18n.__("email_required"),
+                email: TAPi18n.__("email_invalid")
             }
         },
         submitHandler: function() {
             var email = $('#inputEmail').val();
             if(emailList.indexOf(email)<0){
-                emailList.push(email);
+                if(Meteor.users.find({'emails.address': email}).count()>0){
+                    Bert.alert(TAPi18n.__('email_exist'), 'danger');
+                }else{
+                    emailList.push(email);
+                }
             }else{
-                Bert.alert('That email is already in the list', 'danger')
+                Bert.alert(TAPi18n.__("email_in_list"), 'danger')
             }
         },
-        errorLabelContainer: '#errorMessage'
+        errorLabelContainer: "#error"
     })
 
 });
@@ -35,13 +43,15 @@ Template.inviteUsers.events({
         return emailList.remove(this.toString());
     },
     'click #inviteUsers': function () {
-        Meteor.call('inviteUsers', emailList.array(), function(error){
+        var emails = emailList.array();
+        Meteor.call('inviteUsers', emails, function(error){
             if(error){
                 Bert.alert(TAPi18n.__('user_not_invited'), 'danger');
             }else{
                 Bert.alert(TAPi18n.__('user_invited'), 'success');
             }
         });
+        emailList.clear();
     }
 });
 

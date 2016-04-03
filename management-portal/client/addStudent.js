@@ -12,25 +12,21 @@ Template.addStudent.onRendered(function(){
         },
         messages: {
             inputName: {
-                required: TAPi18n.__('name_required')
+                required: TAPi18next.t('required_username')
             },
             inputSurname: {
-                required: TAPi18n.__('email_required')
+                required: TAPi18next.t('required_email')
             }
         },
         submitHandler: function() {
-            var student = {
-                profile: {
-                    name:  $('#inputName').val(),
-                    surname: $('#inputSurname').val()
-                }
-            };
+            var name =  $('#inputName').val();
+            var surname = $('#inputSurname').val();
 
-            Meteor.call('insertStudent', student, function(error){
+            Meteor.call('insertStudent', name, surname, function(error){
                 if(error){
-                    Bert.alert(TAPi18n.__('student_insert_error'), 'danger')
+                    Bert.alert(TAPi18next.t('student_insert_error'), 'danger')
                 }else{
-                    Bert.alert(TAPi18n.__('student_insert_sucess'), 'success')
+                    Bert.alert(TAPi18next.t('student_insert_sucess'), 'success')
                 }
             });
         }

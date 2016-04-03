@@ -1,17 +1,118 @@
 {
-  "application_name": "KEdu",
+  "application_name": "Principle 7",
   "welcome": "Welcome!",
+  "close": "Close",
 
+  /*Authentication*/
   "login": "Login",
   "logout": "Logout",
-  "username": "Username",
-  "password": "Password",
-  "email": "Email",
-  "name": "Name",
-  "surname": "Surname",
+  "login_failed": "Sorry, that username and password do not match. Please try again.",
+  "not_logged_user": "Not user Loged In",
 
-  "update": "Update",
-  "search": "Search",
+  /*User Profile*/
+  "username": "Username",
+  "username_required": "Please, specify a username",
+  "username_length": "The username should be at least 6 character",
+
+  "password": "Password",
+  "password_required": "Please, specify a password",
+  "password_length": "The password should be at least 8 character",
+  "password_confirmation": "Confirm password",
+  "password_confirmation_fail": "Your Password and Password Confirmation must be the same",
+
+  "email": "Email",
+  "email_required": "Please, specify a email",
+  "email_invalid": "Introduce a valid email address please (email@example.com)",
+  "email_in_list": "That email is already in the list",
+  "email_exist": "That email address already belongs to a user",
+
+  "name": "Name",
+  "name_required": "Please, specify a name",
+
+  "surname": "Surname",
+  "surname_required": "Please, specify a surname",
+
+  "phone": "Phone",
+  "phone_required": "Please, specify a phone",
+  "not_phone": "No Phone available",
+
+  "skill": "Skill",
+  "skill_required": "Please, specify a skill",
+  "skills": "Skills",
+  "skill_failure": "Sorry, we could not add that skill",
+  "skill_in_list": "That skill is already in the list",
+
+  "interest": "Interest",
+  "interest_required": "Please, specify a interest",
+  "interests": "Interests",
+  "interest_failure": "Sorry, we could not add that interest",
+  "interest_in_list": "That interest is already in the list",
+
+  "my_profile": "My Profile",
+  "contact_information": "Contact Information",
+  "about_me": "About Me",
+  "messages": "Messages",
+  "message": "Message",
+  "blog": "Blog",
+
+  "user_not_invited": "The user has not been invited",
+  "user_invited": "The user has been invited",
+
+  /*Communities*/
+  "community": "Community",
+  "communities": "Communities",
+  "new_community": "New community",
+
+  "community_name": "Community name",
+
+  "invited_users": "Invited users",
+
+  "community_type": "Community type",
+  "student_group": "Student group",
+  "professional_group": "Professional community",
+  "topic_comma_separated": "Topics comma (,) separated",
+  "activity_group": "Activity community",
+  "budget": "budget",
+  "total": "Total",
+  "per_child": "Per child",
+  "location": "Location",
+  "student_groups": "Student groups",
+  "sportive": "Sportive",
+  "artistic": "Artistic",
+  "scientific": "Scientific",
+  "technological": "Technological",
+  "multimedia": "Multimedia",
+  "educative": "Educative",
+  "other": "Other",
+
+  "members": "Members",
+
+  "community_information": "Community information",
+  "create_community": "Create community",
+
+  /*Forum*/
+  "forum": "Forum",
+
+  "topic": "Topic",
+  "topics": "Topics",
+  "new_topic": "New topic",
+  "create_topic": "Create topic",
+  "no_topics": "There is not topic available, create one!",
+  "description": "Description",
+
+  "post": "Post",
+  "posts": "Posts",
+  "new_post": "New post",
+  "new_post_success": "New post successfully created!",
+  "new_post_failure": "The new post could not be created",
+  "last_post": "Last post",
+  "author": "Author",
+
+  /*Students*/
+  "student": "Student",
+  "students": "Students",
+  "new_student": "New Student",
+  "add_student": "Add Student",
 
   "forgot_pwd": "Forgot your password?",
   "invite_users": "Invite users",
@@ -20,35 +121,13 @@
   "empty_list": "The list is empty",
   "people_to_invite": "People to invite",
 
-  "my_profile": "My Profile",
+  /*Enroll*/
   "enrollment": "Enrollment",
   "enroll": "Enroll",
-  "password_confirmation": "Confirm password",
-
-  "contact_information": "Contact Information",
-  "phone": "Phone",
-  "not_phone": "No Phone available",
-  "about_me": "About Me",
-  "skills": "Skills",
-  "skill": "Skill",
-  "skill_in_list": "That skill is already in the list",
-  "interests": "Interests",
-  "interest": "Interest",
-  "messages": "Messages",
-  "message": "Message",
-
-  "communities": "Communities",
-  "professional": "Professional community",
-  "activity": "Activity community",
-  "student": "Student group",
-  "community_name": "Community name",
-  "community_type": "Community type",
-  "create_community": "Create community",
-
-  "blog": "Blog",
+  "enrollment_failed": "Sorry, we can not enroll you, try again and if the error persis contact the administrator",
 
   "management": "Management",
-  "new_student": "New Student",
-  "add_student": "Add Student"
 
+  "update": "Update",
+  "search": "Search"
 }

@@ -1,0 +1,34 @@
+<template name="enrollment">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>{{_ "enrollment"}}</h2>
+        </div>
+        <div class="panel-body enrollment">
+            <form id="enrollmentForm">
+                <div class="form-group">
+                    <label for="inputUsername">{{_ "username"}}</label>
+                    <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="{{_ "username"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputName">{{_ "name"}}</label>
+                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="{{_ "name"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputSurname">{{_ "surname"}}</label>
+                    <input type="text" class="form-control" id="inputSurname" name="inputSurname" placeholder="{{_ "surname"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">{{_ "password"}}</label>
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="{{_ "password"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputPasswordConfirmation">{{_ "password_confirmation"}}</label>
+                    <input type="password" class="form-control" id="inputPasswordConfirmation" name="inputPasswordConfirmation" placeholder="{{_ "password_confirmation"}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block" value="{{_ "enroll"}}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

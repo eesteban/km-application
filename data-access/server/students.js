@@ -19,14 +19,27 @@ Meteor.publish('studentsComplete', function(){
 });
 
 Meteor.methods({
-    insertStudent: function(student){
+    insertStudent: function(name, surname){
+        check(name, String);
+        check(surname, String);
+
         var userId = Meteor.userId();
         if(userId){
-            student.users = [userId];
-            student.createdAt = Date.now();
-            student.createdBy = userId;
+            var student ={
+                profile: {
+                    name: name,
+                    surname: surname
+                },
+                users:  [userId],
+                createdAt: Date.now(),
+                createdBy:  userId,
+                groups :[]
+            };
+
             var studentId = Students.insert(student);
             if (!studentId) throw new Meteor.Error('insert-student', TAPi18n.__('student_not_created'));
+
+            return studentId;
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__('logged-out'));
         }

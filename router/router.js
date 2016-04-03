@@ -1,12 +1,16 @@
 Router.route('/', {
     name: 'home',
     template: 'home',
-    action:  function(){
-        if(!Meteor.userId()){
-            this.render();
-        }else{
+    layoutTemplate: 'simpleLayout',
+    onBeforeAction: function(){
+        if(Meteor.userId()){
             Router.go('/myProfile');
+        }else {
+            this.next();
         }
+    },
+    action: function(){
+        this.render();
     }
 });
 
@@ -22,12 +26,15 @@ Router.route('/myProfile',{
             user: Meteor.users.findOne(Meteor.userId())
         }
     },
-    action:  function(){
-        if(!Meteor.userId()){
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
+        }else {
             Router.go('/');
-        }else{
-            this.render();
         }
+    },
+    action: function(){
+        this.render();
     }
 });
 
@@ -43,12 +50,15 @@ Router.route('/profile/:_id', {
             user: Meteor.users.findOne(this.params._id)
         }
     },
-    action: function(){
-        if(!Meteor.userId()){
-            Router.go('/');
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
         }else {
-            this.render();
+            Router.go('/');
         }
+    },
+    action: function(){
+        this.render();
     }
 });
 
@@ -56,30 +66,44 @@ Router.route('/community/:_id', {
     name: 'community',
     template: 'community',
     layoutTemplate: 'mainLayout',
-    subscriptions: function(){
-        this.subscribe('community', this.params._id).wait();
+    waitOn: function(){
+        return this.subscribe('community', this.params._id);
     },
     data: function(){
         return {
             community: Communities.findOne(this.params._id)
         }
     },
-    action: function(){
-        if(!Meteor.userId()){
-            Router.go('/');
-        }else {
+    onBeforeAction: function(){
+        if(Meteor.userId()){
             Session.set('currentCommunity', this.params._id);
-            this.render();
+            this.next();
+        }else {
+            Router.go('/');
         }
+    },
+    action: function(){
+        this.render();
     }
 });
 
-Router.route('/management', function(){
-    if(!Meteor.userId()){
-        Router.go('/');
-    }else{
-        this.layout('mainLayout');
-        this.render('administrationPanel');
+Router.route('/management', {
+    name: 'management',
+    template: 'managementDashboard',
+    layoutTemplate: 'mainLayout',
+    waitOn: function(){
+        return this.subscribe('userPrivate');
+    },
+    onBeforeAction: function(){
+        console.log(Meteor.user());
+        if(Meteor.user().type==='admin'){
+            this.next();
+        }else {
+            Router.go('/');
+        }
+    },
+    action: function() {
+        this.render();
     }
 });
 
@@ -87,15 +111,14 @@ Router.route('/communities', {
     name: 'communities',
     template: 'communities',
     layoutTemplate: 'mainLayout',
-    action: function(){
-        if(!Meteor.userId()){
-            Router.go('/');
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
         }else {
-            this.render();
+            Router.go('/');
         }
+    },
+    action: function(){
+        this.render();
     }
-});
-
-Router.route('/enrollment', function(){
-    this.render('enrollment');
 });

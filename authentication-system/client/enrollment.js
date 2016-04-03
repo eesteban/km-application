@@ -1,4 +1,4 @@
-Accounts.onEnrollmentLink(function(token, done){
+Accounts.onEnrollmentLink(function(token){
     Session.set('enrollmentToken', token);
 });
 
@@ -25,21 +25,21 @@ Template.enrollment.onRendered(function(){
         },
         messages: {
             inputUsername:  {
-                required: "Please specify your Username",
-                minlength: "Your username should have at least 6 character"
+                required: TAPi18n.__("username_required"),
+                minlength: TAPi18n.__("username_length")
             },
             inputName: {
-                required: "Please specify your Name"
+                required: TAPi18n.__("surname_required")
             },
             inputSurname:{
-                required: "Please specify your Surname"
+                required:  TAPi18n.__("name_required")
             },
             inputPassword:{
-                required: "We need your Password",
-                minlength: "Your password should have at least 8 character"
+                required:  TAPi18n.__("password_required"),
+                minlength: TAPi18n.__("password_length")
             },
             inputPasswordConfirmation: {
-                required: "Your Password and Password Confirmation must be the same"
+                required: TAPi18n.__("password_confirmation_fail")
             }
         },
         submitHandler: function() {
@@ -47,24 +47,23 @@ Template.enrollment.onRendered(function(){
             var password = $('#inputPassword').val();
             Accounts.resetPassword(token, password, function(error){
                 if(error){
-                    Bert.alert(TAPi18n.__('enrollment_failure'), 'danger');
+                    Bert.alert(TAPi18n.__('enrollment_failed'), 'danger');
                 }else{
-                    var profile = {
-                      name: $('#inputName').val(),
-                      surname: $('#inputSurname').val()
-                    };
                     var username = $('#inputUsername').val();
-                    Meteor.call('updateUser', profile, username, function(error){
+                    var name = $('#inputName').val();
+                    var surname = $('#inputSurname').val();
+
+                    Meteor.call('enrollUser', username, name, surname, function(error){
                         if(error){
-                            Bert.alert('enrollment_failure', 'danger');
+                            Bert.alert('enrollment_failed', 'danger');
                         }else{
+                            Session.set('enrollmentToken', null);
                             Router.go('/myProfile');
                         }
                     });
                 }
             });
-        },
-        success: "valid"
+        }
     })
 });
 

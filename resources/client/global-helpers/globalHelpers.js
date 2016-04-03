@@ -19,6 +19,10 @@ Template.registerHelper('formatDate', function(time){
        + (date.getMinutes()<10?'0':'') + date.getMinutes()
 });
 
+Template.registerHelper('isAdmin', function(){
+    return Meteor.users.findOne({_id: Meteor.userId(), type: 'admin'});
+});
+
 Template.registerHelper('count', function (array){
     return array.length;
 });

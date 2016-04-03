@@ -34,10 +34,10 @@ Template.createCommunity.onRendered(function(){
             var currentCommunityType = instance.currentCommunityType.get();
 
             if(currentCommunityType==='createProfessionalGroup'){
-                community.type = 'professional';
+                community.type = 'professional_group';
                 community.topics = Session.get('topics');
             }else if(currentCommunityType==='createActivityGroup'){
-                community.type = 'activity';
+                community.type = 'activity_group';
                 community.activityType = $('#inputActivityType').val();
                 community.budget = {
                     type: $('#inputBudgetType').val(),
@@ -51,7 +51,7 @@ Template.createCommunity.onRendered(function(){
                     }
                 );
             }else if(currentCommunityType==='createStudentGroup'){
-                community.type = 'student';
+                community.type = 'student_group';
                 community.students = [];
                 Students.find({selected: true}, {_id: 1}).forEach(
                     function(student){
@@ -84,9 +84,6 @@ Template.createCommunity.helpers({
     },
     invitedUsers: function(){
         return Meteor.users.find({invited: true});
-    },
-    isAdmin: function(){
-        return Meteor.users.findOne({_id: Meteor.userId(), type: 'admin'});
     }
 });
 
