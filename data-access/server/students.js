@@ -1,21 +1,76 @@
 Meteor.publish('studentsComplete', function(){
-    var userType = Meteor.users.findOne(this.userId, {type:1}).type;
-    if(userType==="admin"){
-        var students =  Students.find(
-            {},
-            {fields: {
-                'profile': 1,
-                'groups': 1
-            }}
-        );
+    var userId = this.userId;
+    if(userId){
+        var userType = Meteor.users.findOne(userId, {type:1}).type;
+        if(userType==="admin"){
+            var students =  Students.find(
+                {},
+                {fields: {
+                    'profile': 1,
+                    'groups': 1
+                }}
+            );
 
-        if(students){
-            return students;
+            if(students){
+                return students;
+            }
         }
-        return this.ready();
-    }else{
-        return this.ready();
     }
+    return this.ready();
+
+});
+
+Meteor.publish('studentProfile', function(studentId){
+    check(studentId, String);
+    var userId = this.userId;
+    if(userId){
+        var userType = Meteor.users.findOne(userId, {type:1}).type;
+        if(userType==="admin" || Communities.find({type:'student_group', users:userId, students: studentId})){
+            var student =  Students.find(
+                studentId,
+                {fields: {
+                    'profile': 1
+                }}
+            );
+
+            if(student){
+                return student;
+            }
+        }
+    }
+
+    return this.ready();
+});
+
+Meteor.publish('studentComplete', function(studentId){
+    check(studentId, String);
+    var userId = this.userId;
+    if(userId) {
+        var isAdmin = Meteor.users.findOne(userId, {type: 1}).type === "admin";
+        var isAssigned = Communities.find({
+            type: 'student_group',
+            users: userId,
+            'information.students': studentId
+        }).count()>0;
+
+        if (isAdmin || isAssigned) {
+            var student = Students.find(
+                studentId,
+                {
+                    fields: {
+                        'profile': 1,
+                        'groups': 1
+                    }
+                }
+            );
+
+            if (student) {
+                return student;
+            }
+        }
+    }
+
+    return this.ready();
 });
 
 Meteor.methods({

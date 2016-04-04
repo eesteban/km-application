@@ -33,32 +33,35 @@ Template.createCommunity.onRendered(function(){
 
             var currentCommunityType = instance.currentCommunityType.get();
 
+            var information = {};
+
             if(currentCommunityType==='createProfessionalGroup'){
                 community.type = 'professional_group';
-                community.topics = Session.get('topics');
+                information.topics = Session.get('topics');
             }else if(currentCommunityType==='createActivityGroup'){
                 community.type = 'activity_group';
-                community.activityType = $('#inputActivityType').val();
-                community.budget = {
+                information.activityType = $('#inputActivityType').val();
+                information.budget = {
                     type: $('#inputBudgetType').val(),
                     amount: $('#inputBudget').val()
                 };
-                community.location =  $('#inputLocation').val();
-                community.studentGroups = [ ];
+                information.location =  $('#inputLocation').val();
+                information.studentGroups = [ ];
                 Communities.find({type: 'student', selected: true}, {_id: 1}).forEach(
                     function(studentGroup){
-                        community.studentGroups.push(studentGroup._id);
+                        information.studentGroups.push(studentGroup._id);
                     }
                 );
             }else if(currentCommunityType==='createStudentGroup'){
                 community.type = 'student_group';
-                community.students = [];
+                information.students = [];
                 Students.find({selected: true}, {_id: 1}).forEach(
                     function(student){
-                        community.students.push(student._id);
+                        information.students.push(student._id);
                     }
                 );
             }
+            community.information = information;
 
             console.log(community);
 

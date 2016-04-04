@@ -86,18 +86,19 @@ function createCommunities(userIdArray, studentIdArray, number){
 
         var type = communityTypes[Math.floor(Math.random()*2)];
         var community = {
-            "name" : "Community "+i,
-            "users" : communityUsers,
+            name : "Community "+i,
+            users : communityUsers,
             type: type
         };
+        var information = {};
         if(type==='professional_group'){
-            community.topics=['topic 1', 'topic 2', 'topic 3']
+            information.topics=['topic 1', 'topic 2', 'topic 3']
         }else if(type==='activity_group'){
-            community.budget= {
+            information.budget= {
                 amount: 150,
                 type: 'per_child'
             };
-            community.location = 'Location generated'
+            information.location = 'Location generated'
         }else if(type==='student_group'){
             var numberOfStudents = Math.floor(Math.random()*(totalStudents-1))+1;
             var communityStudents = [];
@@ -105,8 +106,10 @@ function createCommunities(userIdArray, studentIdArray, number){
                 var stdIndex = Math.floor(Math.random()*(totalStudents));
                 communityStudents.push(studentIdArray[stdIndex]);
             }
-            community.students = communityStudents;
+            information.students = communityStudents;
         }
+
+        community.information=information;
 
         var communityId = Meteor.call('insertCommunity', community);
 

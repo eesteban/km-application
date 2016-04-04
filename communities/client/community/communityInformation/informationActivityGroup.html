@@ -1,0 +1,16 @@
+<template name="informationActivityGroup">
+    <h3>{{_ "budget"}}</h3>
+    {{budget.amount}}€ {{translate budget.type}}
+
+    <h3>{{_ "location"}}</h3>
+    {{location}}
+
+    <h3>{{_ "student_groups"}}</h3>
+    <ul>
+        {{#each studentGroups}}
+            <li>
+                {{> communityLink id=this}}
+            </li>
+        {{/each}}
+    </ul>
+</template>

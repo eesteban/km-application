@@ -87,6 +87,28 @@ Router.route('/community/:_id', {
     }
 });
 
+Router.route('/student/:_id', {
+    name: 'student',
+    template: 'studentProfile',
+    layoutTemplate: 'mainLayout',
+    waitOn: function(){
+        return [this.subscribe('studentGroups'), this.subscribe('studentComplete', this.params._id)];
+    },
+    data: function(){
+        return Students.findOne(this.params._id);
+    },
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
+        }else {
+            Router.go('/');
+        }
+    },
+    action: function(){
+        this.render();
+    }
+});
+
 Router.route('/management', {
     name: 'management',
     template: 'managementDashboard',

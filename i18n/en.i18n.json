@@ -77,6 +77,7 @@
   "per_child": "Per child",
   "location": "Location",
   "student_groups": "Student groups",
+  "activity_type": "Activity Type",
   "sportive": "Sportive",
   "artistic": "Artistic",
   "scientific": "Scientific",
@@ -113,6 +114,8 @@
   "students": "Students",
   "new_student": "New Student",
   "add_student": "Add Student",
+  "groups": "Groups",
+  "students_information": "Student's infromation",
 
   "forgot_pwd": "Forgot your password?",
   "invite_users": "Invite users",

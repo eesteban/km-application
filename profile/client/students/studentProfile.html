@@ -1,0 +1,37 @@
+<template name="studentProfile">
+    {{#if accessToStudent}}
+        <div class="row">
+            <div class="col col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{_ "students_information"}}
+                    </div>
+                    <div class="panel-body">
+                        {{#with profile}}
+                            <p>{{_ "name"}}: {{name}}</p>
+                            <p>{{_ "surname"}}: {{surname}}</p>
+                        {{/with}}
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{_ "groups"}}
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            {{#each groups}}
+                                <li>
+                                    {{> communityLink id=this}}
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <h4 class="text-danger">{{_ "not_access_student"}}</h4>
+    {{/if}}
+</template>

@@ -2,16 +2,20 @@ var communityPattern = {
     name: String,
     type: Match.OneOf('professional_group', 'activity_group','student_group'),
     users: [String],
-    topics: Match.Optional([String]),
-    budget: Match.Optional({
-        amount: Number,
-        type: Match.OneOf('total', 'per_child')
-    }),
-    activityType: Match.Optional(Match.OneOf(['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'])),
-    location: Match.Optional(String),
-    studentGroups: Match.Optional([String]),
-    students: Match.Optional([String])
-
+    information: {
+        /*Professional*/
+        topics: Match.Optional([String]),
+        /*Activity*/
+        budget: Match.Optional({
+            amount: Number,
+            type: Match.OneOf('total', 'per_child')
+        }),
+        activityType: Match.Optional(Match.OneOf(['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'])),
+        location: Match.Optional(String),
+        studentGroups: Match.Optional([String]),
+        /*Student*/
+        students: Match.Optional([String])
+    }
 };
 
 Meteor.publish("communitiesBasic", function () {
@@ -54,8 +58,7 @@ Meteor.publish("communitiesUser", function (userId) {
         {users: userId},
         {fields: {
             'name': 1,
-            'type': 1,
-            'users': 1
+            'type': 1
         }}
     );
 
@@ -75,7 +78,7 @@ Meteor.publish("community", function (communityId) {
             'name': 1,
             'type': 1,
             'users': 1,
-            'forum': 1
+            'information': 1
         }}
     );
 
@@ -87,12 +90,15 @@ Meteor.publish("community", function (communityId) {
 });
 
 Meteor.publish("studentGroups", function () {
+    var userId = this.userId;
+
     var communities =  Communities.find(
-        {type: 'student_group'},
+        {type: 'student_group', users: userId},
         {fields: {
             'name': 1,
             'users': 1,
-            'activities': 1
+            type: 1,
+            'information': 1
         }}
     );
 
@@ -119,30 +125,33 @@ Meteor.methods({
 
                 var communityType = community.type;
 
+                var information = community.information;
+
                 if(communityType==='professional_group'){
-                    community.topics = unique(community.topics);
+                    information.topics = unique(information.topics);
                 }else if(communityType==='activity_group'){
-                    if(!community.budget){
-                        community.budget={
+                    if(!information.budget){
+                        information.budget={
                             amount: 0,
                             type: 'total'
                         }
                     }
                     var activityTypes = ['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'];
-                    if(inArray(community.activityType, activityTypes)<0){
-                        community.activityType = 'other';
+                    if(inArray(information.activityType, activityTypes)<0){
+                        information.activityType = 'other';
                     }
-                    if(community.studentGroups){
-                        community.studentGroups =  verify(community.studentGroups, function(t) {
-                            return Communities.findOne({_id: t, type : 'student'});
+                    if(information.studentGroups){
+                        information.studentGroups =  verify(information.studentGroups, function(studentGroupId) {
+                            return Communities.findOne({_id: studentGroupId, type : 'student'});
                         });
                     }
                 }else if(communityType==='student_group'){
-                    var students = community.students;
-                    community.students = verify(students, function(t) {
-                        return Students.findOne({_id: t})
+                    information.students = verify(information.students, function(studentId) {
+                        return Students.findOne({_id: studentId})
                     });
                 }
+
+                community.information = information;
 
                 var communityId = Communities.insert(community);
                 if(communityId){
@@ -151,13 +160,13 @@ Meteor.methods({
                         /*Send Messages to the invited user*/
                     });
                     if(communityType==='activity_group'){
-                        if(community.studentGroups){
-                            community.studentGroups.forEach(function(studentGroupID){
-                                Communities.update(studentGroupID, {$push: {'activities': communityId}});
+                        if(community.information.studentGroups){
+                            community.information.studentGroups.forEach(function(studentGroupID){
+                                Communities.update(studentGroupID, {$push: {'information.activities': communityId}});
                             });
                         }
                     }else if(communityType==='student_group'){
-                        community.students.forEach(function(studentId){
+                        community.information.students.forEach(function(studentId){
                             Students.update(studentId, {$push: {'groups': communityId}});
                         });
                     }

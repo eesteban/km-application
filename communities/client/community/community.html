@@ -12,17 +12,17 @@
                             {{_ "community_type"}}: {{translate community.type}}
                         </li>
                     </ul>
-                    <!--            {{#if equals community.type 'student'}}
-                        {{> community_information_student}}
+                    {{#if equals community.type 'professional_group'}}
+                        {{> informationProfessionalGroup community.information}}
                     {{else}}
-                        {{#if equals community.type 'profesional'}}
-                            {{> community_information_profesional}}
+                        {{#if equals community.type 'student_group'}}
+                            {{> informationStudentGroup community.information}}
                         {{else}}
-                            {{#if equals community.type 'activity'}}
-                                {{> community_information_activity}}
+                            {{#if equals community.type 'activity_group'}}
+                                {{> informationActivityGroup community.information}}
                             {{/if}}
                         {{/if}}
-                    {{/if}}-->
+                    {{/if}}
                 </div>
             </div>
         </div>
