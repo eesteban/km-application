@@ -2,9 +2,7 @@
     <h3>{{_ "students"}}</h3>
     <ul>
         {{#each students}}
-            <li>
-                {{> studentLink id=this}}
-            </li>
+            <li>{{> studentLink id=this}}</li>
         {{/each}}
     </ul>
 </template>

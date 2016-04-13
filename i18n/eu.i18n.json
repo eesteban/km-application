@@ -10,6 +10,8 @@
   "not_logged_user": "Ez dago erabiltzailerik",
 
   /*User Profile*/
+  "user": "Erabiltzailea",
+  "users": "Erabiltzaileak",
   "username": "Erabiltzaile izena",
   "username_required": "Mesedez, erabiltzaile izena zehaztu",
   "username_length": "Erabiltzaile izenak gutxienez 6 karaktere izan behar ditu",
@@ -91,6 +93,8 @@
   "community_information": "Taldearen informazioa",
   "create_community": "Taldea sortu",
 
+  "not_access_community": "Barkatu, baina ezin duzu talde hau ikusi",
+
   /*Forum*/
   "forum": "Foroa",
 
@@ -114,9 +118,9 @@
   "students": "Ikasleak",
   "new_student": "Ikasle berriak",
   "add_student": "Ikaslea gehitu",
-
   "groups": "Taldeak",
   "students_information": "Ikaslearen informazioa",
+  "not_access_student": "Barkatu, ezin duzu ikasle honen profila ikusi",
 
   "forgot_pwd": "Pasahitza ahaztu ahal duzu?",
   "invite_users": "Erabiltzaileak gonbidatu",
@@ -128,7 +132,7 @@
   /*Enroll*/
   "enrollment": "Izen ematea",
   "enroll": "Izena eman",
-  "enrollment_failed": "Barkatu, ezin izan dugu zure eskaera burutu, saiatu berriro edo administratzailearekin kontaktatu.",
+  "enrollment_failed": "Barkatu, ezin izan dugu zure eskaera burutu, saiatu berriro edo administratzailearekin kontaktatu",
 
   "management": "Kudeaketa",
 

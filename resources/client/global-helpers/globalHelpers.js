@@ -26,3 +26,21 @@ Template.registerHelper('isAdmin', function(){
 Template.registerHelper('count', function (array){
     return array.length;
 });
+
+Template.registerHelper('accessToCommunity', function(communityId){
+    var community = Communities.findOne(communityId, {type:1, users:1});
+    if(community.type==='student_group'){
+        return !!Communities.findOne({_id: community._id, users:Meteor.userId()});
+    }else {
+        return true;
+    }
+});
+
+Template.registerHelper('accessToStudent', function(communityId){
+    var community = Communities.findOne(communityId, {type:1, users:1});
+    if(community.type==='student_group'){
+        return !!Communities.findOne({_id: community._id, users:Meteor.userId()});
+    }else {
+        return true;
+    }
+});

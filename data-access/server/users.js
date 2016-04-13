@@ -11,6 +11,7 @@ Accounts.onCreateUser(function(options, user){
     }else{
         user.profile = {}
     }
+    user.files = [];
     user.createdAt = date;
     user.blog = {
         entries: [
@@ -72,7 +73,8 @@ Meteor.publish("userPrivate", function () {
             'emails': 1,
             'type': 1,
             'profile': 1,
-            'communities': 1
+            'communities': 1,
+            'files': 1
         }}
     );
 
@@ -243,5 +245,20 @@ Meteor.methods({
     },
     isAdmin: function () {
         return Meteor.user().type==="admin"
+    },
+    addFileUser: function(file){
+        check(file, String);
+        var userId = Meteor.userId();
+
+        if(userId){
+            Meteor.users.update(userId, {$addToSet: {'files': file}}, function(error){
+                if(error){
+                    throw new Meteor.Error('error_insert', TAPi18n.__('insert-failure'));
+                }
+            });
+        }else{
+            throw new Meteor.Error('logged-out', "The entry can't be added");
+        }
+
     }
 });

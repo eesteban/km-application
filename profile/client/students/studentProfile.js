@@ -4,11 +4,15 @@ Template.studentProfile.helpers({
         if(student){
             var studentId = student._id;
             if(studentId){
-                return !!Communities.findOne({
-                    type: 'student_group',
-                    users: Meteor.userId(),
-                    'information.students': studentId
-                });
+                if(Meteor.user().type==='admin'){
+                    return true;
+                }else{
+                    return !!Communities.findOne({
+                        type: 'student_group',
+                        users: Meteor.userId(),
+                        'information.students': studentId
+                    });
+                }
             }else {
                 return false
             }

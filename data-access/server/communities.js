@@ -72,7 +72,7 @@ Meteor.publish("communitiesUser", function (userId) {
 Meteor.publish("community", function (communityId) {
     check(communityId, String);
 
-    var communities =  Communities.find(
+    var community =  Communities.find(
         {_id: communityId},
         {fields: {
             'name': 1,
@@ -82,8 +82,14 @@ Meteor.publish("community", function (communityId) {
         }}
     );
 
-    if(communities){
-        return communities;
+    if(community){
+        if(community.type==='student_group'){
+            if(inArray(community.users, Meteor.userId())){
+                return community;
+            }
+        }else{
+            return community;
+        }
     }
 
     return this.ready();

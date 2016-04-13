@@ -1,5 +1,5 @@
 Template.studentLink.onCreated(function () {
-   Meteor.subscribe('studentProfile', this.data.id) ;
+    Meteor.subscribe('studentProfile', this.data.id);
 });
 
 Template.studentLink.helpers({

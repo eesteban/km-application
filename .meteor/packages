@@ -34,3 +34,8 @@ standard-minifier-css
 standard-minifier-js
 check
 audit-argument-checks
+meteorhacks:aggregate
+force-ssl
+cfs:standard-packages
+cfs:gridfs
+cfs:ui

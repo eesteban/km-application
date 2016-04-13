@@ -10,6 +10,8 @@
   "not_logged_user": "Not user Loged In",
 
   /*User Profile*/
+  "user": "User",
+  "users": "Users",
   "username": "Username",
   "username_required": "Please, specify a username",
   "username_length": "The username should be at least 6 character",
@@ -91,6 +93,8 @@
   "community_information": "Community information",
   "create_community": "Create community",
 
+  "not_access_community": "Sorry, but you do not have access to this community",
+
   /*Forum*/
   "forum": "Forum",
 
@@ -116,6 +120,7 @@
   "add_student": "Add Student",
   "groups": "Groups",
   "students_information": "Student's infromation",
+  "not_access_student": "Sorry, you do not have access to this student",
 
   "forgot_pwd": "Forgot your password?",
   "invite_users": "Invite users",

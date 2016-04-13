@@ -8,16 +8,22 @@
             <li>
                 <a href="/communities"><i class="glyphicon glyphicon-globe"></i> {{_ "communities"}} </a>
             </li>
+            <li>
+                <a href="/users"><i class="glyphicon glyphicon-education"></i> {{_ "users"}} </a>
+            </li>
+            <li>
+                <a href="/students"><i class="glyphicon glyphicon-pencil"></i> {{_ "students"}} </a>
+            </li>
             {{#if isAdmin}}
                 <li>
-                    <a href="/management"><i class="glyphicon glyphicon-education"></i> {{_ "management"}} </a>
+                    <a href="/management"><i class="glyphicon glyphicon-blackboard"></i> {{_ "management"}} </a>
                 </li>
             {{/if}}
-            <li role="separator" class="divider"></li>
+            <li role="separator" class="divider-horizontal"></li>
             <li>
                 {{> i18n_buttons}}
             </li>
-            <li role="separator" class="divider"></li>
+            <li role="separator" class="divider-horizontal"></li>
             <li>
                 <button class="btn btn-sm btn-primary" id="logout">
                     {{_ "logout"}}

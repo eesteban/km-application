@@ -20,6 +20,42 @@ Meteor.publish('studentsComplete', function(){
 
 });
 
+Meteor.publish('userStudents', function(){
+    var userId = this.userId;
+    if(userId){
+        var userType = Meteor.users.findOne(userId, {type:1}).type;
+        var projection = {
+            fields: {
+                'profile': 1
+            }
+        };
+        var students;
+
+        if(userType==="admin"){
+            students = Students.find({}, projection);
+        } else {
+            var usersStudentsId = Communities.aggregate(
+                {$match: {
+                    type:"student_group",
+                    users:userId
+                }},
+                {$group: {
+                    _id:null,
+                    studentsId:{$addToSet: "$information.students"}
+                }}
+            )[0].studentsId;
+            console.log(usersStudentsId);
+
+            students = Students.find({_id: {$in: usersStudentsId}}, projection);
+        }
+        if(students){
+            return students;
+        }
+    }
+
+    return this.ready();
+});
+
 Meteor.publish('studentProfile', function(studentId){
     check(studentId, String);
     var userId = this.userId;

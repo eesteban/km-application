@@ -75,6 +75,8 @@ Template.myProfile.helpers({
                 return user._id;
             } else if(tab==='messages'){
                 return user.messages;
+            } else if(tab==='ownFiles'){
+                return user.files;
             }
         }
     }

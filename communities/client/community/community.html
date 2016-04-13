@@ -1,45 +1,50 @@
 <template name="community">
-    <div class="row profile">
-        <div class="col col-sm-3 nopadding">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2>{{_ "community_information"}}</h2>
-                </div>
-                <div class="panel-body">
-                    <h2>{{community.name}}</h2>
-                    <ul class="profile-details">
-                        <li>
-                            {{_ "community_type"}}: {{translate community.type}}
-                        </li>
-                    </ul>
-                    {{#if equals community.type 'professional_group'}}
-                        {{> informationProfessionalGroup community.information}}
-                    {{else}}
-                        {{#if equals community.type 'student_group'}}
-                            {{> informationStudentGroup community.information}}
+    {{#if accessToCommunity community._id}}
+        <div class="row">
+            <div class="col col-sm-3 nopadding">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>{{_ "community_information"}}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <h2>{{community.name}}</h2>
+                        <ul class="profile-details">
+                            <li>
+                                {{_ "community_type"}}: {{translate community.type}}
+                            </li>
+                        </ul>
+                        {{#if equals community.type 'professional_group'}}
+                            {{> informationProfessionalGroup community.information}}
                         {{else}}
-                            {{#if equals community.type 'activity_group'}}
-                                {{> informationActivityGroup community.information}}
+                            {{#if equals community.type 'student_group'}}
+                                {{> informationStudentGroup community.information}}
+                            {{else}}
+                                {{#if equals community.type 'activity_group'}}
+                                    {{> informationActivityGroup community.information}}
+                                {{/if}}
                             {{/if}}
                         {{/if}}
-                    {{/if}}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col col-sm-9 nopadding">
-            <div class="panel panel-default">
-                <ul class=" panel-heading nav nav-tabs" id="tabs">
-                    <li data-template="forum" class="active"><a href="#">{{_ "forum"}}</a></li>
-                    <li data-template="members"><a href="#">{{_ "members"}}</a></li>
-                </ul>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active">
-                            {{> Template.dynamic template=tab data=tabData}}
+            <div class="col col-sm-9 nopadding">
+                <div class="panel panel-default">
+                    <ul class=" panel-heading nav nav-tabs" id="tabs">
+                        <li data-template="forum" class="active"><a href="#">{{_ "forum"}}</a></li>
+                        <li data-template="members"><a href="#">{{_ "members"}}</a></li>
+                    </ul>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                {{> Template.dynamic template=tab data=tabData}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {{else}}
+        <h4 class="text-danger">{{_ "not_access_community"}}</h4>
+    {{/if}}
+
 </template>

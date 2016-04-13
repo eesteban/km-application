@@ -1,0 +1,27 @@
+<template name="fileInfo">
+    <div class="col col-sm-1">
+        {{#if isImage}}
+            <i class="glyphicon glyphicon-picture"></i>
+        {{else}}
+            {{#if isAudio}}
+                <i class="glyphicon glyphicon-music"></i>
+            {{else}}
+                {{#if isVideo}}
+                    <i class="glyphicon glyphicon-facetime-video"></i>
+                {{else}}
+                    <i class="glyphicon glyphicon glyphicon-file"></i>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    </div>
+    <div class="col col-sm-8">
+        {{#if this.isUploaded}}
+            {{this.name}}
+        {{else}}
+            {{> FS.UploadProgressBar bootstrap=true}}
+        {{/if}}
+    </div>
+    <div class="col col-sm-3">
+        {{> FS.DeleteButton class="btn btn-danger btn-xs"}}
+    </div>
+</template>
