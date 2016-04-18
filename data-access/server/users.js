@@ -246,12 +246,19 @@ Meteor.methods({
     isAdmin: function () {
         return Meteor.user().type==="admin"
     },
-    addFileUser: function(file){
-        check(file, String);
+    addFileUser: function(fileId, path){
+        check(fileId, String);
+        check(path, String);
         var userId = Meteor.userId();
 
         if(userId){
-            Meteor.users.update(userId, {$addToSet: {'files': file}}, function(error){
+            var file = {
+                path: path,
+                owner: userId,
+                fileId: fileId,
+                deleted:  false
+            };
+            Files.insert(file, function(error){
                 if(error){
                     throw new Meteor.Error('error_insert', TAPi18n.__('insert-failure'));
                 }

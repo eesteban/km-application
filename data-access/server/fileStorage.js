@@ -13,13 +13,11 @@ FileStorage.allow({
     }
 });
 
-Meteor.publish("userPrivateFiles", function () {
+Meteor.publish("userFilesInformation", function (filesId) {
+    check(filesId, [String]);
     var userId = this.userId;
 
-    if(userId){
-        var userFiles = Meteor.users.findOne(userId, {fields: {files: 1}}).files;
-        return FileStorage.find({_id: {$in: userFiles}});
-    }else{
-        throw new Meteor.Error('logged-out', "The entry can't be added");
+    if(userId) {
+        return FileStorage.find({_id: {$in: filesId}});
     }
 });

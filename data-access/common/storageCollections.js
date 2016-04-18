@@ -1,4 +1,4 @@
-var fileStore = new FS.Store.GridFS('files', {
+var fileStore = new FS.Store.GridFS('fileStore', {
     //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
     //mongoOptions: {...},                        // optional, see note below
     //transformWrite: transformWrite,   //optional
@@ -8,7 +8,7 @@ var fileStore = new FS.Store.GridFS('files', {
                                                 // Default: 2MB. Reasonable range: 512KB - 4MB
 });
 
-FileStorage = new FS.Collection("files", {
+FileStorage = new FS.Collection("fileStorage", {
     stores: [fileStore]
 });
 

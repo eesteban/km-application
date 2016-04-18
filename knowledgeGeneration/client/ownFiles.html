@@ -1,12 +1,10 @@
 <template name="ownFiles">
     <div class="row">
-        {{#each this}}
-            {{#with FS.GetFile "files" this}}
-                {{> fileInfo this}}
-                <div class="file">
-                    <img src="{{this.url store='thumbnails'}}" alt="">
-                </div>
-            {{/with}}
+        {{#each folders}}
+            {{> folder this}}
+        {{/each}}
+        {{#each files}}
+            {{> fileInfo this}}
         {{/each}}
     </div>
     <div class="row">
@@ -15,10 +13,16 @@
         </div>
         <div class="col col-sm-4">
             <button class="btn btn-primary btn-sm" id="uploadFiles">
-                <i class="glyphicon glyphicon-plus">
-                    <span>{{_ "upload_files"}}</span>
-                </i>
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>{{_ "upload_files"}}</span>
             </button>
         </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newFolder">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>{{_ "new_folder"}}</span>
+        </button>
+        {{> newFolder}}
     </div>
 </template>
