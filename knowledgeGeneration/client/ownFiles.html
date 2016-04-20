@@ -1,28 +1,28 @@
 <template name="ownFiles">
     <div class="row">
-        {{#each folders}}
-            {{> folder this}}
-        {{/each}}
-        {{#each files}}
-            {{> fileInfo this}}
-        {{/each}}
+        {{#if equals template 'trash'}}
+            <div class="col col-sm-8">
+                <h3>{{_ "trash"}}</h3>
+            </div>
+            <div class="col col-sm-4">
+                <button class="btn btn-primary btn-sm" id="btnFS">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>{{_ "file_system"}}</span>
+                </button>
+            </div>
+        {{else}}
+            <div class="col col-sm-8">
+                <h3>{{_ "file_system"}}: {{path}}</h3>
+            </div>
+            <div class="col col-sm-4">
+                <button class="btn btn-primary btn-sm" id="btnTrash">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>{{_ "trash"}}</span>
+                </button>
+            </div>
+        {{/if}}
     </div>
     <div class="row">
-        <div class="col col-sm-8">
-            <input type="file" id="fileInput" multiple>
-        </div>
-        <div class="col col-sm-4">
-            <button class="btn btn-primary btn-sm" id="uploadFiles">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>{{_ "upload_files"}}</span>
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newFolder">
-            <i class="glyphicon glyphicon-plus"></i>
-            <span>{{_ "new_folder"}}</span>
-        </button>
-        {{> newFolder}}
+        {{> Template.dynamic template=template}}
     </div>
 </template>

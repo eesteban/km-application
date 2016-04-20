@@ -1,0 +1,36 @@
+<template name="fileSystem">
+    <div class="row">
+        <h4>{{_ "folders"}}</h4>
+        <ul>
+            {{#each folders}}
+                <li class="fileItem text-center">
+                    {{> folder this}}
+                </li>
+            {{/each}}
+        </ul>
+        <h4>{{_ "files"}}</h4>
+        <ul>
+            {{#each files}}
+                <li class="fileItem text-center">
+                    {{> file this}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col col-sm-8">
+            <input type="file" id="fileInput" multiple>
+            <button class="btn btn-primary btn-sm pull-right" id="uploadFiles">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>{{_ "upload_files"}}</span>
+            </button>
+        </div>
+        <div class="col col-sm-4">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newFolder">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>{{_ "new_folder"}}</span>
+            </button>
+            {{> newFolder}}
+        </div>
+    </div>
+</template>

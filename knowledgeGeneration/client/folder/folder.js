@@ -1,5 +1,5 @@
 Template.folder.events({
-    'click #folder': function () {
+    'click .element': function () {
         var folderName = Template.instance().data.name;
         var newPath = Session.get('path') + folderName + '/';
         console.log(newPath);

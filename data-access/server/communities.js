@@ -162,7 +162,7 @@ Meteor.methods({
                 var communityId = Communities.insert(community);
                 if(communityId){
                     community.users.forEach(function(userId){
-                        Meteor.users.update(userId, {$push: {'communities': communityId}});
+                        Meteor.users.update(userId, {$push: {communities: communityId}});
                         /*Send Messages to the invited user*/
                     });
                     if(communityType==='activity_group'){

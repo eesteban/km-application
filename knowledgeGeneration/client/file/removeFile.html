@@ -1,0 +1,18 @@
+<template name="removeFile">
+    <div class="modal fade"  id="removeFile" role="dialog" aria-labelledby="Remove file">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{_ "remove_file"}}
+                </div>
+                <div class="modal-body">
+                    {{_ "remove_file_warn"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                    <button type="button" class="btn btn-primary" id="removeFileBtn">{{_ "remove_file"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

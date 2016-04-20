@@ -1,0 +1,10 @@
+<template name="trash">
+    <h4>{{_ "files"}}</h4>
+    <ul>
+        {{#each files}}
+            <li class="fileItem text-center">
+                {{> deletedFile this}}
+            </li>
+        {{/each}}
+    </ul>
+</template>
