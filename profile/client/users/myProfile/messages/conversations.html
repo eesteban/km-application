@@ -1,0 +1,11 @@
+<template name="conversations">
+    {{#if conversations.count}}
+        <ul class="list-group">
+            {{#each conversations}}
+                <li id="{{this._id}}" class="list-group-item">{{> conversationInfo this}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        {{_ "empty_list"}}
+    {{/if}}
+</template>

@@ -120,6 +120,24 @@ Meteor.publish("otherUsersBasic", function () {
     return this.ready();
 });
 
+Meteor.publish("otherUsersNames", function (users) {
+    check(users, [String]);
+
+    var otherUsersNames =  Meteor.users.find(
+        {_id: { $in: users}},
+        {fields: {
+            'profile.name': 1,
+            'profile.surname': 1
+        }}
+    );
+
+    if(otherUsersNames){
+        return otherUsersNames;
+    }
+
+    return this.ready();
+});
+
 Meteor.publish("communityUsersBasic", function (communityId) {
     check(communityId, String);
 

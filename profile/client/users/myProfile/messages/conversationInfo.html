@@ -1,0 +1,7 @@
+<template name="conversationInfo">
+    <ul class="tag-bar">
+        {{#each users}}
+            <li class="tag" id="{{this.id}}">{{this.name}}</li>
+        {{/each}}
+    </ul>
+</template>
