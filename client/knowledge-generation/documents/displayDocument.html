@@ -1,0 +1,17 @@
+<template name="displayDocument">
+    <div class="modal fade"  id="documentModal" role="dialog" aria-labelledby="New document">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{this.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{> quillEditor docId=this.docId}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

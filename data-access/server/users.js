@@ -11,7 +11,6 @@ Accounts.onCreateUser(function(options, user){
     }else{
         user.profile = {}
     }
-    user.files = [];
     user.createdAt = date;
     user.blog = {
         entries: [
@@ -126,8 +125,7 @@ Meteor.publish("otherUsersNames", function (users) {
     var otherUsersNames =  Meteor.users.find(
         {_id: { $in: users}},
         {fields: {
-            'profile.name': 1,
-            'profile.surname': 1
+            'profile.completeName': 1
         }}
     );
 
@@ -205,7 +203,8 @@ Meteor.methods({
                 {$set: {
                     username: username,
                     'profile.name': name,
-                    'profile.surname': surname
+                    'profile.surname': surname,
+                    'profile.completeName': name + ' ' + surname
                 }}
             );
         }else{
@@ -264,26 +263,11 @@ Meteor.methods({
     isAdmin: function () {
         return Meteor.user().type==="admin"
     },
-    addFileUser: function(fileId, path){
-        check(fileId, String);
-        check(path, String);
-        var userId = Meteor.userId();
-
-        if(userId){
-            var file = {
-                path: path,
-                owner: userId,
-                fileId: fileId,
-                deleted:  false
-            };
-            Files.insert(file, function(error){
-                if(error){
-                    throw new Meteor.Error('error_insert', TAPi18n.__('insert-failure'));
-                }
-            });
-        }else{
-            throw new Meteor.Error('logged-out', "The entry can't be added");
-        }
-
+    addEmail: function (email) {
+        Accounts.addEmail(Meteor.userId(), email);
+        Accounts.sendVerificationEmail(Meteor.userId(), email);
+    },
+    removeEmail: function (email) {
+        Accounts.removeEmail(Meteor.userId(), email);
     }
 });

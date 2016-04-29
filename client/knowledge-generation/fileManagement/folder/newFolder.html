@@ -1,0 +1,23 @@
+<template name="newFolder">
+    <div class="modal fade"  id="newFolder" role="dialog" aria-labelledby="New folder">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{_ "new_folder"}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newFolderForm">
+                        <div class="form-group">
+                            <label for="inputFolderName">{{_ "name"}}</label>
+                            <input type="text" class="form-control" id="inputFolderName" name="inputName" placeholder="{{_ "folder_name"}}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                            <button type="submit" class="btn btn-primary">{{_ "create_folder"}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

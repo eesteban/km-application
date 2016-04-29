@@ -10,7 +10,9 @@ Meteor.publish("userFiles", function(path){
                 path: 1,
                 name: 1,
                 fileId: 1,
-                deleted: 1
+                docId: 1,
+                deleted: 1,
+                type: 1
             }}
         );
 
@@ -35,7 +37,9 @@ Meteor.publish("deletedFiles", function(){
                 path: 1,
                 name: 1,
                 fileId: 1,
-                deleted: 1
+                docId: 1,
+                deleted: 1,
+                type: 1
             }}
         );
 
@@ -78,7 +82,8 @@ Meteor.methods({
             var folder = {
                 owner: userId,
                 path: path,
-                name: name
+                name: name,
+                type: 'folder'
             };
 
             Files.insert(folder);
@@ -86,12 +91,64 @@ Meteor.methods({
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }
     },
+    newDocument: function (name, path) {
+        check(name, String);
+        check(path, String);
+        var userId = this.userId;
+
+        if(userId){
+            var docId = Documents.insert({
+                ops: [
+                    {insert: "This is your new document.\n"},
+                    {insert: "Let's change the world!\n"}
+                ]
+            });
+            console.log('insertedDoc:' + docId);
+            var document = {
+                owner: userId,
+                path: path,
+                name: name,
+                docId: docId,
+                type: 'doc'
+            };
+
+            Files.insert(document);
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
+        }
+    },
+    newFile: function(fileId, path){
+        check(fileId, String);
+        check(path, String);
+        var userId = Meteor.userId();
+
+        if(userId){
+            if(!Files.findOne({fileId: fileId})){
+                var file = {
+                    path: path,
+                    owner: userId,
+                    fileId: fileId,
+                    deleted:  false,
+                    type: 'file'
+                };
+                Files.insert(file, function(error){
+                    if(error){
+                        throw new Meteor.Error('error_insert', TAPi18n.__('insert-failure'));
+                    }
+                });
+            }else{
+                throw new Meteor.Error('error_insert', TAPi18n.__('insert-failure'));
+            }
+        }else{
+            throw new Meteor.Error('logged-out', "The entry can't be added");
+        }
+    },
     moveToTrash: function(fileId){
         check(fileId, String);
         var userId = this.userId;
 
         if(userId){
-            Files.update({fileId: fileId, owner: userId}, {$set: {deleted: true}});
+            Files.update({_id: fileId, owner: userId}, {$set: {deleted: true}});
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }
@@ -101,7 +158,7 @@ Meteor.methods({
         var userId = this.userId;
 
         if(userId){
-            Files.update({fileId: fileId, owner: userId}, {$set: {deleted: false}});
+            Files.update({_id: fileId, owner: userId}, {$set: {deleted: false}});
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }
@@ -111,7 +168,7 @@ Meteor.methods({
         var userId = this.userId;
 
         if(userId){
-            Files.update({fileId: fileId, owner: userId}, {$set: {removed: true}});
+            Files.update({_id: fileId, owner: userId}, {$set: {removed: true}});
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }

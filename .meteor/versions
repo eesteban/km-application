@@ -35,6 +35,7 @@ cfs:ui@0.1.3
 cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.2.1
+classcraft:meteor-wkhtmltopdf@0.3.1
 coffeescript@1.0.17
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.5
@@ -70,7 +71,10 @@ iron:location@1.0.11
 iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
+jhartma:quill@0.0.2
+jonlachlan:ottypes-rich-text@0.0.2
 jquery@1.11.8
+jspdf:core@1.1.135
 lai:collection-extensions@0.2.1_1
 launch-screen@1.0.11
 less@2.6.0

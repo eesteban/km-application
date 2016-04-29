@@ -1,4 +1,19 @@
-Communities = new Mongo.Collection("communities");
+var Communities = new Mongo.Collection("communities");
 Students = new Mongo.Collection("students");
 Files = new Mongo.Collection("files");
 Conversations = new Mongo.Collection("conversations");
+Documents = new Mongo.Collection("documents");
+fileStore = new FS.Store.GridFS('fileStore', {
+    //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
+    //mongoOptions: {...},                        // optional, see note below
+    //transformWrite: transformWrite,   //optional
+    //transformRead: myTransformReadFunction,     //optional
+    maxTries: 1,                                // optional, default 5
+    chunkSize: 1024*1024                        // optional, default GridFS chunk size in bytes (can be overridden per file).
+                                                // Default: 2MB. Reasonable range: 512KB - 4MB
+});
+
+FileStorage = new FS.Collection("fileStorage", {
+    stores: [fileStore]
+});
+

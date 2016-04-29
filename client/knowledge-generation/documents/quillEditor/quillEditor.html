@@ -1,0 +1,45 @@
+<template name="quillEditor">
+    <div class="ql-containers">
+        <span id="toolbar" class="needsclick toolbar ql-toolbar ql-snow">
+            <span class="ql-format-group">
+                <span title="Bold" class="ql-format-button ql-bold"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Italic" class="ql-format-button ql-italic"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Underline" class="ql-format-button ql-underline"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+            </span>
+            <span class="ql-format-group">
+                <span title="List" class="ql-format-button ql-list"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Bullet" class="ql-format-button ql-bullet"></span>
+            </span>
+            <span class="ql-format-group">
+                <span title="Link" class="ql-format-button ql-link"></span>
+            </span>
+            {{#if connection.connected}}
+                <span class="btn-group pull-right">
+                    <button class="ql-discard btn btn-default {{#unless hasEdits}}disabled{{/unless}}"><i class="trash icon"></i> {{_ "discard"}} </button>
+                    <button class="btn btn-default" id="generatePDF"><i class="glyphicon glyphicon-download"></i> {{_ "generate_pdf"}} </button>
+                </span>
+            {{/if}}
+            {{#if connection.connecting}}
+                <span class="btn-group pull-right">
+                    <button class="ql-reconnect btn btn-default"><i class="loading refresh icon"></i></button>
+                    <button class="ql-save disabled btn btn-default" disabled><i class="save icon"></i> {{_ "can_not_save"}} </button>
+                </span>
+            {{/if}}
+            {{#if connection.offline}}
+                <span class="btn-group pull-right">
+                      <button class="ql-reconnect btn btn-default"><i class="refresh icon"></i></button>
+                      <button class="ql-save disabled btn btn-default" disabled><i class="save icon"></i> {{_ "can_not_save"}} </button>
+                </span>
+            {{/if}}
+        </span>
+
+        <div id="editor-{{docId}}">
+            <div class="needsclick" contenteditable=true spellcheck=false></div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,12 @@
+<template name="document">
+    <div class="row">
+        {{> documentInfo this}}
+    </div>
+    <div class="row">
+        <div class="icons">
+            <a href="#" id="displayDocument" data-toggle="modal" data-target="#documentModal"><span class="glyphicon glyphicon-open-file text-success"></span></a>
+            <a href="#" id="moveToTrash"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+        </div>
+    </div>
+    {{> displayDocument this}}
+</template>

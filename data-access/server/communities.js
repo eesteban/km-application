@@ -209,7 +209,7 @@ Meteor.methods({
                     createdAt: Date.now(),
                     createdBy: userId
                 };
-                Communities.update(communityId, {$addToSet: {'forum': newTopic}}, function(error){
+                Communities.update(communityId, {$addToSet: {forum: newTopic}}, function(error){
                     if(error){
                         throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
                     }else{

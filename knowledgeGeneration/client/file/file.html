@@ -1,9 +1,0 @@
-<template name="file">
-    {{#with FS.GetFile 'fileStorage' this}}
-        {{> fileInfo this}}
-        <div class="row">
-            <a href="{{this.url download=true}}" id="downloadFile"><span class="glyphicon glyphicon-download text-success"></span></a>
-            <a href="#" id="moveToTrash"><span class="glyphicon glyphicon-trash text-danger"></span></a>
-        </div>
-    {{/with}}
-</template>

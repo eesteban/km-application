@@ -13,12 +13,12 @@ FileStorage.allow({
     }
 });
 
-Meteor.publish("userFilesInformation", function (filesId) {
-    check(filesId, [String]);
+Meteor.publish("userFileInformation", function (fileId) {
+    check(fileId, String);
     var userId = this.userId;
 
     if(userId) {
-        return FileStorage.find({_id: {$in: filesId}});
+        return FileStorage.find(fileId);
     }
 });
 

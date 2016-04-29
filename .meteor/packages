@@ -39,3 +39,7 @@ force-ssl
 cfs:standard-packages
 cfs:gridfs
 cfs:ui
+jhartma:quill
+jonlachlan:ottypes-rich-text
+classcraft:meteor-wkhtmltopdf
+jspdf:core

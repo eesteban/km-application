@@ -1,0 +1,24 @@
+<template name="conversations">
+    <div class="row">
+        <div class="col-md-3 col-sm-4 conversationInfo">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newConversation">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>{{_ "new_conversation"}}</span>
+            </button>
+            {{> newConversation}}
+
+            <ul class="list-group">
+                {{#each conversations}}
+                    <li id="{{this._id}}" class="list-group-item conversationInfo">{{> conversationInfo this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-9 col-sm-8 conversationDetails">
+            {{#if selectedConversation}}
+                {{> conversationDetails selectedConversation}}
+            {{else}}
+                {{_ "not_selected_conversation"}}
+            {{/if}}
+        </div>
+    </div>
+</template>
