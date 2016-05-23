@@ -2,18 +2,6 @@ Template.profile.onCreated(function(){
     this.currentTab = new ReactiveVar('aboutUser');
 });
 
-Template.profile.events({
-    'click .nav-tabs li': function(event, template){
-        var currentTab = $(event.target).closest("li");
-
-        currentTab.addClass( "active" );
-        $(".nav-tabs li").not( currentTab ).removeClass( "active" );
-
-        template.currentTab.set(currentTab.data( "template" ));
-    }
-
-});
-
 Template.profile.helpers({
     tab: function() {
         return Template.instance().currentTab.get();
@@ -31,5 +19,18 @@ Template.profile.helpers({
                 return user._id;
             }
         }
+    }
+});
+
+Template.profile.events({
+    'click .navbar-nav li': function(event, template){
+        var currentTab = $(event.target).closest("li");
+        template.currentTab.set(currentTab.data( "template" ));
+    },
+    'click #sendMessage': function (event, template) {
+        event.preventDefault();
+        var userId = template.data.user._id;
+
+        //Meteor.call
     }
 });

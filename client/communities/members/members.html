@@ -1,9 +1,7 @@
 <template name="members">
-    <ul class="user-list">
+    <ul class="content-list">
         {{#each memberList}}
-           <li>
-               {{> profileSmall this}}
-           </li>
+           <li>{{> userSmall this}}</li>
         {{/each}}
     </ul>
 </template>

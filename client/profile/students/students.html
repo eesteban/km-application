@@ -1,13 +1,12 @@
 <template name="students">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2>{{_ "students"}}</h2>
+            {{_ "students"}}
         </div>
-        <ul>
+        <ul class="content-list">
             {{#each students}}
                 <li>{{> studentLink id=this._id}}</li>
             {{/each}}
         </ul>
     </div>
-
 </template>

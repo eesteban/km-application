@@ -4,7 +4,7 @@
             <div class="col col-sm-3 nopadding">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>{{_ "community_information"}}</h2>
+                        {{_ "community_information"}}
                     </div>
                     <div class="panel-body">
                         <h2>{{community.name}}</h2>
@@ -29,10 +29,14 @@
             </div>
             <div class="col col-sm-9 nopadding">
                 <div class="panel panel-default">
-                    <ul class=" panel-heading nav nav-tabs" id="tabs">
-                        <li data-template="forum" class="active"><a href="#">{{_ "forum"}}</a></li>
-                        <li data-template="members"><a href="#">{{_ "members"}}</a></li>
-                    </ul>
+                    <div class="panel-heading navbar" id="tabs">
+                        <div class="container-fluid">
+                            <ul class="nav navbar-nav">
+                                <li data-template="forum"><a id="forum">{{_ "forum"}}</a></li>
+                                <li data-template="members"><a id="members">{{_ "members"}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane active">
@@ -46,5 +50,4 @@
     {{else}}
         <h4 class="text-danger">{{_ "not_access_community"}}</h4>
     {{/if}}
-
 </template>

@@ -4,7 +4,7 @@
             {{#each availableOptions}}
                 <option value="{{_id}}">
                     {{#unless equals targetCollection 'studentGroups'}}
-                        {{profile.name}} {{profile.surname}}
+                        {{profile.completeName}}
                     {{else}}
                         {{name}}
                     {{/unless}}

@@ -3,7 +3,9 @@
         {{> fileInfo this}}
         <div class="row">
             <a href="{{this.url download=true}}" id="downloadFile"><span class="glyphicon glyphicon-download text-success"></span></a>
+            <a href="#" id="share" data-toggle="modal" data-target="#shareModal"><span class="glyphicon glyphicon-upload text-primary"></span></a>
             <a href="#" id="moveToTrash"><span class="glyphicon glyphicon-trash text-danger"></span></a>
         </div>
     {{/with}}
+    {{> shareModal this}}
 </template>

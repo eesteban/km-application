@@ -5,8 +5,9 @@ Accounts.onEmailVerificationLink(function(token){
 });
 
 Template.myProfile.onCreated(function(){
-    this.currentTab = new ReactiveVar("aboutMe");
+    this.currentTab = new ReactiveVar('aboutMe');
     Meteor.subscribe("userPrivate");
+    Meteor.subscribe("profilePictureInformation");
 });
 
 Template.myProfile.onRendered(function(){
@@ -24,16 +25,11 @@ Template.myProfile.onRendered(function(){
         submitHandler: function() {
             var phone = $('#phone').val();
             var userPhones = Meteor.user().profile.phones;
-            if(userPhones){
-                if(userPhones.indexOf(phone)<0){
-                    Meteor.users.update(Meteor.userId(), {$push: {'profile.phones': phone}})
-                }else{
-                    Bert.alert('That phone is already in the list', 'danger')
-                }
+            if(!userPhones || userPhones.indexOf(phone)<0){
+                Meteor.call('addPhone', phone);
             }else{
-                Meteor.users.update(Meteor.userId(), {$set: {'profile.phones': [phone]}})
+                Bert.alert('That phone is already in the list', 'danger')
             }
-
         },
         errorLabelContainer: '#errorMessagePhone'
     });
@@ -91,23 +87,20 @@ Template.myProfile.events({
     },
     'click .removePhone': function (event){
         event.preventDefault();
-        Meteor.users.update(Meteor.userId(), {$pull: {phones: this.toString()}});
+        var phone =  this.toString();
+        Meteor.call('removePhone', phone);
     },
     'click .removeEmail': function (event){
         event.preventDefault();
         if(Meteor.user().emails.length <= 1){
             Bert.alert("You can't delete your last Email address", 'warning');
         }else{
-            Meteor.call('removeEmail', this.address);
+            var email = this.address;
+            Meteor.call('removeEmail', email);
         }
     },
-
-    'click .nav-tabs li': function(event, template){
+    'click .navbar-nav li': function(event, template){
         var currentTab = $(event.target).closest("li");
-
-        currentTab.addClass( "active" );
-        $(".nav-tabs li").not( currentTab ).removeClass( "active" );
-
         template.currentTab.set(currentTab.data( "template" ));
     }
 });

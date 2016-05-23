@@ -35,7 +35,8 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function() {
             var interest = $('#interest').val();
-            if(Meteor.user().profile.interests.indexOf(interest)<0) {
+            var interests = Meteor.user().profile.interests;
+            if(!interests || interests.indexOf(interest)<0) {
                 Meteor.call('addInterest', interest, function (error) {
                     if (error) {
                         Bert.alert(TAPi18n.__('interest_failure'), 'danger')
@@ -60,7 +61,8 @@ Template.aboutMe.onRendered(function () {
         },
         submitHandler: function() {
             var skill = $('#skill').val();
-            if(Meteor.user().profile.skills.indexOf(skill)<0){
+            var skills = Meteor.user().profile.skills;
+            if(!skills || skills.indexOf(skill)<0){
                 Meteor.call('addSkill', skill, function(error){
                     if(error){
                         Bert.alert(TAPi18n.__('skill_failure'), 'danger')

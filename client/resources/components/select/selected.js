@@ -10,8 +10,8 @@ Template.selected.helpers({
         }
     },
     targetCollection: function(){
-    return Template.instance().data.targetCollection;
-}
+        return Template.instance().data.targetCollection;
+    }
 });
 
 Template.selected.events({

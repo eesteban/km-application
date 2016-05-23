@@ -1,13 +1,12 @@
 <template name="users">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2>{{_ "users"}}</h2>
+            {{_ "users"}}
         </div>
-        <ul>
+        <ul class="content-list">
             {{#each users}}
                 <li>{{> userSmall this}}</li>
             {{/each}}
         </ul>
     </div>
-
 </template>

@@ -1,4 +1,5 @@
 Template.forum.onCreated(function (){
+    Meteor.subscribe('communityForum', this.data);
     Session.set('selectedTopicIndex', -1)
 });
 
@@ -12,5 +13,9 @@ Template.forum.events({
 Template.forum.helpers({
     selectedTopicIndex: function(){
         return Session.get('selectedTopicIndex')>=0;
+    },
+    forum: function () {
+        return Communities.findOne(Template.instance().data, {forum:1}).forum;
     }
+
 });

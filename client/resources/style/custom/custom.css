@@ -13,10 +13,9 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
-
-.navbar{
-    background:     #151c2d;
-    color: #FFFFFF;
+.top-nav{
+    background: #000000 !important;
+    color:      #ffffff;
 }
 
 .top-nav > li {
@@ -36,7 +35,6 @@
 
     .navbar-header{
         width:      180px;
-        background: #151C2D;
     }
 
     .navbar-left {
@@ -49,16 +47,16 @@
 
     .side-nav {
         position:       fixed;
-        top:     50px;
+        top:            50px;
         width:          180px;
         margin-left:    5px;
-        border:     none;
-        border-radius: 0;
-        overflow-y: auto;
-        bottom: 0;
-        overflow-x: hidden;
+        border:         none;
+        border-radius:  0;
+        overflow-y:     auto;
+        bottom:         0;
+        overflow-x:     hidden;
         padding-bottom: 40px;
-        background: #151c2d;
+        background:     #3C3C3C;
     }
 
     .side-nav>li>a {
@@ -86,6 +84,11 @@
 
 .modal {
     text-align: justify !important;
+}
+
+.container-fluid>.navbar-nav>li>a {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
 }
 
 .fileItem {
@@ -116,6 +119,23 @@ input[type="file"] {
 .user-profile-small{
     padding: 10px;
     display: inline-block;
+}
+
+.content-list {
+    padding-left: 20px !important;
+    list-style: none;
+}
+
+.content-list>li {
+    margin-top: 12px;
+}
+
+.nav-tabs {
+    padding-bottom: 0 !important;
+}
+
+.media-right{
+    vertical-align: middle !important;
 }
 
 .user-image-small{
@@ -182,12 +202,16 @@ textarea {
 
 .panel{
     height: 100%;
+    border-right: 2px solid #dbdbdb !important;
+    border-bottom: 2px solid #dbdbdb !important;
 }
 
-.panel-heading > h2 {
-    margin: 6px 0;
-    display: inline-block;
+.panel-heading {
+    margin: 6px !important;
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
     font-size: 16px;
+    border-bottom: 1px solid #dbdbdb !important;
 }
 
 .message{

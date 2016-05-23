@@ -12,7 +12,8 @@ Meteor.publish("userFiles", function(path){
                 fileId: 1,
                 docId: 1,
                 deleted: 1,
-                type: 1
+                type: 1,
+                users: 1
             }}
         );
 
@@ -65,8 +66,8 @@ Meteor.publish("communityFiles", function(path, communityId){
         }}
     );
 
-    if(communities){
-        return communities;
+    if(files){
+        return files;
     }
 
     return this.ready();
@@ -169,6 +170,20 @@ Meteor.methods({
 
         if(userId){
             Files.update({_id: fileId, owner: userId}, {$set: {removed: true}});
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
+        }
+    },
+    shareFile: function (fileId, users) {
+        check(fileId, String);
+        check(users, [String]);
+
+        var userId = this.userId;
+
+        if(userId){
+            users.forEach(function(user){
+                Files.update({_id: fileId, owner: userId}, {$addToSet: {users: user}});
+            });
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }

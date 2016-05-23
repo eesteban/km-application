@@ -1,0 +1,7 @@
+<template name="conversationInfo">
+    <ul class="tag-bar userList conversationInfo" id="{{_id}}">
+        {{#each users}}
+            {{> userSmall this}}
+        {{/each}}
+    </ul>
+</template>

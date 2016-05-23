@@ -1,0 +1,18 @@
+<template name="uploadImage">
+    <div class="modal fade"  id="uploadImage" role="dialog" aria-labelledby="Upload image">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{_ "upload_image"}}</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="file" id="imageInput">
+                    <button class="btn btn-primary btn-sm pull-right" id="uploadImageBtn">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>{{_ "upload_image"}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

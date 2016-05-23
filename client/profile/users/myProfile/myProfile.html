@@ -3,10 +3,22 @@
         {{#with user}}
         <div class="col col-sm-3 nopadding">
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{_ "my_information"}}
+                </div>
                 <div  class="panel-body">
                     <h2>{{profile.name}} {{profile.surname}}</h2>
                     <div class="profile-image">
-                        <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image">
+                        <a href="#" id="profileImage" data-toggle="modal" data-target="#uploadImage">
+                            {{#if profile.picture}}
+                                {{#with FS.GetFile "pictureStorage" profile.picture}}
+                                    <img src="{{this.url store="pictureStore"}}" alt="{{_ "profile_picture"}}" class="img-circle user-image">
+                                {{/with}}
+                            {{else}}
+                                <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image">
+                            {{/if}}
+                        </a>
+                        {{> uploadImage}}
                     </div>
                     <h3>{{_ "contact_information"}}</h3>
                     <ul class="profile-details">
@@ -71,13 +83,17 @@
         </div>
         <div class="col col-sm-9 nopadding">
             <div class="panel panel-default">
-                <ul class="panel-heading nav nav-tabs" id="tabs">
-                    <li data-template="aboutMe" class="active"><a id="aboutMe">{{_ "about_me"}}</a></li>
-                    <li data-template="blog"><a id="blog">{{_ "blog"}}</a></li>
-                    <li data-template="communityList"><a id="communities">{{_ "communities"}}</a></li>
-                    <li data-template="ownFiles"><a id="files">{{_ "files"}}</a></li>
-                    <li data-template="conversations"><a id="messages">{{_ "messages"}}</a></li>
-                </ul>
+                <div class="panel-heading navbar" id="tabs">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li data-template="aboutMe"><a id="aboutMe">{{_ "about_me"}}</a></li>
+                            <li data-template="blog"><a id="blog">{{_ "blog"}}</a></li>
+                            <li data-template="communityList"><a id="communities">{{_ "communities"}}</a></li>
+                            <li data-template="ownFiles"><a id="files">{{_ "files"}}</a></li>
+                            <li data-template="conversations"><a id="messages">{{_ "messages"}}</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="tab-pane active">

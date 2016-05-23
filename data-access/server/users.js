@@ -20,7 +20,7 @@ Accounts.onCreateUser(function(options, user){
                 body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
                 ' Nam porta tincidunt faucibus. Duis id est at dui volutpat luctus.' +
                 ' Fusce vel nunc libero. Nulla turpis ligula, rutrum et lacus vel, faucibus aliquet justo.' +
-                ' Curabitur ultrices eu ex sit amet tristique.' +
+                ' Curapbitur ultrices eu ex sit amet tristique.' +
                 ' Nulla id sem tincidunt, pharetra velit efficitur, dictum risus.' +
                 ' Proin rutrum tempor tellus, sit amet rhoncus lectus fringilla lacinia.' +
                 ' Aenean vulputate mi at lacus consequat, at dapibus libero venenatis.' +
@@ -107,8 +107,7 @@ Meteor.publish("otherUsersBasic", function () {
         {_id: { $ne: userId}},
         {fields: {
             'profile.image': 1,
-            'profile.name': 1,
-            'profile.surname': 1
+            'profile.completeName': 1
         }}
     );
 
@@ -121,6 +120,7 @@ Meteor.publish("otherUsersBasic", function () {
 
 Meteor.publish("otherUsersNames", function (users) {
     check(users, [String]);
+    console.log('other user names: '+users);
 
     var otherUsersNames =  Meteor.users.find(
         {_id: { $in: users}},
@@ -264,10 +264,34 @@ Meteor.methods({
         return Meteor.user().type==="admin"
     },
     addEmail: function (email) {
+        check(email, String);
         Accounts.addEmail(Meteor.userId(), email);
         Accounts.sendVerificationEmail(Meteor.userId(), email);
     },
     removeEmail: function (email) {
+        check(email, String);
         Accounts.removeEmail(Meteor.userId(), email);
+    },
+    addPhone: function (phone) {
+        check(phone, String);
+        Meteor.users.update(Meteor.userId(), {$addToSet: {'profile.phones': phone}})
+    },
+    removePhone: function (phone) {
+        check(phone, String);
+        Meteor.users.update(Meteor.userId(), {$pull: {'profile.phones': phone}})
+    },
+    setProfilePicture: function (pictureId) {
+        check(pictureId, String);
+
+        var userId = Meteor.userId();
+        if(userId){
+            if(Meteor.user().profile.picture){
+                //remove profile picture
+                console.log('remove previous picture');
+            }
+            Meteor.users.update(userId, {$set: {'profile.picture': pictureId}});
+        }else{
+            throw new Meteor.Error('logged-out', "The profile picture can't be added");
+        }
     }
 });

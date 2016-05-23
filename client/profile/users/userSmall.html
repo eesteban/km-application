@@ -1,5 +1,18 @@
 <template name="userSmall">
-    <a href="/profile/{{_id}}">
-        {{profile.name}} {{profile.surname}}
-    </a>
+    {{#with user}}
+    <div class="media">
+        <div class="media-left">
+            {{#if profile.picture}}
+                {{#with FS.GetFile "pictureStorage" profile.picture}}
+                    <img src="{{this.url store="pictureStore"}}" alt="{{_ "profile_picture"}}" class="img-circle user-image-small">
+                {{/with}}
+            {{else}}
+                <img src="/images/profile_default.png" alt="{{_ "profile_picture"}}" class="img-circle user-image-small">
+            {{/if}}
+        </div>
+        <div class="media-right">
+            {{> completeName _id}}
+        </div>
+    </div>
+    {{/with}}
 </template>

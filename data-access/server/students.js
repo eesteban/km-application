@@ -119,7 +119,8 @@ Meteor.methods({
             var student ={
                 profile: {
                     name: name,
-                    surname: surname
+                    surname: surname,
+                    completeName: name + ' ' + surname
                 },
                 users:  [userId],
                 createdAt: Date.now(),

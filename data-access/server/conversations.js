@@ -45,7 +45,7 @@ Meteor.methods({
 
         if(userId) {
             var user = Meteor.user();
-            var users =[userId];
+            var users = [userId];
             Meteor.users.find({_id: {$in: participantIdArray}}).forEach(function (user) {
                 users.push(user._id)
             });

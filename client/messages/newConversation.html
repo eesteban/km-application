@@ -9,17 +9,21 @@
                     <form id="newConversationForm">
                         <div class="form-group">
                             <label>{{_ "participants"}}</label>
-                            {{> selectFromCollection targetCollection='users'}}
+                            {{#unless toId}}
+                                {{> selectFromCollection targetCollection='users'}}
+                            {{else}}
+                                {{getUserCompleteName toId}}
+                            {{/unless}}
                         </div>
                         <div class="form-group">
                             <label for="inputMessage">{{_ "message"}}</label>
                             <textarea class="form-control" rows="5" id="inputMessage" name="inputMessage" placeholder="{{_ "message"}}"></textarea>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
-                            <button type="submit" class="btn btn-primary">{{_ "create_conversation"}}</button>
-                        </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                    <button type="button" class="btn btn-primary" id="createConversation">{{_ "create_conversation"}}</button>
                 </div>
             </div>
         </div>

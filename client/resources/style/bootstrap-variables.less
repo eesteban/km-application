@@ -11,17 +11,15 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-@gray-base:              #000000;
-@gray-darker:            #151c2d;
-@gray-dark:              #233B70;
+@gray-base:             #626262;
+@gray-darker:           darken(@gray-base, 30%);
+@gray-dark:             darken(@gray-base, 15%);
 @gray:                   #9a9a9a;
 @gray-light:             #dbdbdb;
 @gray-lighter:           #f4f4f4;
 
 
-@brand-primary:         #F28914;
-@brand-secondary:       #233B70;
-@brand-secondary-light: #6299e9;
+@brand-primary:         #6299e9;
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
@@ -33,9 +31,9 @@
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-@body-bg:               @gray-light;
+@body-bg:               @gray-lighter;
 //** Global text color on `<body>`.
-@text-color:            @brand-secondary;
+@text-color:            @gray-dark;
 
 //** Global textual link color.
 @link-color:            @brand-primary;
@@ -109,7 +107,7 @@
 @line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 @line-height-small:         1.5;
 
-@border-radius-base:        4px;
+@border-radius-base:        0px;
 @border-radius-large:       6px;
 @border-radius-small:       3px;
 
@@ -433,12 +431,12 @@
 @nav-disabled-link-hover-color:             @gray-light;
 
 //== Tabs
-@nav-tabs-border-color:                     @gray;
+@nav-tabs-border-color:                     @gray-light;
 
-@nav-tabs-link-hover-border-color:          @gray;
+@nav-tabs-link-hover-border-color:          @gray-light;
 
 @nav-tabs-active-link-hover-bg:             @panel-bg;
-@nav-tabs-active-link-hover-color:          @brand-secondary-light;
+@nav-tabs-active-link-hover-color:          @brand-primary;
 @nav-tabs-active-link-hover-border-color:   @gray;
 
 @nav-tabs-justified-link-border-color:            #ddd;
@@ -716,16 +714,16 @@
 @panel-border-radius:         @border-radius-base;
 
 //** Border color for elements within panels
-@panel-inner-border:          #ddd;
+@panel-inner-border:          null;
 @panel-footer-bg:             #f5f5f5;
 
 @panel-default-text:          @gray-dark;
-@panel-default-border:        @gray;
-@panel-default-heading-bg:    @gray-lighter;
+@panel-default-border:        null;
+@panel-default-heading-bg:    @panel-bg;
 
 @panel-primary-text:          #fff;
-@panel-primary-border:        @brand-secondary;
-@panel-primary-heading-bg:    @brand-secondary;
+@panel-primary-border:        @brand-primary;
+@panel-primary-heading-bg:    @brand-primary;
 
 @panel-success-text:          @state-success-text;
 @panel-success-border:        @state-success-border;

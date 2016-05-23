@@ -33,5 +33,5 @@ function hasAccess(userId, fileId){
 }
 
 function isOwner(userId, fileId){
-    return userId ? !!Files.find({fileId: fileId, owner: userId}) : false;
+    return userId ? !! Files.find({fileId: fileId, owner: userId}) : false;
 }

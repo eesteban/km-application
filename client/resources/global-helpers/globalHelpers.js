@@ -44,3 +44,7 @@ Template.registerHelper('accessToStudent', function(communityId){
         return true;
     }
 });
+
+Template.registerHelper('getUserCompleteName', function(userId){
+    return Meteor.users.findOne(userId, {'profile.completeName':1}).profile.completeName;
+});

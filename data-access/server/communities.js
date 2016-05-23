@@ -23,7 +23,7 @@ Meteor.publish("communitiesBasic", function () {
     var communities =  Communities.find(
         {users: userId},
         {fields: {
-            'name': 1
+            name: 1
         }}
     );
 
@@ -38,9 +38,9 @@ Meteor.publish("communitiesAll", function () {
     var communities =  Communities.find(
         {},
         {fields: {
-            'name': 1,
-            'type': 1,
-            'users': 1
+            name: 1,
+            type: 1,
+            users: 1
         }}
     );
 
@@ -57,8 +57,8 @@ Meteor.publish("communitiesUser", function (userId) {
     var communities =  Communities.find(
         {users: userId},
         {fields: {
-            'name': 1,
-            'type': 1
+            name: 1,
+            type: 1
         }}
     );
 
@@ -75,10 +75,10 @@ Meteor.publish("community", function (communityId) {
     var community =  Communities.find(
         {_id: communityId},
         {fields: {
-            'name': 1,
-            'type': 1,
-            'users': 1,
-            'information': 1
+            name: 1,
+            type: 1,
+            users: 1,
+            information: 1
         }}
     );
 
@@ -95,16 +95,48 @@ Meteor.publish("community", function (communityId) {
     return this.ready();
 });
 
+
+Meteor.publish("communityForum", function (communityId) {
+    check(communityId, String);
+
+    var community =  Communities.find(
+        communityId,
+        {fields: {
+            type: 1,
+            forum: 1,
+            users: 1
+        }}
+    );
+
+    if(community){
+        var flag;
+        community.forEach(function(com){
+            if(com.type==='student_group'){
+                if(inArray(com.users, Meteor.userId())){
+                    flag = true;
+                }
+            }else{
+                flag = true;
+            }
+        });
+        if(flag){
+            return community;
+        }
+    }
+
+    return this.ready();
+});
+
 Meteor.publish("studentGroups", function () {
     var userId = this.userId;
 
     var communities =  Communities.find(
         {type: 'student_group', users: userId},
         {fields: {
-            'name': 1,
-            'users': 1,
+            name: 1,
+            users: 1,
             type: 1,
-            'information': 1
+            information: 1
         }}
     );
 
@@ -189,6 +221,7 @@ Meteor.methods({
         }
     },
     newTopic: function(communityId, topic, description, post){
+        check(communityId, String);
         check(topic, String);
         check(description, String);
         check(post, String);

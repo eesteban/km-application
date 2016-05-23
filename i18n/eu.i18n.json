@@ -40,7 +40,7 @@
 
   "skills": "Trebetasunak",
   "skill_required": "Mesedez, trebetasuna zehaztu",
-  "skill": "Tebetasuna",
+  "skill": "Trebetasuna",
   "skill_failure": "Barkatu, ezin izan da trebetasuna gehitu",
   "skill_in_list": "Trebetasun hori zerrendan dago",
 
@@ -59,6 +59,15 @@
 
   "user_not_invited": "Ezin izan dugu erabiltzailea gonbidatu",
   "user_invited": "Erabiltzailea gonbidatu dugu",
+
+  /*Conversations*/
+  "participants": "Parteartzaileak",
+  "conversation": "Elkarrizketa",
+  "new_conversation": "Elkarrizketa berria",
+  "create_conversation": "Elkarrizketa sortu",
+  "not_selected_conversation": "Ez duzu elkarrizketarik hautatu",
+  "send": "Bidali",
+  "new_message": "Mezu berria",
 
   /*Communities*/
   "community": "Taldea",
@@ -127,7 +136,7 @@
   "management_portal": "Kudeaketa ataria",
   "new_users": "Erabiltzaile berriak",
   "empty_list": "Zerrenda hutsik dago",
-  "people_to_invite": "Gondbidatu zerrenda",
+  "people_to_invite": "Gondbidatuen zerrenda",
 
   /*Enroll*/
   "enrollment": "Izen ematea",
@@ -137,5 +146,24 @@
   "management": "Kudeaketa",
 
   "update": "Eguneratu",
-  "search": "Bilatu"
+  "search": "Bilatu",
+
+  /*Knowledge generation*/
+  "files": "Fitxategiak",
+  "upload_files": "Fitxategiak igo",
+
+  "folders": "Karpeta",
+  "new_folder": "Karpeta berria",
+  "folder_name": "Karpetaren izena",
+  "create_folder": "Karpeta sortu",
+
+  "documents": "Dokumentuak",
+  "new_document": "Dokumentu berria",
+  "document_name": "Dokumentuaren izena",
+  "create_document": "Dokumentua sortu",
+  "discard": "Desegin",
+  "generate_pdf": "PDF-a sortu",
+
+  "trash": "Zakarrontzia",
+  "file_system": "Fitxategi sistema"
 }

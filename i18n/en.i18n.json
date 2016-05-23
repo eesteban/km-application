@@ -51,6 +51,7 @@
   "interest_in_list": "That interest is already in the list",
 
   "my_profile": "My Profile",
+  "my_information": "My Information",
   "contact_information": "Contact Information",
   "about_me": "About Me",
   "messages": "Messages",
@@ -59,6 +60,15 @@
 
   "user_not_invited": "The user has not been invited",
   "user_invited": "The user has been invited",
+
+  /*Conversations*/
+  "participants": "Participants",
+  "conversation": "Conversation",
+  "new_conversation": "New conversation",
+  "create_conversation": "Create conversation",
+  "not_selected_conversation": "You have not selected any conversation",
+  "send": "Send",
+  "new_message": "New message",
 
   /*Communities*/
   "community": "Community",
@@ -137,5 +147,24 @@
   "management": "Management",
 
   "update": "Update",
-  "search": "Search"
+  "search": "Search",
+
+  /*Knowledge generation*/
+  "files": "Files",
+  "upload_files": "Upload files",
+
+  "folders": "Folders",
+  "new_folder": "New folder",
+  "folder_name": "Folder name",
+  "create_folder": "Create folder",
+
+  "documents": "Documents",
+  "new_document": "New document",
+  "document_name": "Document name",
+  "create_document": "Create document",
+  "discard": "Discard",
+  "generate_pdf": "Generate PDF",
+
+  "trash": "Trash",
+  "file_system": "File system"
 }

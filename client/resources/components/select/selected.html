@@ -5,7 +5,7 @@
                 {{#each selectedOptions}}
                     <li id="{{_id}}" class="list-group-item" value="{{_id}}">
                         {{#unless equals targetCollection 'studentGroups'}}
-                            {{profile.name}} {{profile.surname}}
+                            {{profile.completeName}}
                         {{else}}
                             {{name}}
                         {{/unless}}
