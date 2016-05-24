@@ -105,6 +105,13 @@
 
   "not_access_community": "Sorry, but you do not have access to this community",
 
+  /*Blog*/
+  "blog_administration": "Blog administration",
+  "new_entry": "New Entry",
+  "publish_entry": "Publish Entry",
+  "title": "Title",
+  "body": "Body",
+
   /*Forum*/
   "forum": "Forum",
 

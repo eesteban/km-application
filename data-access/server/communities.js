@@ -72,8 +72,8 @@ Meteor.publish("communitiesUser", function (userId) {
 Meteor.publish("community", function (communityId) {
     check(communityId, String);
 
-    var community =  Communities.find(
-        {_id: communityId},
+    var communities =  Communities.find(
+        communityId,
         {fields: {
             name: 1,
             type: 1,
@@ -82,14 +82,15 @@ Meteor.publish("community", function (communityId) {
         }}
     );
 
-    if(community){
-        if(community.type==='student_group'){
-            if(inArray(community.users, Meteor.userId())){
-                return community;
+    var publish = this;
+    if(communities){
+        var userId = publish.userId;
+        communities.forEach(function(community){
+            if(!hasAccessToCommunity(community, userId)){
+                return publish.ready();
             }
-        }else{
-            return community;
-        }
+        });
+        return communities;
     }
 
     return this.ready();
@@ -99,7 +100,7 @@ Meteor.publish("community", function (communityId) {
 Meteor.publish("communityForum", function (communityId) {
     check(communityId, String);
 
-    var community =  Communities.find(
+    var communities =  Communities.find(
         communityId,
         {fields: {
             type: 1,
@@ -108,20 +109,17 @@ Meteor.publish("communityForum", function (communityId) {
         }}
     );
 
-    if(community){
-        var flag;
-        community.forEach(function(com){
-            if(com.type==='student_group'){
-                if(inArray(com.users, Meteor.userId())){
-                    flag = true;
-                }
-            }else{
-                flag = true;
+    var publish = this;
+    if(communities){
+        var userId = this.userId;
+
+        communities.forEach(function(community){
+            if(!hasAccessToCommunity(community, userId)){
+                return publish.ready();
             }
         });
-        if(flag){
-            return community;
-        }
+
+        return communities;
     }
 
     return this.ready();
@@ -229,19 +227,7 @@ Meteor.methods({
         var userId = Meteor.userId();
         if(userId){
             if(Communities.findOne({_id: communityId, users: userId}) || Meteor.user().type==="admin"){
-                var newPost = {
-                    author: Meteor.user().profile.name + ' ' + Meteor.user().profile.surname,
-                    authorId: userId,
-                    post: post,
-                    createdAt: Date.now()
-                };
-                var newTopic = {
-                    topic: topic,
-                    description: description,
-                    posts: [newPost],
-                    createdAt: Date.now(),
-                    createdBy: userId
-                };
+                var newTopic = createTopic(topic, description, post, Meteor.user());
                 Communities.update(communityId, {$addToSet: {forum: newTopic}}, function(error){
                     if(error){
                         throw new Meteor.Error('create-topic', TAPi18n.__("topic_not_created"));
@@ -264,13 +250,9 @@ Meteor.methods({
 
         var userId = Meteor.userId();
         if(userId){
-            if(Communities.findOne({_id: communityId, users: userId}) || Meteor.user().type==="admin"){
-                var newPost = {
-                    author: Meteor.user().profile.name + ' ' + Meteor.user().profile.surname,
-                    authorId: userId,
-                    post: post,
-                    createdAt: Date.now()
-                };
+            var user = Meteor.user();
+            if(Communities.findOne({_id: communityId, users: userId}) || user.type==="admin"){
+                var newPost = createPost(post, generateDate(), user);
                 var addPostExpression= {};
                 var forumIndex = "forum."+topicIndex+".posts";
                 addPostExpression[forumIndex] = newPost;
@@ -289,3 +271,47 @@ Meteor.methods({
         }
     }
 });
+
+function createPost(text, date, user){
+    return {
+        author: user.profile.completeName,
+        authorId: user._id,
+        post: text,
+        createdAt: date
+    }
+}
+
+function createTopic(topic, description, post, user){
+    var date = generateDate();
+    var newPost = createPost(post, date, user);
+
+    return {
+        topic: topic,
+        description: description,
+        posts: [newPost],
+        createdAt: date,
+        createdBy: user._id
+    };
+}
+
+function generateDate(){
+    var date = new Date();
+    var formattedDate =  date.getDate() + "/"
+        + (date.getMonth()+1)  + "/"
+        + date.getFullYear() + " - "
+        + date.getHours() + ":"
+        + (date.getMinutes()<10?'0':'') + date.getMinutes();
+    console.log(formattedDate);
+    return {
+        original: date,
+        formatted: formattedDate
+    }
+}
+
+function hasAccessToCommunity(community, userId){
+    if(community.type==='student_group'){
+        return inArray(community.users, userId);
+    }else{
+        return true;
+    }
+}

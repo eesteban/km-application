@@ -20,7 +20,7 @@ Meteor.publish('document', function (docId) {
 QuillStacks = new Mongo.Collection('quillStacks');
 
 Meteor.methods({
-    'updateDocument': function(docId, delta, index) {
+    updateDocument: function(docId, delta, index) {
         var userId = Meteor.userId();
         check(docId, String);
         check(delta, Object);
@@ -83,7 +83,7 @@ Meteor.methods({
             throw new Meteor.Error('logged-out', TAPi18n.__("document_not_updated"));
         }
     },
-    'generatePDF': function(html, docId){
+    generatePDF: function(html, docId){
         check(html, String);
         check(docId, String);
         console.log('html');

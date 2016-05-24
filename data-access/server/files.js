@@ -17,7 +17,7 @@ Meteor.publish("userFiles", function(path){
             }}
         );
 
-        if(files){
+        if (files && hasAccessMany(userId, files)){
             return files;
         }
 
@@ -44,8 +44,8 @@ Meteor.publish("deletedFiles", function(){
             }}
         );
 
-        if(files){
-            return files;
+        if(files && hasAccessMany(userId, files)){
+            return files
         }
 
         return this.ready();
@@ -66,7 +66,7 @@ Meteor.publish("communityFiles", function(path, communityId){
         }}
     );
 
-    if(files){
+    if(files && hasAccessMany(this.userId, files)){
         return files;
     }
 
@@ -189,3 +189,32 @@ Meteor.methods({
         }
     }
 });
+
+
+function hasAccessMany(userId, files){
+    if(userId){
+        files.forEach(function(file){
+            if(!hasAccess(userId, file)){
+                return false;
+            }
+        });
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function hasAccess(userId, file){
+    var fileCommunity = file.community;
+    return file.owner === userId || inArray(file.users, userId) || (fileCommunity && hasAccessToCommunity(userId, fileCommunity));
+}
+
+function hasAccessToCommunity(userId, communityId){
+    var community = Communities.findOne(communityId, {users: 1});
+    if(community.type==='student_group'){
+        return inArray(community.users, userId);
+    }else{
+        return true;
+    }
+}

@@ -104,6 +104,13 @@
 
   "not_access_community": "Barkatu, baina ezin duzu talde hau ikusi",
 
+  /*Blog*/
+  "blog_administration": "Blogaren kudeaketa",
+  "new_entry": "Sarrera berria",
+  "publish_entry": "Sarrera argitaratu",
+  "title": "Izenburua",
+  "body": "Testua",
+
   /*Forum*/
   "forum": "Foroa",
 

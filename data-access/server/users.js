@@ -12,27 +12,23 @@ Accounts.onCreateUser(function(options, user){
         user.profile = {}
     }
     user.createdAt = date;
+    var title = 'First blog Entry';
+    var body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
+    ' Nam porta tincidunt faucibus. Duis id est at dui volutpat luctus.' +
+    ' Fusce vel nunc libero. Nulla turpis ligula, rutrum et lacus vel, faucibus aliquet justo.' +
+    ' Curapbitur ultrices eu ex sit amet tristique.' +
+    ' Nulla id sem tincidunt, pharetra velit efficitur, dictum risus.' +
+    ' Proin rutrum tempor tellus, sit amet rhoncus lectus fringilla lacinia.' +
+    ' Aenean vulputate mi at lacus consequat, at dapibus libero venenatis.' +
+    ' In hac habitasse platea dictumst.' +
+    ' Fusce pellentesque ligula ligula, ut eleifend ligula volutpat eget.' +
+    ' Nullam nec urna eget turpis bibendum gravida. Etiam eget ipsum non purus ultricies convallis.' +
+    ' Maecenas laoreet at ligula sed gravida.' +
+    ' Suspendisse ex sapien, molestie vitae tristique ac, sagittis ut dui.' +
+    ' Nunc lobortis mauris elit.';
+    var entry = newBlogEntry(title, body);
     user.blog = {
-        entries: [
-            {
-                title: 'First blog Entry',
-                date: date,
-                body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Nam porta tincidunt faucibus. Duis id est at dui volutpat luctus.' +
-                ' Fusce vel nunc libero. Nulla turpis ligula, rutrum et lacus vel, faucibus aliquet justo.' +
-                ' Curapbitur ultrices eu ex sit amet tristique.' +
-                ' Nulla id sem tincidunt, pharetra velit efficitur, dictum risus.' +
-                ' Proin rutrum tempor tellus, sit amet rhoncus lectus fringilla lacinia.' +
-                ' Aenean vulputate mi at lacus consequat, at dapibus libero venenatis.' +
-                ' In hac habitasse platea dictumst.' +
-                ' Fusce pellentesque ligula ligula, ut eleifend ligula volutpat eget.' +
-                ' Nullam nec urna eget turpis bibendum gravida. Etiam eget ipsum non purus ultricies convallis.' +
-                ' Maecenas laoreet at ligula sed gravida.' +
-                ' Suspendisse ex sapien, molestie vitae tristique ac, sagittis ut dui.' +
-                ' Nunc lobortis mauris elit.',
-                comments: []
-            }
-        ]
+        entries: [entry]
     };
 
     console.log('User created: '+ user._id);
@@ -120,8 +116,7 @@ Meteor.publish("otherUsersBasic", function () {
 
 Meteor.publish("otherUsersNames", function (users) {
     check(users, [String]);
-    console.log('other user names: '+users);
-
+    
     var otherUsersNames =  Meteor.users.find(
         {_id: { $in: users}},
         {fields: {
@@ -235,12 +230,7 @@ Meteor.methods({
         check(title, String);
         check(body, String);
 
-        var entry = {
-            title: title,
-            body: body,
-            date: new Date(),
-            comments: []
-        };
+        var entry = newBlogEntry(title, body);
         var userId = Meteor.userId();
 
         if(userId){
@@ -295,3 +285,21 @@ Meteor.methods({
         }
     }
 });
+
+function newBlogEntry(title, body){
+    var date = new Date();
+    var formattedDate =  date.getDate() + "/"
+        + (date.getMonth()+1)  + "/"
+        + date.getFullYear() + " - "
+        + date.getHours() + ":"
+        + (date.getMinutes()<10?'0':'') + date.getMinutes();
+    return {
+        title: title,
+        body: body,
+        date: {
+            original: date,
+            formatted: formattedDate
+        },
+        comments: []
+    };
+}

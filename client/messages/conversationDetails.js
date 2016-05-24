@@ -1,5 +1,4 @@
 Template.conversationDetails.onRendered(function(){
-    var conversationId = Session.get('selectedConversation');
     $('#newMessage').validate({
         rules:{
             message: {
@@ -13,7 +12,7 @@ Template.conversationDetails.onRendered(function(){
         },
         submitHandler: function() {
             var message = $('#newMessageInput').val();
-            console.log(message);
+            var conversationId = Session.get('selectedConversation');
             if(message && message!==''){
                 Meteor.call('newMessage', conversationId, message, function(error){
                     if(error){

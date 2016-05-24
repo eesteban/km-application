@@ -35,3 +35,32 @@ function hasAccess(userId, fileId){
 function isOwner(userId, fileId){
     return userId ? !! Files.find({fileId: fileId, owner: userId}) : false;
 }
+
+function hasAccess(fileId) {
+    var userId = Meteor.userId();
+    var file = Files.findOne(fileId, {owner: 1, users: 1, community: 1});
+
+    if (userId && file) {
+        var fileCommunity = file.community;
+        return file.owner === userId || inArray(file.users, userId) || (fileCommunity && hasAccessToCommunity(fileCommunity));
+    }else{
+        return false;
+    }
+}
+
+function hasAccessToCommunity(communityId){
+    var community = Communities.findOne(communityId, {users: 1});
+    if(community){
+        if(isStudentGroup(community)){
+            return inArray(community.users, Meteor.userId());
+        }else{
+            return true;
+        }
+    }else{
+        return false;
+    }
+}
+
+function isStudentGroup(community){
+    return community.type==='student_group';
+}

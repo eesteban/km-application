@@ -20,6 +20,10 @@ Meteor.publish("profilePictureInformation", function (userId) {
         userId = this.userId;
     }
 
-    var profilePicture = Meteor.users.findOne(userId, {'profile.picture': 1}).profile.picture;
-    return PictureStorage.find(profilePicture);
+    var user = Meteor.users.findOne(userId, {profile: 1});
+    if(user){
+        return PictureStorage.find(user.profile.picture);
+    }
+
+    return this.ready();
 });

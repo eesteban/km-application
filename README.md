@@ -4,3 +4,5 @@ Knowledge management application, developed as thesis project, which includes di
 - Blog
 - Communities
 - Search engine
+- File management
+- Document editing

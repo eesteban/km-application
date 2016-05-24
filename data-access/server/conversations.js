@@ -1,9 +1,9 @@
 Meteor.publish("userConversations", function () {
     var userId = this.userId;
     var conversations =  Conversations.find(
-        {'users': userId},
+        {users: userId},
         {fields: {
-            'users': 1
+            users: 1
         }}
     );
 
@@ -38,39 +38,24 @@ Meteor.publish("conversation", function (conversationId) {
 });
 
 Meteor.methods({
-    newConversation: function (participantIdArray, message) {
+    newConversation: function (participantIdArray, messageText) {
         var userId = Meteor.userId();
         check(participantIdArray, [String]);
-        check(message, String);
+        check(messageText, String);
 
         if(userId) {
-            var user = Meteor.user();
             var users = [userId];
             Meteor.users.find({_id: {$in: participantIdArray}}).forEach(function (user) {
                 users.push(user._id)
             });
+            
+            var message = createMessage(userId, messageText);
 
-            var date = new Date();
-            var formattedDate =  date.getDate() + "/"
-                + (date.getMonth()+1)  + "/"
-                + date.getFullYear() + " - "
-                + date.getHours() + ":"
-                + (date.getMinutes()<10?'0':'') + date.getMinutes();
-            var conversation = {
-                users: users,
-                messages: [{
-                    message: message,
-                    user: userId,
-                    date: {
-                        original: date,
-                        formatted: formattedDate
-                    }
-                }]
-            };
-
-            var conversationId = Conversations.insert(conversation);
-            if(!conversationId){
-                throw new Meteor.Error('create-conversation', TAPi18n.__("conversation_not_created"));
+            var conversation = Conversations.findOne({users: users}, {_id: 1});
+            if(conversation){
+                sendMessage(conversation._id, userId, message);
+            }else{
+                createConversation(users, message);
             }
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("conversation_not_created"));
@@ -82,28 +67,46 @@ Meteor.methods({
         check(messageText, String);
 
         if(userId) {
-            var date = new Date();
-            var formattedDate =  date.getDate() + "/"
-                + (date.getMonth()+1)  + "/"
-                + date.getFullYear() + " - "
-                + date.getHours() + ":"
-                + (date.getMinutes()<10?'0':'') + date.getMinutes();
-            var message = {
-                message: messageText,
-                user: userId,
-                date: {
-                    original: date,
-                    formatted: formattedDate
-                }
-            };
-
-            Conversations.update({_id: conversationId, users: userId}, {$addToSet: {messages: message}}, function(error){
-                if(error){
-                    throw new Meteor.Error('send-message', TAPi18n.__("message_not_sent"));
-                }
-            });
+            var message = createMessage(userId, messageText);
+            sendMessage(conversationId, userId, message);
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("conversation_not_created"));
         }
     }
 });
+
+function createMessage (userId, messageText){
+    var date = new Date();
+    var formattedDate =  date.getDate() + "/"
+        + (date.getMonth()+1)  + "/"
+        + date.getFullYear() + " - "
+        + date.getHours() + ":"
+        + (date.getMinutes()<10?'0':'') + date.getMinutes();
+    return {
+        message: messageText,
+        user: userId,
+        date: {
+            original: date,
+            formatted: formattedDate
+        }
+    };
+}
+
+function sendMessage(conversationId, userId, message){
+    Conversations.update({_id: conversationId, users: userId}, {$addToSet: {messages: message}}, function(error){
+        if(error){
+            throw new Meteor.Error('send-message', TAPi18n.__("message_not_sent"));
+        }
+    });
+}
+
+function createConversation(users, message){
+    var conversation = {
+        users: users,
+        messages: [message]
+    };
+    var conversationId = Conversations.insert(conversation);
+    if(!conversationId){
+        throw new Meteor.Error('create-conversation', TAPi18n.__("conversation_not_created"));
+    }
+}

@@ -114,7 +114,5 @@ Template.quillEditor.events({
     'click #generatePDF': function (event, template){
         event.preventDefault();
         template.quillEditor.getModule('pdfGenerator').generatePDF();
-        //var docId = template.data.docId;
-        //Meteor.call('generatePDF', $('#editor-'+docId).html(), docId);
     }
 });

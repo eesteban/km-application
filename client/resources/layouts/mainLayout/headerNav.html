@@ -11,19 +11,21 @@
             </button>
         </div>
         <div class="nav navbar-left">
-            <form class="navbar-form" role="search">
+<!--            <form class="navbar-form" role="search">
                 <div class="input-group search">
                     <input type="text" class="form-control input-sm" id="inputSearch" placeholder="{{_ "search"}}">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class=" glyphicon glyphicon-search" ></i>
-                    </button>
-                </span>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class=" glyphicon glyphicon-search" ></i>
+                        </button>
+                    </span>
                 </div>
-            </form>
+            </form>-->
         </div>
         <div class="nav navbar-right">
-            {{> profileSmall}}
+            <div class="user-profile-small" id="profile">
+                {{> userSmall currentUserId}}
+            </div>
         </div>
     </div>
 </template>
