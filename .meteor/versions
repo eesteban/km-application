@@ -52,7 +52,6 @@ email@1.0.12
 emdagon:bootstrap-multiselect@0.0.2
 es5-shim@4.5.10
 fastclick@1.0.11
-force-ssl@1.0.11
 fortawesome:fontawesome@4.5.0
 fourseven:scss@3.4.3
 geojson-utils@1.0.8
@@ -122,7 +121,7 @@ spacebars-compiler@1.0.11
 srp@1.0.8
 standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
-tap:i18n@1.8.0
+tap:i18n@1.8.2
 tap:i18n-ui@0.8.0
 templating@1.1.9
 templating-tools@1.0.4

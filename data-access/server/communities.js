@@ -58,7 +58,8 @@ Meteor.publish("communitiesUser", function (userId) {
         {users: userId},
         {fields: {
             name: 1,
-            type: 1
+            type: 1,
+            users: 1
         }}
     );
 

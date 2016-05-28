@@ -11,7 +11,7 @@ Template.registerHelper('translate', function (text) {
 });
 
 Template.registerHelper('isAdmin', function(){
-    return Meteor.users.findOne({_id: Meteor.userId(), type: 'admin'});
+    return Meteor.user().type = 'admin';
 });
 
 Template.registerHelper('count', function (array){

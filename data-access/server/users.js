@@ -6,6 +6,11 @@ Accounts.onCreateUser(function(options, user){
     var date = new Date();
 
     user.type = options.type;
+    if(options.enrolled){
+        user.enrolled=options.enrolled;
+    }else{
+        user.enrolled=false;
+    }
     if(options.profile){
         user.profile = options.profile;
     }else{
@@ -30,8 +35,8 @@ Accounts.onCreateUser(function(options, user){
     user.blog = {
         entries: [entry]
     };
-
     console.log('User created: '+ user._id);
+    console.log(user);
     return user;
 });
 
@@ -45,10 +50,10 @@ Meteor.publish("user", function (userId) {
     check(userId, String);
 
     var user =  Meteor.users.find(
-        {_id: userId},
+        {_id: userId, enrolled: true},
         {fields: {
-            'emails': 1,
-            'profile': 1
+            emails: 1,
+            profile: 1
         }}
     );
 
@@ -61,21 +66,24 @@ Meteor.publish("user", function (userId) {
 Meteor.publish("userPrivate", function () {
     var userId =  this.userId;
 
-    var currentUser =  Meteor.users.find(
-        {_id: userId},
-        {fields: {
-            'username': 1,
-            'emails': 1,
-            'type': 1,
-            'profile': 1,
-            'communities': 1,
-            'files': 1
-        }}
-    );
+    if(userId){
+        var currentUser =  Meteor.users.find(
+            {_id: userId, enrolled: true},
+            {fields: {
+                username: 1,
+                emails: 1,
+                type: 1,
+                profile: 1,
+                communities: 1,
+                files: 1
+            }}
+        );
 
-    if(currentUser){
-        return currentUser;
+        if(currentUser){
+            return currentUser;
+        }
     }
+
     return this.ready();
 });
 
@@ -83,9 +91,9 @@ Meteor.publish("otherUsersEmails", function () {
     var userId = this.userId;
 
     var otherUserBasic =  Meteor.users.find(
-        {_id: { $ne: userId}},
+        {_id: { $ne: userId}, enrolled: true},
         {fields: {
-            'emails': 1
+            emails: 1
         }}
     );
 
@@ -100,7 +108,7 @@ Meteor.publish("otherUsersBasic", function () {
     var userId = this.userId;
 
     var otherUserBasic =  Meteor.users.find(
-        {_id: { $ne: userId}},
+        {_id: { $ne: userId}, enrolled: true},
         {fields: {
             'profile.image': 1,
             'profile.completeName': 1
@@ -118,7 +126,7 @@ Meteor.publish("otherUsersNames", function (users) {
     check(users, [String]);
     
     var otherUsersNames =  Meteor.users.find(
-        {_id: { $in: users}},
+        {_id: { $in: users}, enrolled: true},
         {fields: {
             'profile.completeName': 1
         }}
@@ -135,7 +143,7 @@ Meteor.publish("communityUsersBasic", function (communityId) {
     check(communityId, String);
 
     var communityUsersBasic =  Meteor.users.find(
-        {communities: communityId},
+        {communities: communityId, enrolled: true},
         {fields: {
             'profile.image': 1,
             'profile.name': 1,
@@ -155,10 +163,10 @@ Meteor.publish("otherUsersComplete", function () {
     var userId = this.userId;
 
     var otherUserComplete =  Meteor.users.find(
-        {_id: { $ne: userId}},
+        {_id: { $ne: userId}, enrolled: true},
         {fields: {
-            'emails': 1,
-            'profile': 1
+            emails: 1,
+            profile: 1
         }}
     );
 
@@ -173,7 +181,7 @@ Meteor.publish("blog", function (userId) {
     check(userId, String);
 
     var blog = Meteor.users.find(
-        {_id: userId},
+        {_id: userId, enrolled: true},
         {fields: {
             blog: 1
         }}
@@ -199,7 +207,8 @@ Meteor.methods({
                     username: username,
                     'profile.name': name,
                     'profile.surname': surname,
-                    'profile.completeName': name + ' ' + surname
+                    'profile.completeName': name + ' ' + surname,
+                    enrolled: true
                 }}
             );
         }else{

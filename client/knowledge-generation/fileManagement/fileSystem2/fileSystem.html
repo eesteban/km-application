@@ -1,0 +1,55 @@
+<template name="fileSystem2">
+    <div class="row">
+        <div class="col col-sm-9 col-md-10 nopadding">
+            <div class="row">
+                <h4>{{_ "folders"}}</h4>
+                <ul>
+                    {{#each folders}}
+                        <li class="fileItem text-center">
+                            {{> folder this}}
+                        </li>
+                    {{/each}}
+                </ul>
+                <h4>{{_ "files"}}</h4>
+                <ul>
+                    {{#each files}}
+                        <li class="fileItem text-center">
+                            {{> file this}}
+                        </li>
+                    {{/each}}
+                </ul>
+                <h4>{{_ "documents"}}</h4>
+                <ul>
+                    {{#each documents}}
+                        <li class="fileItem text-center">
+                            {{> document this}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="row">
+                <input type="file" id="fileInput" multiple>
+                <button class="btn btn-primary btn-sm pull-right" id="uploadFiles">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>{{_ "upload_files"}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="col col-sm-3 col-md-2 nopadding">
+            <div class="row">
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newFolder">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>{{_ "new_folder"}}</span>
+                </button>
+                {{> newFolder}}
+            </div>
+            <div class="row">
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newDocument">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>{{_ "new_document"}}</span>
+                </button>
+                {{> newDocument}}
+            </div>
+        </div>
+    </div>
+</template>

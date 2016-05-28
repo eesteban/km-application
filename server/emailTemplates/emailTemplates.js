@@ -1,13 +1,16 @@
-Accounts.emailTemplates.siteName = 'KM_edu';
-Accounts.emailTemplates.siteName = 'KM_edu Administrator <accounts@km-application.com>';
+Accounts.emailTemplates.siteName = 'Patxi Larrainzar KM';
+Accounts.emailTemplates.from = "KM_edu Administrator <administration@km-application.com>";
 Accounts.emailTemplates.enrollAccount = {
     subject: function () {
-        return 'Enrollment email for KM Edu';
+        return 'Izen emate emaila - Endika Esteban-en gradu amaierako proiektua';
     },
     text: function (user, url) {
-        return 'To register in the application visit the following link:\n\n'+
+        return 'Web aplikazioan izena emateko hurrengo estekan sakatu:\n\n'+
                 url + '\n\n' +
-                'If you feel something is wrong, please contact with the management of your school';
+                'Momentuz ez daude funtzionalitate guztiak, hauek momentuz garaturiko atalak:\n' +
+                '       - Taldeak, foroa barne\n' +
+                '       - Profil pertsonala, bloga, fitxategiak (elementu txikiak igo bakarrik mesedez), eta mezularitza barne\n'+
+                'Edozein akats edo arazo izatekotan hurrengo helbidean kontaktatu mesedez: endikae94@gmail.com';
     }
 };
 

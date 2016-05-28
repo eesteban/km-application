@@ -1,8 +1,10 @@
 <template name="simpleLayout">
     <div class="row">
-        <div class="col center-block">
-            {{> i18n_buttons}}
+        <div class="col col-sm-2 col-md-3"></div>
+        <div class="col col-sm-8 col-md-6">
             {{> yield}}
+            {{> i18n_dropdown}}
         </div>
+        <div class="col col-sm-2 col-md-3"></div>
     </div>
 </template>

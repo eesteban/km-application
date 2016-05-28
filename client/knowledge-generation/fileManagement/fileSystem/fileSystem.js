@@ -27,7 +27,6 @@ Template.fileSystem.events({
                     if(error){
                         Bert.alert(TAPi18n.__('insert-failure') +': '+ error.message);
                     }else{
-                        console.log(fileObj._id + ' ' + path);
                         Meteor.call('newFile', fileObj._id, path);
                     }
                 });

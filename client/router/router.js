@@ -159,7 +159,7 @@ Router.route('/management', {
         return this.subscribe('userPrivate');
     },
     onBeforeAction: function(){
-        console.log(Meteor.user());
+        console.log(Meteor.user().type);
         if(Meteor.user().type==='admin'){
             this.next();
         }else {
