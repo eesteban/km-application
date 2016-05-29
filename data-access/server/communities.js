@@ -7,10 +7,10 @@ var communityPattern = {
         topics: Match.Optional([String]),
         /*Activity*/
         budget: Match.Optional({
-            amount: Number,
+            amount: String,
             type: Match.OneOf('total', 'per_child')
         }),
-        activityType: Match.Optional(Match.OneOf(['sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other'])),
+        activityType: Match.Optional(Match.OneOf('sportive','artistic', 'scientific', 'technological', 'multimedia', 'educative', 'other')),
         location: Match.Optional(String),
         studentGroups: Match.Optional([String]),
         /*Student*/
@@ -267,6 +267,21 @@ Meteor.methods({
                 throw new Meteor.Error('create-post', TAPi18n.__("post_not_created"));
             }
 
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("post_not_created"));
+        }
+    },
+    joinCommunity: function (communityId) {
+        check(communityId, String);
+
+        var userId = Meteor.userId();
+        if(userId){
+            var community = Communities.findOne(communityId);
+            if(community && hasAccessToCommunity(community, userId)){
+                Communities.update(communityId,  {$addToSet: {users: userId}});
+            }else{
+                throw new Meteor.Error('join-community', TAPi18n.__("join_community_failure"));
+            }
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("post_not_created"));
         }

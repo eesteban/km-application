@@ -27,6 +27,8 @@
   "email_invalid": "Mesedez, balizoko posta elektronikoa erabili (email@adibidea.com)",
   "email_in_list": "Posta elektroniko hori dagoeneko zerrendan dago",
   "email_exist": "Posta elektroniko hori erabiltzaile bati dagokio",
+  "verify_email": "Posta elektronikoa berretsi",
+  "verified_email": "Berretsikatko posta elektronikoa",
 
   "name": "Izena",
   "name_required": "Mesedez, izena zehaztu",
@@ -53,12 +55,16 @@
   "my_profile": "Nire Profila",
   "contact_information": "Kontaktu Informazioa",
   "about_me": "Niri Buruz",
+  "not_about_me": "Ez duzu zuri buruzko informaziorik zehaztu",
+  "not_about_user": "Ez dago erabiltzaileari buruzko informazioa",
   "messages": "Mezuak",
   "message": "Mezua",
   "blog": "Bloga",
 
   "user_not_invited": "Ezin izan dugu erabiltzailea gonbidatu",
   "user_invited": "Erabiltzailea gonbidatu dugu",
+
+  "user_information": "Erabiltzailearen informazioa",
 
   /*Conversations*/
   "participants": "Parteartzaileak",

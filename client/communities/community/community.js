@@ -6,8 +6,11 @@ Template.community.events({
     'click .navbar-nav li': function(event, template){
         var currentTab = $(event.target).closest("li");
         template.currentTab.set(currentTab.data( "template" ));
+    },
+    'click #joinCommunity': function(event, template){
+        var communityId = template.data.community._id;
+        Meteor.call('joinCommunity', communityId);
     }
-
 });
 
 Template.community.helpers({
@@ -25,5 +28,9 @@ Template.community.helpers({
                 return community.users;
             }
         }
+    },
+    notMember: function () {
+        var notMember = Template.instance().data.community.users.indexOf(Meteor.userId())<1;
+        return notMember;
     }
 });

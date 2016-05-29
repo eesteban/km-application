@@ -259,17 +259,29 @@ Meteor.methods({
             Accounts.sendEnrollmentEmail(userId);
         });
     },
-    isAdmin: function () {
-        return Meteor.user().type==="admin"
-    },
     addEmail: function (email) {
         check(email, String);
-        Accounts.addEmail(Meteor.userId(), email);
-        Accounts.sendVerificationEmail(Meteor.userId(), email);
+        console.log(email);
+
+        var userId = Meteor.userId();
+        if(Accounts.addEmail(userId, email)){
+            Accounts.sendVerificationEmail(userId, email);
+        }else{
+            throw new Meteor.Error('email-in-use', TAPi18n.__("email_used"));
+        }
     },
     removeEmail: function (email) {
         check(email, String);
         Accounts.removeEmail(Meteor.userId(), email);
+    },
+    verifyUserEmail: function (email) {
+        check(email, String);
+        if(inArray(email, Meteor.user().emails)){
+            console.log('email exists:'+email);
+            Accounts.sendVerificationEmail(Meteor.userId(), email);
+        }else{
+            throw new Meteor.Error('email-not-exist', TAPi18n.__("email_not_exist"));
+        }
     },
     addPhone: function (phone) {
         check(phone, String);

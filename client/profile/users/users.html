@@ -8,6 +8,8 @@
                 <ul class="content-list">
                     {{#each users}}
                         <li>{{> userSmall this}}</li>
+                    {{else}}
+                        {{_ "empty_list"}}
                     {{/each}}
                 </ul>
             </div>

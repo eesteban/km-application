@@ -9,6 +9,14 @@
                     <div class="panel-body">
                         <h2>{{community.name}}</h2>
                         <ul class="profile-details">
+                            {{#if notMember}}
+                                <li>
+                                    <button class="btn btn-primary btn-sm" id="joinCommunity">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        {{_ "join_community"}}
+                                    </button>
+                                </li>
+                            {{/if}}
                             <li>
                                 {{_ "community_type"}}: {{translate community.type}}
                             </li>

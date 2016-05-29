@@ -1,7 +1,3 @@
-var user1Id;
-var user2Id;
-var user3Id;
-
 Meteor.startup(function () {
     process.env.MAIL_URL="smtp://postmaster%40patxilarrainzar.tk:95647086ce56a74218a97307e6a7e486@smtp.mailgun.org:587";
     /*Create the Admin user*/
@@ -19,6 +15,7 @@ Meteor.startup(function () {
         };
 
         var adminID = Accounts.createUser(admin);
+        Accounts.addEmail(adminID, "endikae94@gmail.com");
         console.log('createAdministrator - ID: ' + adminID);
     }
 });
@@ -29,7 +26,7 @@ Meteor.methods({
 
         var studentIdArray = createStudents(5);
 
-        var communityIdArray = createCommunities(userIdArray, studentIdArray, 4);
+        createCommunities(userIdArray, studentIdArray, 4);
     }
 });
 
@@ -84,7 +81,7 @@ function createCommunities(userIdArray, studentIdArray, number){
     for(var i=0; i<number;i++){
         var numberOfUsers = Math.floor(Math.random()*(totalUsers-1))+1;
         var communityUsers = [];
-        for (var k=0; k<numberOfUsers;k++){
+        for (var m=0; m<numberOfUsers;m++){
             var index = Math.floor(Math.random()*(totalUsers));
             communityUsers.push(userIdArray[index]);
         }
@@ -107,7 +104,7 @@ function createCommunities(userIdArray, studentIdArray, number){
         }else if(type==='student_group'){
             var numberOfStudents = Math.floor(Math.random()*(totalStudents-1))+1;
             var communityStudents = [];
-            for (var m=0; k<numberOfStudents;k++){
+            for (var n=0; n<numberOfStudents;n++){
                 var stdIndex = Math.floor(Math.random()*(totalStudents));
                 communityStudents.push(studentIdArray[stdIndex]);
             }
@@ -119,7 +116,7 @@ function createCommunities(userIdArray, studentIdArray, number){
         var communityId = Meteor.call('insertCommunity', community);
 
         var numberOfTopics = Math.floor(Math.random()*2);
-        for(var n=0; k<numberOfTopics;k++){
+        for(var k=0; k<numberOfTopics;k++){
             Meteor.call('newTopic', communityId, 'New Topic '+ k, 'This is the description', 'The first Post');
         }
 

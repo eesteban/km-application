@@ -39,13 +39,12 @@
                             <form id="newPhone">
                                 <div class="input-group">
                                     <input type="text" class="form-control input-sm" id="phone" name="phone" placeholder="{{_ "phone"}}">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class=" glyphicon glyphicon-plus" ></i>
-                            </button>
-                        </span>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class=" glyphicon glyphicon-plus" ></i>
+                                        </button>
+                                    </span>
                                 </div>
-                                <div id="errorMessagePhone"> </div>
                             </form>
                         </li>
 
@@ -54,9 +53,19 @@
                             {{#each emails}}
                                 <div class="detail-info">
                                     {{this.address}}
-                                    <a class="removeEmail" href="#">
-                                        <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
-                                    </a>
+                                    <div class="pull-right">
+                                        {{#if this.verified}}
+                                            <i class="glyphicon glyphicon-ok text-success" aria-label="{{_ "verified_email"}}"></i>
+                                        {{else}}
+                                            <a class="verifyEmail" href="#" aria-label="{{_ "verify_email"}}">
+                                                <i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                                            </a>
+                                        {{/if}}
+                                        <a class="removeEmail" href="#">
+                                            <i class="glyphicon glyphicon-remove-sign text-danger"></i>
+                                        </a>
+                                    </div>
+
                                 </div>
                             {{else}}
                                 <div class="detail-info">
@@ -67,13 +76,12 @@
                                 <form id="newEmail">
                                     <div class="input-group">
                                         <input type="text" class="form-control input-sm" id="email" name="email" placeholder="{{_ "email"}}">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class=" glyphicon glyphicon-plus" ></i>
-                                </button>
-                            </span>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class=" glyphicon glyphicon-plus" ></i>
+                                            </button>
+                                        </span>
                                     </div>
-                                    <div id="errorMessageEmail"> </div>
                                 </form>
                             </div>
                         </li>

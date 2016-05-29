@@ -30,8 +30,7 @@ Template.myProfile.onRendered(function(){
             }else{
                 Bert.alert('That phone is already in the list', 'danger')
             }
-        },
-        errorLabelContainer: '#errorMessagePhone'
+        }
     });
     $("#newEmail").validate({
         rules:{
@@ -48,9 +47,13 @@ Template.myProfile.onRendered(function(){
         },
         submitHandler: function() {
             var email = $('#email').val();
-            Meteor.call('addEmail', email);
-        },
-        errorLabelContainer: '#errorMessageEmail'
+            var userEmails = Meteor.user().emails;
+            if(!userEmails || userEmails.indexOf(email)<0){
+                Meteor.call('addEmail', email);
+            }else{
+                Bert.alert('That email is already in the list', 'danger')
+            }
+        }
     });
 });
 
@@ -98,6 +101,11 @@ Template.myProfile.events({
             var email = this.address;
             Meteor.call('removeEmail', email);
         }
+    },
+    'click .verifyEmail': function (event){
+        event.preventDefault();
+        var email = this.address;
+        Meteor.call('verifyUserEmail', email);
     },
     'click .navbar-nav li': function(event, template){
         var currentTab = $(event.target).closest("li");

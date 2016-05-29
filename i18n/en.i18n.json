@@ -1,5 +1,5 @@
 {
-  "application_name": "Principle 7",
+  "application_name": "Your Wire",
   "welcome": "Welcome!",
   "close": "Close",
 
@@ -27,6 +27,8 @@
   "email_invalid": "Introduce a valid email address please (email@example.com)",
   "email_in_list": "That email is already in the list",
   "email_exist": "That email address already belongs to a user",
+  "verify_email": "Verify email",
+  "verified_email": "Verified email",
 
   "name": "Name",
   "name_required": "Please, specify a name",
@@ -54,12 +56,16 @@
   "my_information": "My Information",
   "contact_information": "Contact Information",
   "about_me": "About Me",
+  "not_about_me": "You have not specified any information about you",
+  "not_about_user": "There is no information about the user",
   "messages": "Messages",
   "message": "Message",
   "blog": "Blog",
 
   "user_not_invited": "The user has not been invited",
   "user_invited": "The user has been invited",
+
+  "user_information": "User information",
 
   /*Conversations*/
   "participants": "Participants",
@@ -173,5 +179,8 @@
   "generate_pdf": "Generate PDF",
 
   "trash": "Trash",
-  "file_system": "File system"
+  "file_system": "File system",
+
+  /*Error messages*/
+  "email_used": "That email is already in use"
 }

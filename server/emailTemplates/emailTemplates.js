@@ -1,5 +1,5 @@
-Accounts.emailTemplates.siteName = 'Patxi Larrainzar KM';
-Accounts.emailTemplates.from = "KM_edu Administrator <administration@km-application.com>";
+Accounts.emailTemplates.siteName = 'Patxi Larrainzar - Proiektua';
+Accounts.emailTemplates.from = "Endika Esteban <administration@km-application.com>";
 Accounts.emailTemplates.enrollAccount = {
     subject: function () {
         return 'Izen emate emaila - Endika Esteban-en gradu amaierako proiektua';
