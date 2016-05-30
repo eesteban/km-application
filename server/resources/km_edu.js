@@ -1,5 +1,4 @@
 Meteor.startup(function () {
-    process.env.MAIL_URL="smtp://postmaster%40patxilarrainzar.tk:95647086ce56a74218a97307e6a7e486@smtp.mailgun.org:587";
     /*Create the Admin user*/
     if(!Meteor.users.find().count()){
         var admin = {
