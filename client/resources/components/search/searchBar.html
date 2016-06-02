@@ -1,0 +1,33 @@
+<template name="searchBar">
+    <div id="searchBar">
+        <form class="navbar-form search">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm search-key" id="inputSearch" placeholder="{{_ "search"}}">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-sm search-concept" data-toggle="dropdown">
+                        <span id="search_concept">{{translate searchConcept}}</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href='#' id="users" class="concept">{{_ "users"}}</a></li>
+                        <li><a href='#' id="files" class="concept">{{_ "files"}}</a></li>
+                        <li><a href='#' id="students" class="concept">{{_ "students"}}</a></li>
+                        <li><a href='#' id="communities" class="concept">{{_ "communities"}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href='#' id="all" class="concept">{{_ "all"}}</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </form>
+        <ul class="search-results">
+            {{#each searchResult}}
+                <li>
+                    {{>result this}}
+                </li>
+            {{else}}
+                {{_ "empty_list"}}
+            {{/each}}
+        </ul>
+    </div>
+
+</template>

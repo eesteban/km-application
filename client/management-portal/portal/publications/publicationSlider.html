@@ -1,0 +1,21 @@
+<template name="publicationSlider">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{_ "information"}}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col col-sm-8">
+                    {{>publicationInfo selectedPublication}}
+                </div>
+                <ol class="list-group col-sm-4">
+                    {{#each latestPublications}}
+                        <li class="list-group-item {{#if equals selectedPublicationId _id}}active{{/if}} publication-title" id="{{_id}}">
+                            {{title}}
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </div>
+    </div>
+</template>

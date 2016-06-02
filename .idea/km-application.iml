@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.deploy/.meteor/local" />
       <excludeFolder url="file://$MODULE_DIR$/.meteor/local" />
       <excludeFolder url="file://$MODULE_DIR$/principle7-deployment/.meteor/local" />
+      <excludeFolder url="file://$MODULE_DIR$/usefull" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

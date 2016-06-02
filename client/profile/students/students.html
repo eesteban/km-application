@@ -6,6 +6,8 @@
         <ul class="content-list">
             {{#each students}}
                 <li>{{> studentLink id=this._id}}</li>
+            {{else}}
+                {{_ "empty_list"}}
             {{/each}}
         </ul>
     </div>

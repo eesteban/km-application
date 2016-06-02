@@ -13,23 +13,38 @@
     padding:        20px;
 }
 
+.search-results{
+    display: none;
+    position: absolute;
+    top: 45px;
+    background: #ffffff;
+    margin: 15px;
+    padding: 3px;
+    width: 350px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.search-results li{
+    display: block;
+}
+
 .row{
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
 .top-nav{
     background: #000000 !important;
-    color:      #ffffff;
 }
 
 .top-nav > li {
     display:        inline-block !important;
 }
 
-.input-group.search{
-    border: none;
-    width:          100%;
-    padding-left:   5px;
+.search-concept{
+    width: 100px;
+    white-space: nowrap;
 }
 
 @media(min-width:768px) {

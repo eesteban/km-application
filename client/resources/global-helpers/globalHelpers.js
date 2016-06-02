@@ -1,4 +1,4 @@
-Template.registerHelper("isEmpty", function (object) {
+Template.registerHelper('isEmpty', function (object) {
     return jQuery.isEmpty(object);
 });
 

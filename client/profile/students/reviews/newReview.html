@@ -1,0 +1,27 @@
+<template name="newReview">
+    <div class="modal fade"  id="newReview" role="dialog" aria-labelledby="New Review">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{_ "new_Review"}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newReviewForm">
+                        <div class="form-group">
+                            <label for="inputTitle">{{_ "title"}}</label>
+                            <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="{{_ "title"}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBody">{{_ "body"}}</label>
+                            <textarea class="form-control" id="inputBody" name="inputBody" placeholder="{{_ "body"}}"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "close"}}</button>
+                    <button type="submit" form="newReviewForm" class="btn btn-primary">{{_ "create_Review"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

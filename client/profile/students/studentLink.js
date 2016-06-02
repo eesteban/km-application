@@ -7,3 +7,10 @@ Template.studentLink.helpers({
         return Students.findOne(Template.instance().data.id);
     }
 });
+
+Template.studentLink.events({
+    'click .studentLink': function(){
+        var studentId = Template.instance().data.id;
+        Session.set('selectedStudent', studentId);
+    }
+});

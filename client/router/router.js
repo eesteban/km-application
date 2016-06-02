@@ -38,6 +38,22 @@ Router.route('/myProfile',{
     }
 });
 
+Router.route('/portal',{
+    name: 'portal',
+    template: 'portal',
+    layoutTemplate: 'mainLayout',
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
+        }else {
+            Router.go('/');
+        }
+    },
+    action: function(){
+        this.render();
+    }
+});
+
 Router.route('/profile/:_id', {
     name: 'profile',
     template: 'profile',

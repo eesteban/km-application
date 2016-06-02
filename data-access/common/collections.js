@@ -3,6 +3,14 @@ Students = new Mongo.Collection("students");
 Files = new Mongo.Collection("files");
 Conversations = new Mongo.Collection("conversations");
 Documents = new Mongo.Collection("documents");
+Publications = new Mongo.Collection("Publications");
+
+UserIndex = new EasySearch.Index({
+    collection: Meteor.users,
+    fields: ['profile.name', 'profile.surname', 'profile.completeName','emails'],
+    engine: new EasySearch.Minimongo()
+});
+
 fileStore = new FS.Store.GridFS('fileStore', {
     //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
     //mongoOptions: {...},                        // optional, see note below

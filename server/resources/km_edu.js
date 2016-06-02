@@ -18,7 +18,22 @@ Meteor.startup(function () {
         Accounts.addEmail(adminID, "endikae94@gmail.com");
         console.log('createAdministrator - ID: ' + adminID);
     }
+    
+    createIndex();
 });
+
+function createIndex() {
+    var users_index_name = 'users_text_index';
+    Meteor.users._dropIndex(users_index_name);
+    Meteor.users._ensureIndex({
+        'profile.name': 'text',
+        'profile.surname': 'text',
+        'profile.completeName': 'text',
+        'emails': 'text'
+    }, {
+        name: users_index_name
+    });
+}
 
 Meteor.methods({
     fastSetup: function(){
@@ -97,7 +112,7 @@ function createCommunities(userIdArray, studentIdArray, number){
             information.topics=['topic 1', 'topic 2', 'topic 3']
         }else if(type==='activity_group'){
             information.budget= {
-                amount: 150,
+                amount: '150',
                 type: 'per_child'
             };
             information.location = 'Location generated'

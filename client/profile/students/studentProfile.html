@@ -15,20 +15,49 @@
                 </div>
             </div>
             <div class="col col-sm-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        {{_ "groups"}}
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-                            {{#each groups}}
-                                <li>
-                                    {{> communityLink id=this}}
-                                </li>
-                            {{/each}}
-                        </ul>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{_ "groups"}}
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                {{#each groups}}
+                                    <li>
+                                        {{> communityLink id=this}}
+                                    </li>
+                                {{else}}
+                                    {{_ "empty_list"}}
+                                {{/each}}
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{_ "reviews"}}
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                {{#each reviews}}
+                                    <li>
+                                        {{> studentReview review=this}}
+                                    </li>
+                                {{else}}
+                                    {{_ "empty_list"}}
+                                {{/each}}
+
+                            </ul>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newReview">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                {{_ "new_review"}}
+                            </button>
+                            {{> newReview studentId=this}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     {{else}}

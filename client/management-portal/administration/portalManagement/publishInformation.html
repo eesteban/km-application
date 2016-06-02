@@ -1,0 +1,31 @@
+<template name="publishInformation">
+    <div class="panel">
+        <div class="panel-heading">
+            {{_ "publish_information"}}
+        </div>
+        <div class="panel-body">
+            <form id="publicationForm">
+                <div class="form-group">
+                    <label for="inputTitle">{{_ "title"}}</label>
+                    <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="{{_ "title"}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputBody">{{_ "body"}}</label>
+                    <textarea class="form-control" id="inputBody" name="inputBody" placeholder="{{_ "body"}}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputType">{{_ "type"}}</label>
+                    <select class="form-control" id="inputType" name="inputType">
+                        <option value="knowledge_management">{{_ "knowledge_management"}}</option>
+                        <option value="tutorial">{{_ "tutorial"}}</option>
+                        <option value="process">{{_ "process"}}</option>
+                        <option value="rules_and_bp">{{_ "rules_and_bp"}}</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit" form="publicationForm">
+                    {{_ "publish"}}
+                </button>
+            </form>
+        </div>
+    </div>
+</template>
