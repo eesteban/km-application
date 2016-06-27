@@ -1,7 +1,11 @@
 <template name="home">
-    {{#unless enrollmentToken}}
-        {{> login}}
-    {{else}}
+    {{#if enrollmentToken}}
         {{> enrollment}}
-    {{/unless}}
+    {{else}}
+        {{#if resetPasswordToken}}
+            {{> resetPassword}}
+        {{else}}
+            {{> login}}
+        {{/if}}
+    {{/if}}
 </template>

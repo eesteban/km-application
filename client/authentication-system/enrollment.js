@@ -39,7 +39,7 @@ Template.enrollment.onRendered(function(){
                 minlength: TAPi18n.__("password_length")
             },
             inputPasswordConfirmation: {
-                required: TAPi18n.__("password_confirmation_fail")
+                equalTo: TAPi18n.__("password_confirmation_fail")
             }
         },
         submitHandler: function() {

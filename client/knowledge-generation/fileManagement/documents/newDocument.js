@@ -13,6 +13,7 @@ Template.newDocument.onRendered(function(){
         submitHandler: function() {
             var documentName =  $('#inputDocumentName').val();
             var path = Session.get('path');
+            var community
 
             Meteor.call('newDocument', documentName, path, function(error){
                 if(error){

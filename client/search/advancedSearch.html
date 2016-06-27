@@ -1,0 +1,127 @@
+<template name="advancedSearch">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                {{_ "search_parameters"}}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form id="searchForm">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm search-key" id="inputAdvSearch" placeholder="{{_ "search"}}">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle btn-sm search-concept" data-toggle="dropdown">
+                                        <span id="search_concept">{{translate searchConcept}}</span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href='#' id="users" class="concept">{{_ "users"}}</a></li>
+                                        <li><a href='#' id="files" class="concept">{{_ "files"}}</a></li>
+                                        <li><a href='#' id="students" class="concept">{{_ "students"}}</a></li>
+                                        <li><a href='#' id="communities" class="concept">{{_ "communities"}}</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href='#' id="all" class="concept">{{_ "all"}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{#if equals searchConcept 'users'}}
+                            <div class="form-group">
+                                <label>{{_ "fields"}}</label>
+                                <div class="input-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="userEmail" checked> {{_ "email"}}
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="userName" checked> {{_ "name"}}
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="userSurname" checked> {{_ "surname"}}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{_ "user_type"}}</label>
+                                <div class="input-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="user_type" value="any" checked> {{_ "any"}}
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="user_type" value="staff"> {{_ "staff"}}
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="user_type" value="admin"> {{_ "administrator"}}
+                                    </label>
+                                </div>
+                            </div>
+                        {{/if}}
+
+                        {{#if equals searchConcept 'files'}}
+                            <div class="row">
+                                <div class="col col-sm-6">
+                                    <div class="form-group">
+                                        <label for="fileDateInput">
+                                            {{_ "file_creation_date"}}
+                                        </label>
+                                        <div class="input-group date" id="fileDateTimepicker">
+                                            <input type="text" class="form-control input-sm" id="fileDateInput"/>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-6">
+                                    <div class="form-group">
+                                        <label for="fileDateInput">
+                                            {{_ "file_creation_date"}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{/if}}
+                        {{#if equals searchConcept 'communities'}}
+                            <div class="form-group">
+                                <label>{{_ "fields"}}</label>
+                                <div class="input-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="communityName" checked> {{_ "name"}}
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="communityTopics" checked> {{_ "topics"}}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="communityTypeInput">
+                                    {{_ "community_type"}}
+                                </label>
+                                <select class="form-control input-sm" id="communityTypeInput">
+                                    <option id="activity_group" class="community-type">{{_ "activity_group"}}</option>
+                                    <option id="student_group" class="community-type">{{_ "student_group"}}</option>
+                                    <option id="professional_group" class="community-type">{{_ "professional_group"}}</option>
+                                    <option id="all" class="community-type">{{_ "all"}}</option>
+                                </select>
+                            </div>
+                        {{/if}}
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block btn-primary">
+                                {{_ "search"}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    {{#each searchResults}}
+                        {{> searchResultSet this}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

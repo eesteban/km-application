@@ -1,12 +1,12 @@
-Template.ownFiles.onCreated(function(){
+Template.ownArchives.onCreated(function(){
     var path = '/';
     Session.set('path', path);
 
-    Meteor.subscribe('userFiles', path);
+    Meteor.subscribe('userArchives', path);
     this.tmpl = new ReactiveVar('fileSystem');
 });
 
-Template.ownFiles.helpers({
+Template.ownArchives.helpers({
     template: function () {
         return Template.instance().tmpl.get();
     },
@@ -15,7 +15,7 @@ Template.ownFiles.helpers({
     }
 });
 
-Template.ownFiles.events({
+Template.ownArchives.events({
     'click #btnFS': function (event, template) {
         template.tmpl.set('fileSystem');
     },

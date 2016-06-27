@@ -1,0 +1,31 @@
+<template name="createPoll">
+    <div class="panel">
+        <div class="panel-heading">
+            {{_ "create_poll"}}
+        </div>
+        <div class="panel-body">
+            <form id="createPollForm">
+                <div class="form-group">
+                    <label for="inputQuestion">{{_ "question"}}</label>
+                    <input type="text" class="form-control" id="inputQuestion" name="inputQuestion" placeholder="{{_ "question"}}">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="multipleChoice"/> {{_ "allow_multiple_choice"}}
+                </div>
+                <div class="form-group" id="optionGroup">
+                    <label >{{_ "options"}}</label>
+                    <input type="text" class="form-control option" placeholder="{{_ "option"}}"> <br>
+                    <input type="text" class="form-control option" placeholder="{{_ "option"}}">
+                </div>
+
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary btn-block" value="{{_ "add_option"}}" id="addOption"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block" value="{{_ "create_poll"}}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</template> 

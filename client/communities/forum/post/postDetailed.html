@@ -1,10 +1,22 @@
 <template name="postDetailed">
-    <td class="hidden-xs hidden-sm">
+    {{#with post}}
+    <td class="hidden-xs hidden-sm class col-sm-2">
         <a href="/profile/{{authorId}}">{{author}}</a>
         <br>
         <small><i class="fa fa-clock-o"></i> {{createdAt.formatted}}</small>
+        <br>
+        {{likes}}<a href="#" class="likePost">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+        </a>
+        {{dislikes}}<a href="#" class="dislikePost">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+        </a>
+        <a href="#" class="commentPost">
+            <i class="glyphicon glyphicon-comment"></i>
+        </a>
     </td>
-    <td >
+    <td class="col-sm-10">
         {{post}}
     </td>
+    {{/with}}
 </template>

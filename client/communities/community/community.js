@@ -26,11 +26,12 @@ Template.community.helpers({
                 return community._id;
             }else if(tab==='members'){
                 return community.users;
+            }else if(tab==='communityArchives'){
+                return community._id;
             }
         }
     },
     notMember: function () {
-        var notMember = Template.instance().data.community.users.indexOf(Meteor.userId())<1;
-        return notMember;
+        return Template.instance().data.community.users.indexOf(Meteor.userId()) < 1;
     }
 });

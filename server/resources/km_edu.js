@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-    process.env.MAIL_URL="smtp://postmaster%40patxilarrainzar.tk:95647086ce56a74218a97307e6a7e486@smtp.mailgun.org:587";
+    // process.env.MAIL_URL="smtp://postmaster%40patxilarrainzar.tk:95647086ce56a74218a97307e6a7e486@smtp.mailgun.org:587";
     /*Create the Admin user*/
     if(!Meteor.users.find().count()){
         var admin = {
@@ -19,12 +19,12 @@ Meteor.startup(function () {
         console.log('createAdministrator - ID: ' + adminID);
     }
     
-    createIndex();
+    createIndexes();
 });
 
-function createIndex() {
+function createIndexes() {
     var users_index_name = 'users_text_index';
-    Meteor.users._dropIndex(users_index_name);
+    // Meteor.users._dropIndex(users_index_name);
     Meteor.users._ensureIndex({
         'profile.name': 'text',
         'profile.surname': 'text',
@@ -32,6 +32,24 @@ function createIndex() {
         'emails': 'text'
     }, {
         name: users_index_name
+    });
+
+    var communities_text_index = 'communities_text_index';
+    // Communities._dropIndex(communities_text_index);
+    Communities._ensureIndex({
+        'name': 'text'
+    }, {
+        name: communities_text_index
+    });
+
+    var students_text_index = 'students_text_index';
+    // Students._dropIndex(users_index_name);
+    Students._ensureIndex({
+        'profile.name': 'text',
+        'profile.surname': 'text',
+        'profile.completeName': 'text'
+    }, {
+        name: students_text_index
     });
 }
 

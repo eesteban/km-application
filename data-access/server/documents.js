@@ -2,7 +2,7 @@ Meteor.publish('document', function (docId) {
     var userId = this.userId;
     check(docId, String);
 
-    if(userId && Files.findOne({owner: userId, docId: docId, removed: {$ne: true}})){
+    if(userId && Archives.findOne({owner: userId, docId: docId, removed: {$ne: true}})){
         var document =  Documents.find(
             docId
         );
@@ -26,7 +26,7 @@ Meteor.methods({
         check(delta, Object);
         check(index, Object);
 
-        if(userId && Files.findOne({owner: userId, docId: docId})){
+        if(userId && Archives.findOne({owner: userId, docId: docId})){
             var document = Documents.findOne(docId);
             if(document){
                 var stack = QuillStacks.findOne({docId: docId});

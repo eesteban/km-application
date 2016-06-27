@@ -4,7 +4,7 @@
             <div class="row">
                 <h4>{{_ "folders"}}</h4>
                 <ul>
-                    {{#each folders}}
+                    {{#each archives 'folder'}}
                         <li class="fileItem text-center">
                             {{> folder this}}
                         </li>
@@ -12,7 +12,7 @@
                 </ul>
                 <h4>{{_ "files"}}</h4>
                 <ul>
-                    {{#each files}}
+                    {{#each archives 'file'}}
                         <li class="fileItem text-center">
                             {{> file this}}
                         </li>
@@ -20,7 +20,7 @@
                 </ul>
                 <h4>{{_ "documents"}}</h4>
                 <ul>
-                    {{#each documents}}
+                    {{#each archives 'doc'}}
                         <li class="fileItem text-center">
                             {{> document this}}
                         </li>

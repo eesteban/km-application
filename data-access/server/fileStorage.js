@@ -24,7 +24,7 @@ Meteor.publish("userFileInformation", function (fileId) {
 
 function hasAccess(userId, fileId){
     if(userId){
-        var file = Files.findOne({fileId: fileId}, {owner: 1, users: 1, community: 1});
+        var file = Archives.findOne({fileId: fileId}, {owner: 1, users: 1, community: 1});
         if (file) {
             // var fileCommunity = file.community;
             return file.owner === userId /*|| inArray(file.users, userId) || (fileCommunity && hasAccessToCommunity(fileCommunity))*/;
@@ -36,7 +36,7 @@ function hasAccess(userId, fileId){
         // if(user){
         //
         //     var userCommunities= user.communities;
-        //     var hasAccessToCommunity = !!Files.find({fileId: fileId, community: {$in : userCommunities}});
+        //     var hasAccessToCommunity = !!Archives.find({fileId: fileId, community: {$in : userCommunities}});
         //     return isOwner(userId, fileId) || hasAccessToCommunity;
         // }
 
@@ -47,12 +47,12 @@ function hasAccess(userId, fileId){
 
 //
 function isOwner(userId, fileId){
-    return userId ? !! Files.find({fileId: fileId, owner: userId}) : false;
+    return userId ? !! Archives.find({fileId: fileId, owner: userId}) : false;
 }
 //
 // function hasAccess(fileId) {
 //     var userId = Meteor.userId();
-//     var file = Files.findOne(fileId, {owner: 1, users: 1, community: 1});
+//     var file = Archives.findOne(fileId, {owner: 1, users: 1, community: 1});
 //
 //     if (userId && file) {
 //         var fileCommunity = file.community;

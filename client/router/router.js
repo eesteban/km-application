@@ -54,6 +54,22 @@ Router.route('/portal',{
     }
 });
 
+Router.route('/search',{
+    name: 'search',
+    template: 'advancedSearch',
+    layoutTemplate: 'mainLayout',
+    onBeforeAction: function(){
+        if(Meteor.userId()){
+            this.next();
+        }else {
+            Router.go('/');
+        }
+    },
+    action: function(){
+        this.render();
+    }
+});
+
 Router.route('/profile/:_id', {
     name: 'profile',
     template: 'profile',

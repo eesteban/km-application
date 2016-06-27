@@ -34,16 +34,13 @@ unique = function ( results ){
 };
 
 // jQuery source for the inArray method
-inArray = function( elem, arr, i ) {
+inArray = function(elem, arr) {
     var len;
 
-    if ( arr ) {
+    if (arr) {
         len = arr.length;
-        i = i ? i < 0 ? Math.max( 0, len + i ) : i : 0;
-
-        for ( ; i < len; i++ ) {
-            // Skip accessing in sparse arrays
-            if ( i in arr && arr[ i ] === elem ) {
+        for (var i=0; i < len; i++ ) {
+            if(arr[i] === elem){
                 return i;
             }
         }

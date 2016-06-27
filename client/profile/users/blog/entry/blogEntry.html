@@ -1,7 +1,18 @@
 <template name="blogEntry">
-    <h4>{{title}}</h4>
-    <h5>{{date.formatted}}</h5>
+    <h4>{{entry.title}}</h4>
+    <div class="row">
+        <div class="col col-sm-10">
+            <h5>{{entry.date.formatted}}</h5>
+        </div>
+        {{#if isOwner}}
+            <div class="col col-sm-2">
+                <a class="deleteEntry pull-right" href="#" aria-label="{{_ "delete_entry"}}">
+                    <i class="glyphicon glyphicon-remove-sign text-danger"></i>
+                </a>
+            </div>
+        {{/if}}
+    </div>
     <div>
-        {{body}}
+        {{entry.body}}
     </div>
 </template>

@@ -7,7 +7,6 @@ Template.searchBar.helpers({
         return Session.get('searchConcept');
     },
     searchResult: function(){
-        console.log('access search result');
         return Session.get('searchResult');
     }
 });
@@ -29,14 +28,6 @@ Template.searchBar.events({
                 });
             }
         }, 500);
-    },
-    'focus #inputSearch': function(){
-        $('.search-results').css('display','block');
-    },
-    'focusout #inputSearch': function(event){
-        if($('#searchBar').has(event.target).length == 0){
-            $('.search-results').css('display','none');
-        }
     },
     'click .concept': function (event) {
         var searchConcept = $(event.target).attr('id');

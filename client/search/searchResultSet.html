@@ -1,0 +1,12 @@
+<template name="searchResultSet">
+    <h4>{{type}}</h4>
+    <ul>
+        {{#each results}}
+            <li>
+                {{>result this}}
+            </li>
+        {{else}}
+            {{_ "empty_list"}}
+        {{/each}}
+    </ul>
+</template>

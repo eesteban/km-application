@@ -271,6 +271,28 @@ Meteor.methods({
             throw new Meteor.Error('logged-out', TAPi18n.__("post_not_created"));
         }
     },
+    reactToPost: function(communityId, topicIndex, postIndex, reaction){
+        check(communityId, String);
+        check(topicIndex, Number);
+        check(postIndex, Number);
+        check(reaction, Match.OneOf('likes', 'dislikes'));
+
+        var userId = Meteor.userId();
+        if(userId){
+            if(canReactToPost(communityId, topicIndex, postIndex, userId)){
+                var likePostExpression= {};
+                var usersReactedExpression = {};
+                var postPath = 'forum.'+topicIndex+'.posts.'+postIndex;
+                likePostExpression[postPath+'.'+reaction] = 1;
+                usersReactedExpression[postPath+'.usersReacted'] = userId;
+                Communities.update(communityId,  {$inc: likePostExpression, $addToSet: usersReactedExpression});
+            }else{
+                throw new Meteor.Error('like-post', TAPi18n.__("like_post_failure"));
+            }
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("like_post_failure"));
+        }
+    },
     joinCommunity: function (communityId) {
         check(communityId, String);
 
@@ -329,5 +351,25 @@ function hasAccessToCommunity(community, userId){
         return inArray(community.users, userId);
     }else{
         return true;
+    }
+}
+
+function canReactToPost(communityId, topicIndex, postIndex, userId ){
+    var postProjection= {};
+    var forumIndex = 'forum.'+topicIndex+'.posts.'+postIndex;
+    postProjection[forumIndex] = 1;
+    postProjection['type'] = 1;
+    postProjection['users'] = 1;
+
+    var community = Communities.findOne(communityId, postProjection);
+    if(hasAccessToCommunity(community, userId)){
+        var usersReacted = community.forum[topicIndex].posts[postIndex].usersReacted;
+        if(usersReacted){
+            return inArray(userId, usersReacted)<0;
+        }else{
+            return true
+        }
+    }{
+        return false
     }
 }

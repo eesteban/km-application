@@ -1,14 +1,20 @@
 Template.blog.onCreated(function () {
-    Meteor.subscribe('blog', this.data);
+    var selectedUserId = this.data;
+    Meteor.subscribe('blog', selectedUserId);
+    Session.set('selectedUser', selectedUserId);
 });
 
 Template.blog.helpers({
     isOwner: function(){
-        return Meteor.userId()===Template.instance().data;
+        var selectedUserId = Session.get('selectedUser');
+        return Meteor.userId()===selectedUserId;
     },
     blogEntries: function() {
-        var userId = Template.instance().data;
-        var blog = Meteor.users.findOne(userId, {'blog.entries':1}).blog;
-        return blog && blog.entries;
+        var selectedUserId = Session.get('selectedUser');
+        var blog = Meteor.users.findOne(selectedUserId, {blog: 1}).blog;
+        if (blog) {
+            return blog.entries
+        }
+        return false;
     }
 });

@@ -19,7 +19,7 @@
         <tbody>
         {{#each posts}}
             <tr>
-                {{> postDetailed this}}
+                {{> postDetailed post=this postIndex=@index}}
             </tr>
         {{else}}
             {{_ "no_posts"}}

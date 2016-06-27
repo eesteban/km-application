@@ -16,6 +16,12 @@ Accounts.onCreateUser(function(options, user){
     }else{
         user.profile = {}
     }
+
+    user.storageSpace = {
+        free: 52428800,
+        occupied: 0
+    };
+    
     user.createdAt = date;
     var title = 'First blog Entry';
     var body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
@@ -304,6 +310,12 @@ Meteor.methods({
         }else{
             throw new Meteor.Error('logged-out', "The profile picture can't be added");
         }
+    },
+    removeBlogEntry: function (index) {
+        check(index, Number);
+        var user = Meteor.user();
+        user.blog.entries.splice(index,1);
+        Meteor.users.update(Meteor.userId(), user);
     }
 });
 

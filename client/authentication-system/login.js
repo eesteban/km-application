@@ -40,5 +40,8 @@ Template.login.onRendered(function(){
 Template.login.events({
     'submit form': function (event) {
         event.preventDefault();
+    },
+    'click #resetPassword': function(event){
+        event.preventDefault();
     }
 });

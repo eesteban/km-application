@@ -1,0 +1,24 @@
+<template name="pollDisplay">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{_ "polls"}}
+        </div>
+        <div class="panel-body">
+            {{#if selectedPoll}}
+                <div class="row">
+                    <a href="#" id="previous">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                    </a>
+                    <a href="#" id="next">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="row">
+                    {{> poll selectedPoll}}
+                </div>
+            {{else}}
+                {{_ "empty_list"}}
+            {{/if}}
+        </div>
+    </div>
+</template>

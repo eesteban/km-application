@@ -1,13 +1,26 @@
 Communities = new Mongo.Collection("communities");
 Students = new Mongo.Collection("students");
-Files = new Mongo.Collection("files");
+Archives = new Mongo.Collection("archives");
 Conversations = new Mongo.Collection("conversations");
 Documents = new Mongo.Collection("documents");
-Publications = new Mongo.Collection("Publications");
+Publications = new Mongo.Collection("publications");
+Polls = new Mongo.Collection("polls");
 
 UserIndex = new EasySearch.Index({
     collection: Meteor.users,
     fields: ['profile.name', 'profile.surname', 'profile.completeName','emails'],
+    engine: new EasySearch.Minimongo()
+});
+
+CommunityIndex = new EasySearch.Index({
+    collection: Communities,
+    fields: ['name'],
+    engine: new EasySearch.Minimongo()
+});
+
+StudentIndex = new EasySearch.Index({
+    collection: Students,
+    fields: ['profile.name', 'profile.surname', 'profile.completeName'],
     engine: new EasySearch.Minimongo()
 });
 

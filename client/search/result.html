@@ -1,0 +1,19 @@
+<template name="result">
+    {{#if equals searchConcept 'users'}}
+        {{>userSmall this}}
+    {{else}}
+        {{#if equals searchConcept 'communities'}}
+            {{>communityLink community=this}}
+        {{else}}
+            {{#if equals searchConcept 'students'}}
+                {{>studentLink student=this}}
+            {{else}}
+                {{#if equals searchConcept 'files'}}
+                    {{>fileInfo this}}
+                {{else}}
+                    {{_ "unknown_result_type"}}
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</template>

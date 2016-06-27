@@ -1,18 +1,34 @@
+Template.fileSystem.onCreated(function () {
+    if(this.data && this.data.communityId){
+        Session.set('communityFS', this.data.communityId);
+    }else{
+        Session.set('communityFS', null);
+    }
+});
+
 Template.fileSystem.helpers({
-    template: function () {
-        return Template.instance().template.get();
-    },
-    files: function () {
+    archives: function (type) {
         var path = Session.get('path');
-        return Files.find({owner: Meteor.userId(), path: path,  type:'file', deleted:{$ne: true}});
-    },
-    folders: function () {
-        var path = Session.get('path');
-        return Files.find({owner: Meteor.userId(), path: path,  type:'folder'}, {name: 1});
-    },
-    documents: function () {
-        var path = Session.get('path');
-        return Files.find({owner: Meteor.userId(), path: path,  type:'doc', deleted:{$ne: true}}, {name: 1});
+        var communityId = Session.get('communityFS');
+        var query1 = {
+            path: path,
+            deleted:{$ne: true}
+        };
+
+        if(communityId){
+            query1.communityId = communityId;
+        }else{
+            query1.owner =  Meteor.userId()
+        }
+        var query2 = {
+            $or: [{
+                type: type
+            },{
+                type: 'link',
+                linkType: type
+            }]
+        };
+        return Archives.find({$and: [query1, query2]});
     }
 });
 
@@ -27,7 +43,9 @@ Template.fileSystem.events({
                     if(error){
                         Bert.alert(TAPi18n.__('insert-failure') +': '+ error.message);
                     }else{
-                        Meteor.call('newFile', fileObj._id, path);
+                        //TODO:when create communityFS UPDATE THIS PART
+                        var communityId = Session.get('communityFS') || undefined;
+                        Meteor.call('newFile', fileObj.name(), fileObj._id, fileObj.size(), path, communityId);
                     }
                 });
             }

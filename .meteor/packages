@@ -44,3 +44,5 @@ classcraft:meteor-wkhtmltopdf
 jspdf:core
 email
 matteodem:easy-search
+tsega:bootstrap3-datetimepicker
+ctjp:meteor-bootstrap-switch

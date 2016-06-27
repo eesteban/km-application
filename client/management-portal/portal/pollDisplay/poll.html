@@ -1,0 +1,16 @@
+<template name="poll">
+    {{#with this}}
+        <h4>{{question}}</h4>
+            <form id="pollReplyForm">
+                <div class="form-group" id="optionGroup">
+                    {{#each options}}
+                        <div>
+                            {{this.value}}
+                            <input type={{#if multipleChoice}}checkbox{{else}}radio{{/if}} name="reply" value={{@index}} />
+                        </div>
+                    {{/each}}
+                </div>
+            </form>
+        <button type="submit" class="btn btn-block btn-primary" form="pollReplyForm">{{_ "submit_poll"}}</button>
+    {{/with}}
+</template>
