@@ -1,0 +1,39 @@
+<template name="organizationInformationDisplay">
+    <div class="panel">
+        <div class="panel-heading">
+            {{_ "organization_information"}}
+        </div>
+        <div class="panel-body">
+            {{#with information}}
+                <h4>{{_ "description"}}</h4>
+                <p>{{description}}</p>
+                <h4>{{_ "philosophy"}}</h4>
+                <p>{{philosophy}}</p>
+                <h4>{{_ "address"}}</h4>
+                <p>{{contact.address}}</p>
+                <h4>{{_ "description"}}</h4>
+                <p>{{description}}</p>
+                <h4>{{_ "phone"}}</h4>
+                {{#each contact.phones}}
+                    <div class="detail-info">
+                        <b>{{this.label}}</b>:  {{this.number}}
+                    </div>
+                {{else}}
+                    <div class="detail-info">
+                        {{_ "not_phone"}}
+                    </div>
+                {{/each}}
+                <h4>{{_ "phone"}}</h4>
+                {{#each contact.emails}}
+                    <div class="detail-info">
+                        <b>{{this.label}}</b>:  {{this.email}}
+                    </div>
+                {{else}}
+                    <div class="detail-info">
+                        {{_ "not_email"}}
+                    </div>
+                {{/each}}
+            {{/with}}
+        </div>
+    </div>
+</template>
