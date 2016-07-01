@@ -81,7 +81,8 @@ Meteor.publish("userPrivate", function () {
                 type: 1,
                 profile: 1,
                 communities: 1,
-                files: 1
+                files: 1,
+                storageSpace: 1
             }}
         );
 

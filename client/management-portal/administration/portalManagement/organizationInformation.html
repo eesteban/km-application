@@ -1,3 +1,99 @@
 <template name="organizationInformation">
+    <div class="panel">
+        <div class="panel-heading">
+            {{_ "organization_information"}}
+        </div>
+        <div class="panel-body">
+            {{#with information}}
+                <form id="organizationInformationForm">
+                    <div class="form-group">
+                        <label for="inputDescr">{{_ "description"}}</label>
+                        <textarea class="form-control" id="inputDescr" name="inputDescr" placeholder="{{_ "description"}}">{{description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhilo">{{_ "philosophy"}}</label>
+                        <textarea class="form-control" id="inputPhilo" name="inputPhilo" placeholder="{{_ "philosophy"}}">{{philosophy}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">{{_ "address"}}</label>
+                        <textarea class="form-control" id="inputAddress" name="inputAddress" placeholder="{{_ "address"}}">{{contact.address}}</textarea>
+                    </div>
+                </form>
 
+                <form id="addPhoneForm">
+                    <div class="form-group">
+                        <label><i class="glyphicon glyphicon-earphone"></i> {{_ "phone"}}</label>
+                        {{#each contact.phones}}
+                            <div class="detail-info">
+                                <b>{{this.label}}</b>:  {{this.number}}
+                                <div class="pull-right">
+                                    <a class="removePhone" href="#" id={{@index}} >
+                                        <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        {{else}}
+                            <div class="detail-info">
+                                {{_ "not_phone"}}
+                            </div>
+                        {{/each}}
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-label">{{_ "label"}}</div>
+                        <input type="text" class="form-control input-sm" id="inputPhoneLabel" name="inputPhoneLabel" placeholder="{{_ "label"}}">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-label">{{_ "phone"}}</div>
+                        <input type="text" class="form-control input-sm" id="inputPhone" name="inputPhone" placeholder="{{_ "phone"}}">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-sm">{{_ "add_phone"}}</button>
+                    </div>
+                </form>
+
+                <form id="addEmailForm">
+                    <div class="form-group">
+                        <label><i class="glyphicon glyphicon-envelope"></i> {{_ "email"}}</label>
+                        {{#each contact.emails}}
+                            <div class="detail-info">
+                                <b>{{this.label}}</b>:  {{this.email}}
+                                <div class="pull-right">
+                                    <a class="removeEmail" href="#">
+                                        <i class="glyphicon glyphicon-remove-sign text-danger pull-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        {{else}}
+                            <div class="detail-info">
+                                {{_ "not_email"}}
+                            </div>
+                        {{/each}}
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-label">{{_ "label"}}</div>
+                        <input class="form-control input-sm" id="inputEmailLabel" name="inputEmailLabel" placeholder="{{_ "label"}}">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-label">{{_ "email"}}</div>
+                        <input class="form-control input-sm" id="inputOrganizationEmail" name="inputOrganizationEmail" placeholder="{{_ "email"}}">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-sm">{{_ "add_email"}}</button>
+                    </div>
+                </form>
+
+                <div>
+                    <button class="btn btn-primary btn-block" type="submit" form="organizationInformationForm">
+                        {{_ "update"}}
+                    </button>
+                </div>
+            {{/with}}
+        </div>
+    </div>
 </template>

@@ -43,7 +43,7 @@ Meteor.publish("userArchives", function(path){
 
     if(userId){
         var files =  Archives.find(
-            {owner: userId, path: path, deleted: {$ne: true}, removed: {$ne: true}},
+            {owner: userId, path: path, deleted: {$ne: true}, removed: {$ne: true}, communityId: null},
             {fields: {
                 owner: 1,
                 path: 1,
@@ -54,7 +54,8 @@ Meteor.publish("userArchives", function(path){
                 type: 1,
                 users: 1,
                 linkType: 1,
-                linkId: 1
+                linkId: 1,
+                communityId: 1
             }}
         );
 
@@ -90,6 +91,8 @@ Meteor.publish("communityArchives", function(communityId, path){
                 communityId: 1
             }}
         );
+
+        console.log(archives.fetch());
         
         if (archives && hasAccessMany(userId, archives)){
             return archives;
@@ -100,7 +103,6 @@ Meteor.publish("communityArchives", function(communityId, path){
         throw new Meteor.Error('logged-out', "Subscription cancelled");
     }
 });
-
 
 Meteor.publish("deletedArchives", function(){
     var userId = this.userId;
@@ -135,6 +137,7 @@ Meteor.methods({
     newFolder: function (folderName, path, communityId) {
         check(folderName, String);
         check(path, String);
+        check(communityId, Match.Maybe(String));
         var userId = Meteor.userId();
 
         if(userId){
@@ -153,7 +156,7 @@ Meteor.methods({
     newDocument: function (docName, path, communityId) {
         check(docName, String);
         check(path, String);
-        check(communityId, Match.Optional(String));
+        check(communityId, Match.Maybe(String));
 
         var userId = Meteor.userId();
         if(userId){
@@ -182,11 +185,12 @@ Meteor.methods({
         check(fileId, String);
         check(fileSize, Number);
         check(path, String);
-        check(communityId, Match.Optional(String));
+        check(communityId, Match.Maybe(String));
 
         var userId = Meteor.userId();
         if(userId){
-            var freeSpace = Meteor.user().storageSpace.free;
+            var storageSpace = Meteor.user().storageSpace;
+            var freeSpace = storageSpace.free;
             if(fileSize <= freeSpace){
                 var file = archive(fileName, userId, path, communityId);
                 file.type = 'file';
@@ -196,6 +200,12 @@ Meteor.methods({
                 Archives.insert(file, function(error){
                     if(error){
                         throw new Meteor.Error('error_insert_file', TAPi18n.__('insert-failure'));
+                    }else{
+                        storageSpace = {
+                            free: freeSpace - fileSize,
+                            occupied: storageSpace.occupied + fileSize
+                        };
+                        Meteor.users.update(Meteor.userId(), {$set: {storageSpace: storageSpace}});
                     }
                 });
             }else{

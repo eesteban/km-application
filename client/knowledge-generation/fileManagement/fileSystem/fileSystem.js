@@ -18,7 +18,8 @@ Template.fileSystem.helpers({
         if(communityId){
             query1.communityId = communityId;
         }else{
-            query1.owner =  Meteor.userId()
+            query1.owner = Meteor.userId();
+            query1.communityId = null;
         }
         var query2 = {
             $or: [{
@@ -29,6 +30,16 @@ Template.fileSystem.helpers({
             }]
         };
         return Archives.find({$and: [query1, query2]});
+    },
+    freeSpace: function(){
+        var bytes = Meteor.user().storageSpace.free;
+        var decimals = 2;
+        if(bytes == 0) return '0 Byte';
+        var k = 1024;
+        var dm = decimals + 1 || 3;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 });
 
@@ -43,7 +54,6 @@ Template.fileSystem.events({
                     if(error){
                         Bert.alert(TAPi18n.__('insert-failure') +': '+ error.message);
                     }else{
-                        //TODO:when create communityFS UPDATE THIS PART
                         var communityId = Session.get('communityFS') || undefined;
                         Meteor.call('newFile', fileObj.name(), fileObj._id, fileObj.size(), path, communityId);
                     }

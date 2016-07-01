@@ -4,6 +4,7 @@ Archives = new Mongo.Collection("archives");
 Conversations = new Mongo.Collection("conversations");
 Documents = new Mongo.Collection("documents");
 Publications = new Mongo.Collection("publications");
+Organization = new Mongo.Collection("organization");
 Polls = new Mongo.Collection("polls");
 
 UserIndex = new EasySearch.Index({

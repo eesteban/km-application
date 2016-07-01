@@ -13,8 +13,9 @@ Template.newFolder.onRendered(function(){
         submitHandler: function() {
             var folderName =  $('#inputFolderName').val();
             var path = Session.get('path');
+            var communityId =  Session.get('communityFS');
 
-            Meteor.call('newFolder', folderName, path, function(error){
+            Meteor.call('newFolder', folderName, path, communityId, function(error){
                 if(error){
                     Bert.alert(TAPi18n.__('new_folder_failure'), 'danger');
                 }else{

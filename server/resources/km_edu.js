@@ -55,6 +55,8 @@ function createIndexes() {
 
 Meteor.methods({
     fastSetup: function(){
+        createOrganization();
+
         var userIdArray = createUsers(Meteor.userId(), 4);
 
         var studentIdArray = createStudents(5);
@@ -62,6 +64,29 @@ Meteor.methods({
         createCommunities(userIdArray, studentIdArray, 4);
     }
 });
+
+function createOrganization() {
+    var existingOrganization = Organization.findOne();
+    
+    if(!existingOrganization){
+        var organization = {
+            information: {
+                philosophy: 'philosophy of my school',
+                contact: {
+                    address: 'main street 1, Paris, 75016',
+                    emails: [
+                        {
+                            label: 'office',
+                            email: 'maile@school.com'
+                        }
+                    ]
+                }
+            }
+        };
+        Organization.insert(organization);
+    }
+}
+
 
 function createUsers(adminId, number){
     Meteor.users.remove({_id: {$ne: adminId}});

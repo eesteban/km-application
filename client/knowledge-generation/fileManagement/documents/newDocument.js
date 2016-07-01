@@ -13,9 +13,9 @@ Template.newDocument.onRendered(function(){
         submitHandler: function() {
             var documentName =  $('#inputDocumentName').val();
             var path = Session.get('path');
-            var community
+            var communityId =  Session.get('communityFS');
 
-            Meteor.call('newDocument', documentName, path, function(error){
+            Meteor.call('newDocument', documentName, path, communityId, function(error){
                 if(error){
                     Bert.alert(TAPi18n.__('new_document_failure'), 'danger');
                 }else{
