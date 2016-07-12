@@ -5,8 +5,9 @@
     <div class="row">
         <div class="icons">
             <a href="#" id="displayDocument" data-toggle="modal" data-target="#documentModal"><span class="glyphicon glyphicon-open-file text-success"></span></a>
+            <a href="#" id="share" data-toggle="modal" data-target="#shareModal_{{this._id}}"><span class="glyphicon glyphicon-upload text-primary"></span></a>
             <a href="#" id="moveToTrash"><span class="glyphicon glyphicon-trash text-danger"></span></a>
         </div>
     </div>
-    {{> displayDocument this}}
+    {{> shareModal this}}
 </template>

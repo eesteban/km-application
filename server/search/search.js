@@ -1,6 +1,6 @@
 var searchParameterPattern = {
     key: Match.Optional(String),
-    concept:  Match.OneOf('users', 'files', 'students', 'communities', 'all'),
+    concept:  Match.OneOf('users', 'archives', 'students', 'communities', 'all'),
     advancedSearch: Match.Optional(Boolean),
     /*Users*/
     userEmail: Match.Optional(Boolean),
@@ -8,6 +8,10 @@ var searchParameterPattern = {
     userSurname: Match.Optional(Boolean),
     userType: Match.Optional(Match.OneOf('staff', 'admin')),
     /*Archives*/
+    archiveName: Match.Optional(Boolean),
+    ownerName: Match.Optional(Boolean),
+    deletedArchives: Match.Optional(Boolean),
+    archiveType: Match.Optional(Match.OneOf('file', 'doc', 'link')),
     /*Students*/
     /*Communities*/
     communityName: Match.Optional(Boolean),
@@ -24,8 +28,8 @@ Meteor.publish('search', function(searchParameters){
         case 'users':
             return searchUsers(searchParameters);
             break;
-        case 'files':
-            return searchFiles(searchParameters);
+        case 'archives':
+            return searchArchives(searchParameters, userId);
             break;
         case 'students':
             return searchStudents(searchParameters, userId);
@@ -95,8 +99,71 @@ function searchUsers(searchParameters){
     return result;
 }
 
-function searchFiles(key) {
+function searchArchives(searchParameters, userId) {
+    var mongoParameters = [];
+    var key = searchParameters.key || '';
+    var includeKeyRegex = {
+        $regex: key,
+        $options: 'i'
+    };
 
+    if(searchParameters.advancedSearch){
+        if(key){
+            if(searchParameters.archiveName){
+                mongoParameters.push({
+                    name: includeKeyRegex
+                });
+            }
+            if(searchParameters.ownerName){
+                mongoParameters.push({
+                    owner: includeKeyRegex
+                });
+            }
+        }
+    }else{
+        mongoParameters = [
+            {name: includeKeyRegex}
+        ]
+    }
+
+    var queryArray = [{$or: mongoParameters}];
+    var archiveType = searchParameters.archiveType;
+    if(archiveType){
+        queryArray.push({type: archiveType});
+    }
+    if(!searchParameters.deletedArchives){
+        queryArray.push({deleted: {$ne: true}});
+    }
+
+    var query;
+    if(queryArray.length>1){
+        query = {$and: queryArray}
+    }else{
+        query = queryArray
+    }
+
+    console.log(mongoParameters);
+    console.log(query);
+
+    var result = Archives.find(
+        query,{
+            fields: {
+                owner: 1,
+                path: 1,
+                name: 1,
+                fileId: 1,
+                docId: 1,
+                deleted: 1,
+                type: 1,
+                linkType: 1,
+                linkId: 1
+            }}
+    );
+
+    if (result && hasAccessArchives(userId, result)){
+        console.log(result.fetch());
+        return result;
+    }
 }
 
 function searchStudents(searchParameters, userId) {
@@ -200,4 +267,32 @@ function searchCommunities(searchParameters) {
 
 function search(key) {
 
+}
+
+function hasAccessArchives(userId, files){
+    if(userId){
+        files.forEach(function(file){
+            if(!hasAccessArchive(userId, file)){
+                return false;
+            }
+        });
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function hasAccessArchive(userId, file){
+    var fileCommunity = file.community;
+    return file.owner === userId || inArray(file.users, userId) || (fileCommunity && hasAccessCommunity(userId, fileCommunity));
+}
+
+function hasAccessCommunity(userId, communityId){
+    var community = Communities.findOne(communityId, {users: 1});
+    if(community.type==='student_group'){
+        return inArray(community.users, userId);
+    }else{
+        return true;
+    }
 }

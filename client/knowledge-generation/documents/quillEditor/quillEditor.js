@@ -4,11 +4,11 @@ if(typeof QuillDrafts === "undefined") {
 
 textChangesListener = function(delta, source) {
     if (source === 'user') {
-        var docId = this.template.data.docId;
+        var docId = Session.get('selectedDocument');
         QuillDrafts.upsert({docId: docId}, {$addToSet: {modifications: delta}});
         var oldDelta = new Delta($.extend({}, this.template.quillEditor.oldDelta));
         this.template.quillEditor.oldDelta = this.template.quillEditor.oldDelta.compose(delta);
-        var doc = Documents.findOne({_id: docId});
+        var doc = Documents.findOne(docId);
         // Check for other new content besides the last keystroke
         var editorContents = this.template.quillEditor.getContents();
         var updateDelta;
@@ -23,7 +23,6 @@ textChangesListener = function(delta, source) {
 
 Template.quillEditor.onCreated(function() {
     this.quillEditor = {};
-    Meteor.subscribe('document', this.data.docId);
 });
 
 Template.quillEditor.onRendered(function() {
@@ -33,7 +32,7 @@ Template.quillEditor.onRendered(function() {
         name: Meteor.user().username
     };
 
-    template.quillEditor = new Quill('#editor-' + template.data.docId, {
+    template.quillEditor = new Quill('#editor', {
         modules: {
             'authorship': {
                 authorId: author.name, // should be authorId
@@ -44,18 +43,20 @@ Template.quillEditor.onRendered(function() {
             },
             'link-tooltip': true,
             'pdfGenerator': {
-                docId: template.data.docId
+                docId: Session.get('selectedDocument')
             }
         },
         theme: 'snow'
     });
 
+    var authorship = template.quillEditor.getModule('authorship');
+
     template.quillEditor.template = template;
     template.quillEditor.oldDelta = template.quillEditor.getContents();
 
     Tracker.autorun(function() {
-        var docId = template.data.docId;
-        var remoteContents = Documents.findOne({_id: docId});
+        var docId = Session.get('selectedDocument');
+        var remoteContents = Documents.findOne(docId);
 
         if (!remoteContents) {
             remoteContents = new Delta();
@@ -98,11 +99,12 @@ Template.quillEditor.helpers({
         }
     },
     hasEdits: function() {
-         var template = Template.instance();
-         var unsavedChanges = QuillDrafts.findOne({docId: template.data.docId});
-         if(template.quillEditor && unsavedChanges) {
-           return unsavedChanges.modifications;
-         }
+        var template = Template.instance();
+        var docId = Session.get('selectedDocument');
+        var unsavedChanges = QuillDrafts.findOne({docId: docId});
+        if(template.quillEditor && unsavedChanges) {
+            return unsavedChanges.modifications;
+        }
     }
 });
 

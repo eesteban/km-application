@@ -245,39 +245,56 @@ Meteor.methods({
             throw new Meteor.Error('logged-out', TAPi18n.__("not_logged_user"));
         }
     },
-    shareFile: function (fileId, users) {
-        check(fileId, String);
+    shareArchive: function (archiveId, users) {
+        check(archiveId, String);
         check(users, [String]);
 
         var userId = Meteor.userId();
 
         if(userId){
-            var file = Archives.get(fileId, {name: 1, type: 1, linkTo: 1});
-            if(file){
-                if(file.type==='folder'){
-                    throw new Meteor.Error('folder_link');
-                }else{
-                    var link = {
-                        name: file.name,
-                        path: '/',
-                        type: 'link',
-                        users: [],
-                        deleted: false,
-                        linkId: fileId
-                    };
-                    link.linkType = (file.type === 'link') ? file.linkType : file.type;
+            var archive = Archives.findOne(archiveId);
+            if(archive){
+                while(archive.type === 'link') {
+                    archiveId = archive.linkId;
+                    archive = Archives.findOne(archiveId);
+                }
+                if(archive){
+                    if(archive.type==='folder'){
+                        throw new Meteor.Error('folder_link');
+                    }else {
+                        console.log(archive);
+                        var link = {
+                            name: archive.name,
+                            path: '/',
+                            type: 'link',
+                            users: [],
+                            deleted: false,
+                            linkType: archive.type
+                        };
 
-                    console.log(link);
-                    users.forEach(function(user){
-                        link.owner= user;
-                        Archives.insert(link, function(error){
-                            if(error){
-                                throw new Meteor.Error('error_insert_link', TAPi18n.__('insert-failure'));
-                            }else{
-                                Archives.update(fileId, {$addToSet: {users: user}});
+                        if (archive.type === 'file') {
+                            link.linkId = archive.fileId;
+                        } else {
+                            link.linkId = archive.docId;
+                        }
+
+                        users.forEach(function (user) {
+                            var previousLink = Archives.findOne({linkId: archiveId, owner: user}, {_id: 1});
+                            if (!previousLink) {
+                                link.owner = user;
+                                console.log(link);
+                                Archives.insert(link, function (error) {
+                                    if (error) {
+                                        throw new Meteor.Error('error_insert_link', TAPi18n.__('insert-failure'));
+                                    } else {
+                                        Archives.update(archiveId, {$addToSet: {users: user}});
+                                    }
+                                });
                             }
                         });
-                    });
+                    }
+                }else{
+                    throw new Meteor.Error('invalid_link');
                 }
             }else{
                 throw new Meteor.Error('non_existing_file');

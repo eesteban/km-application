@@ -16,7 +16,7 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href='#' id="users" class="concept">{{_ "users"}}</a></li>
-                                        <li><a href='#' id="files" class="concept">{{_ "files"}}</a></li>
+                                        <li><a href='#' id="archives" class="concept">{{_ "archives"}}</a></li>
                                         <li><a href='#' id="students" class="concept">{{_ "students"}}</a></li>
                                         <li><a href='#' id="communities" class="concept">{{_ "communities"}}</a></li>
                                         <li class="divider"></li>
@@ -58,30 +58,32 @@
                             </div>
                         {{/if}}
 
-                        {{#if equals searchConcept 'files'}}
-                            <div class="row">
-                                <div class="col col-sm-6">
-                                    <div class="form-group">
-                                        <label for="fileDateInput">
-                                            {{_ "file_creation_date"}}
-                                        </label>
-                                        <div class="input-group date" id="fileDateTimepicker">
-                                            <input type="text" class="form-control input-sm" id="fileDateInput"/>
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-6">
-                                    <div class="form-group">
-                                        <label for="fileDateInput">
-                                            {{_ "file_creation_date"}}
-                                        </label>
-                                    </div>
+                        {{#if equals searchConcept 'archives'}}
+                            <div class="form-group">
+                                <label>{{_ "fields"}}</label>
+                                <div class="input-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="archiveName" checked> {{_ "name"}}
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="ownerName" checked> {{_ "owner"}}
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="deletedArchives" checked> {{_ "deleted"}}
+                                    </label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="archiveTypeInput">
+                                    {{_ "archive_type"}}
+                                </label>
+                                <select class="form-control input-sm" id="archiveTypeInput">
+                                    <option id="file" class="archive-type">{{_ "file"}}</option>
+                                    <option id="doc" class="archive-type">{{_ "document"}}</option>
+                                    <option id="link" class="archive-type">{{_ "link"}}</option>
+                                    <option id="all" class="archive-type">{{_ "all"}}</option>
+                                </select>
+                            </div>
                         {{/if}}
                         {{#if equals searchConcept 'communities'}}
                             <div class="form-group">
@@ -119,6 +121,8 @@
                 <div class="row">
                     {{#each searchResults}}
                         {{> searchResultSet this}}
+                    {{else}}
+                        {{_ "empty_list"}}
                     {{/each}}
                 </div>
             </div>

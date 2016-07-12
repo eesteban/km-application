@@ -18,7 +18,8 @@ Meteor.publish("userFileInformation", function (fileId) {
     var userId = this.userId;
 
     if(userId) {
-        return FileStorage.find(fileId);
+        var files = FileStorage.find(fileId);
+        return files;
     }
 });
 
@@ -27,7 +28,7 @@ function hasAccess(userId, fileId){
         var file = Archives.findOne({fileId: fileId}, {owner: 1, users: 1, community: 1});
         if (file) {
             // var fileCommunity = file.community;
-            return file.owner === userId /*|| inArray(file.users, userId) || (fileCommunity && hasAccessToCommunity(fileCommunity))*/;
+            return file.owner === userId || inArray(file.users, userId);
         }else{
             return true
         }

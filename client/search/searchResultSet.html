@@ -1,12 +1,66 @@
 <template name="searchResultSet">
-    <h4>{{type}}</h4>
+    <h4>{{translate type}}</h4>
     <ul>
-        {{#each results}}
-            <li>
-                {{>result this}}
-            </li>
+        {{#if equals type 'users'}}
+            {{#each results}}
+                <li>
+                    {{>userSmall this}}
+                </li>
+            {{else}}
+                {{_ "empty_list"}}
+            {{/each}}
         {{else}}
-            {{_ "empty_list"}}
-        {{/each}}
+            {{#if equals type 'communities'}}
+                {{#each results}}
+                    <li>
+
+                    {{>communityLink community=this}}
+                    </li>
+                {{else}}
+                    {{_ "empty_list"}}
+                {{/each}}
+            {{else}}
+                {{#if equals type 'students'}}
+                    {{#each results}}
+                        <li>
+                            {{>studentLink student=this}}
+                        </li>
+                    {{else}}
+                        {{_ "empty_list"}}
+                    {{/each}}
+                {{else}}
+                    {{#if equals type 'archives'}}
+                        {{#each results}}
+                            <li>
+                                {{#if equals this.type 'file'}}
+                                    {{>file this}}
+                                {{else}}
+                                    {{#if equals this.type 'doc'}}
+                                        {{>document this}}
+                                    {{else}}
+                                        {{#if equals this.type 'link'}}
+                                            {{#if equals this.linkType 'file'}}
+                                                {{>file this}}
+                                            {{else}}
+                                                {{#if equals linkType.type 'doc'}}
+                                                    {{>document this}}
+                                                {{/if}}
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                            </li>
+                        {{else}}
+                            {{_ "empty_list"}}
+                        {{/each}}
+                    {{else}}
+                        {{_ "unknown_result_type"}}
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+        {{/if}}
     </ul>
+    {{#if equals type 'archives'}}
+        {{> displayDocument}}
+    {{/if}}
 </template>

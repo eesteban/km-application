@@ -1,6 +1,6 @@
 Template.shareModal.onRendered(function () {
-    var fileId = this.data._id;
-    $('#shareForm').validate({
+    var archiveId = this.data._id;
+    $('#shareForm_'+archiveId).validate({
         submitHandler: function() {
             var selectedUsers = [];
             Meteor.users.find({selected:true}, {_id: 1}).forEach(
@@ -9,7 +9,9 @@ Template.shareModal.onRendered(function () {
                 }
             );
 
-            Meteor.call('shareFile', fileId, selectedUsers, function(error){
+            console.log('submit share');
+            console.log(selectedUsers);
+            Meteor.call('shareArchive', archiveId, selectedUsers, function(error){
                 if(error){
                     Bert.alert(TAPi18n.__('share_failure'), 'danger');
                 }else{

@@ -52,8 +52,25 @@ Template.advancedSearch.events({
                     Session.set('searchResults', [searchResultSet]);
                 });
                 break;
-            case 'files':
-                return searchFiles(key);
+            case 'archives':
+                searchParameters.archiveName=$('#archiveName').prop('checked');
+                searchParameters.ownerName=$('#ownerName').prop('checked');
+                searchParameters.deletedArchives=$('#deletedArchives').prop('checked');
+
+                var archiveType = $('#archiveTypeInput').children(':selected').attr('id');
+                if(archiveType!=='all'){
+                    searchParameters.archiveType = archiveType;
+                }
+                console.log(searchParameters);
+
+                Meteor.subscribe('search', searchParameters, function(){
+                    var searchResult = search(searchParameters);
+                    var searchResultSet = {
+                        type: 'archives',
+                        results: searchResult.fetch()
+                    };
+                    Session.set('searchResults', [searchResultSet]);
+                });
                 break;
             case 'students':
                 Meteor.subscribe('search', searchParameters, function(){
@@ -90,14 +107,79 @@ Template.advancedSearch.events({
                 return search(key);
                 break;
         }
-        // Meteor.subscribe('search', searchParameters, function(){
-        //     console.log('subscriptionComplete');
-        //     var searchResult = search(searchParameters);
-        //     Session.set('searchResult', searchResult.fetch());
-        //     console.log(Session.get('searchResult'));
-        // });
     }
 });
+
+Template.searchBar.onCreated(function () {
+    Session.set('searchConcept', 'users');
+});
+
+Template.searchBar.helpers({
+    searchConcept: function(){
+        return Session.get('searchConcept');
+    },
+    searchResults: function(){
+        return Session.get('searchResults');
+    }
+});
+
+Template.searchBar.events({
+    'keyup #inputSearchBar': function(){
+        delay(searchEvent(), 500);
+    },
+    'click .concept': function (event) {
+        var searchConcept = $(event.target).attr('id');
+        Session.set('searchConcept', searchConcept);
+        searchEvent();
+    },
+    'submit #searchBarForm': function (event) {
+        event.preventDefault();
+    }
+});
+
+var searchEvent = function () {
+    var key = $('#inputSearchBar').val();
+    if(key && key !=''){
+        var concept = Session.get('searchConcept');
+        var searchParameters = {
+            key: key,
+            concept: concept
+        };
+        Meteor.subscribe('search', searchParameters, function(){
+            var searchResult = search(searchParameters);
+            var searchResultSet = {
+                results: searchResult.fetch()
+            };
+            switch (concept) {
+                case 'users':
+                    searchResultSet.type= 'users';
+                    break;
+                case 'archives':
+                    searchResultSet.type= 'archives';
+                    break;
+                case 'students':
+                    searchResultSet.type= 'students';
+                    break;
+                case 'communities':
+                    searchResultSet.type= 'communities';
+                    break;
+                case 'all':
+                    return search(key);
+                    break;
+            }
+            Session.set('searchResults', [searchResultSet]);
+            $('#searchBarResults').show();
+        });
+    }
+};
+
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 
 function search(searchParameters){
     var concept = searchParameters.concept;
@@ -106,8 +188,8 @@ function search(searchParameters){
         case 'users':
             return searchUsers(searchParameters);
             break;
-        case 'files':
-            return searchFiles(searchParameters);
+        case 'archives':
+            return searchArchives(searchParameters);
             break;
         case 'students':
             return searchStudents(searchParameters);
@@ -118,8 +200,6 @@ function search(searchParameters){
         case 'all':
             return search(searchParameters);
             break;
-        default:
-            return this.ready();
     }
 }
 
@@ -169,7 +249,7 @@ function searchUsers(searchParameters){
     }else{
         query = {$or: mongoParameters};
     }
-    
+
     var result = Meteor.users.find(
         query,{
             fields: {
@@ -195,9 +275,70 @@ function searchStudents(searchParameters) {
 
     var result = Students.find(
         query, {
-        fields: {
-            profile: 1
-        }}
+            fields: {
+                profile: 1
+            }}
+    );
+    console.log(result.fetch());
+    return result;
+}
+
+function searchArchives(searchParameters) {
+    var mongoParameters = [];
+    var key = searchParameters.key || '';
+    var includeKeyRegex = {
+        $regex: key,
+        $options: 'i'
+    };
+
+    if(searchParameters.advancedSearch){
+        if(key){
+            if(searchParameters.archiveName){
+                mongoParameters.push({
+                    name: includeKeyRegex
+                });
+            }
+            if(searchParameters.ownerName){
+                mongoParameters.push({
+                    owner: includeKeyRegex
+                });
+            }
+        }
+    }else{
+        mongoParameters = [
+            {name: includeKeyRegex}
+        ]
+    }
+
+    var queryArray = [{$or: mongoParameters}];
+    var archiveType = searchParameters.archiveType;
+    if(archiveType){
+        queryArray.push({type: archiveType});
+    }
+    if(!searchParameters.deletedArchives){
+        queryArray.push({deleted: {$ne: true}});
+    }
+
+    var query;
+    if(queryArray.length>1){
+        query = {$and: queryArray}
+    }else{
+        query = queryArray
+    }
+
+    var result = Archives.find(
+        query,{
+            fields: {
+                owner: 1,
+                path: 1,
+                name: 1,
+                fileId: 1,
+                docId: 1,
+                deleted: 1,
+                type: 1,
+                linkType: 1,
+                linkId: 1
+            }}
     );
     console.log(result.fetch());
     return result;
@@ -250,3 +391,4 @@ function searchCommunities(searchParameters) {
     console.log(result.fetch());
     return result;
 }
+
