@@ -17,7 +17,7 @@ Template.poll.events({
             var pollId = template.data._id;
             Meteor.call('replyPoll', pollId, reply);
         }else{
-            Bert.alert(TAPi18n.__('not_reply'), 'warning');
+            Bert.alert(TAPi18n.__('reply_failure'), 'warning');
         }
     }
 });

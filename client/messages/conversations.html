@@ -11,6 +11,15 @@
                 {{#each conversations}}
                     <li id="{{this._id}}" class="list-group-item conversationInfo">{{> conversationInfo this}}</li>
                 {{/each}}
+                <li class="list-group-item">
+                    <a href="#" id="showArchivedConversations">
+                        {{#if showArchivedConversations}}
+                            {{_ "hide_archived"}} <i class="glyphicon glyphicon-chevron-up"></i>
+                        {{else}}
+                            {{_ "show_archived"}} <i class="glyphicon glyphicon-chevron-down"></i>
+                        {{/if}}
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-md-9 col-sm-8 conversationDetails">

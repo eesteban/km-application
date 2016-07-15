@@ -8,7 +8,7 @@ Template.newConversation.onRendered(function(){
         },
         messages: {
             inputMessage: {
-                required: TAPi18n.__('required_message')
+                required: TAPi18n.__('message_required')
             }
         },
         submitHandler: function() {

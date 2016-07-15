@@ -8,9 +8,9 @@ Template.deletedFile.events({
 
         Meteor.call('removeFile', template.data._id, function(error) {
             if (error) {
-                Bert.alert(TAPi18n.__("file_remove_failure"), 'danger')
+                Bert.alert(TAPi18n.__("remove_failure"), 'danger')
             } else {
-                Bert.alert(TAPi18n.__("file_remove_success"), 'success');
+                Bert.alert(TAPi18n.__("remove_success"), 'success');
             }
         });
     },
@@ -19,9 +19,9 @@ Template.deletedFile.events({
 
         Meteor.call('restoreFile', template.data._id, function(error) {
             if (error) {
-                Bert.alert(TAPi18n.__("file_restore_failure"), 'danger')
+                Bert.alert(TAPi18n.__("restore_failure"), 'danger')
             } else {
-                Bert.alert(TAPi18n.__("file_restore_success"), 'success');
+                Bert.alert(TAPi18n.__("restore_success"), 'success');
             }
         });
     }

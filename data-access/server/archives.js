@@ -197,7 +197,7 @@ Meteor.methods({
                 file.fileId = fileId;
                 file.size = fileSize;
                 console.log(file);
-                Archives.insert(file, function(error){
+                return Archives.insert(file, function(error){
                     if(error){
                         throw new Meteor.Error('error_insert_file', TAPi18n.__('insert-failure'));
                     }else{

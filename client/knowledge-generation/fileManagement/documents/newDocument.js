@@ -7,7 +7,7 @@ Template.newDocument.onRendered(function(){
         },
         messages: {
             inputName: {
-                required: TAPi18n.__('required_name')
+                required: TAPi18n.__('name_required')
             }
         },
         submitHandler: function() {

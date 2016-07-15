@@ -5,9 +5,9 @@ Template.removeFile.events({
 
         Meteor.call('removeFile', fileId, function(error){
             if(error){
-                Bert.alert(TAPi18n.__("file_remove_failure"), 'danger')
+                Bert.alert(TAPi18n.__("remove_failure"), 'danger')
             }else{
-                Bert.alert(TAPi18n.__("file_remove_success"), 'success');
+                Bert.alert(TAPi18n.__("remove_success"), 'success');
                 $('#removeFile').modal('hide');
             }
         });

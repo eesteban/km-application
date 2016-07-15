@@ -13,46 +13,41 @@
   "user": "Erabiltzailea",
   "users": "Erabiltzaileak",
   "username": "Erabiltzaile izena",
-  "username_required": "Mesedez, erabiltzaile izena zehaztu",
   "username_length": "Erabiltzaile izenak gutxienez 6 karaktere izan behar ditu",
 
   "password": "Pasahitza",
-  "password_required": "Mesedez, pasahitza zehaztu",
   "password_length": "Pasahitzak gutxienez 6 karaktere izan behar ditu",
   "password_confirmation": "Pasahitza berretsi",
   "password_confirmation_fail": "Zure pasahitza eta berrespenak ez dute bat egiten",
+  "reset_password": "Pasahitza aldatu",
 
   "email": "Posta elektronikoa",
-  "email_required": "Mesedez, posta elektronikoa zehaztu",
   "email_invalid": "Mesedez, balizoko posta elektronikoa erabili (email@adibidea.com)",
   "email_in_list": "Posta elektroniko hori dagoeneko zerrendan dago",
   "email_exist": "Posta elektroniko hori erabiltzaile bati dagokio",
   "verify_email": "Posta elektronikoa berretsi",
   "verified_email": "Berretsikatko posta elektronikoa",
+  "send_email": "Mezu elektronikoa bidali",
 
   "name": "Izena",
-  "name_required": "Mesedez, izena zehaztu",
 
   "surname": "Abizena",
-  "surname_required": "Mesedez, abizena zehaztu",
 
   "phone": "Telefonoa",
-  "phone_required": "Mesedez, telefonoa zehaztu",
   "not_phone": "Ez da telefonorik zehaztu",
 
   "skills": "Trebetasunak",
-  "skill_required": "Mesedez, trebetasuna zehaztu",
   "skill": "Trebetasuna",
   "skill_failure": "Barkatu, ezin izan da trebetasuna gehitu",
   "skill_in_list": "Trebetasun hori zerrendan dago",
 
   "interest": "Zaletasuna",
-  "interest_required": "Please, specify a interest",
   "interests": "Zaletasunak",
   "interest_failure": "Sorry, we could not add that interest",
   "interest_in_list": "That interest is already in the list",
 
   "my_profile": "Nire Profila",
+  "my_information": "Nire informazioa",
   "contact_information": "Kontaktu Informazioa",
   "about_me": "Niri Buruz",
   "not_about_me": "Ez duzu zuri buruzko informaziorik zehaztu",
@@ -108,7 +103,13 @@
   "community_information": "Taldearen informazioa",
   "create_community": "Taldea sortu",
 
+  "archives": "Artxiboak",
+
+  "join_community": "Parte hartu",
   "not_access_community": "Barkatu, baina ezin duzu talde hau ikusi",
+
+  "insert_community_success": "Taldea sortu duzu",
+  "insert_community_failure": "Ezin izan dugu taldea sortu!",
 
   /*Blog*/
   "blog_administration": "Blogaren kudeaketa",
@@ -123,17 +124,21 @@
   "topic": "Gaia",
   "topics": "Gaiak",
   "new_topic": "Gai berria",
+  "new_topic_success": "Gai berria sortu duzu",
+  "new_topic_failure": "Barkatu, ezin izan dugu gai berria sortu",
   "create_topic": "Sortu gaia",
   "no_topics": "Ez dago gairik momentuz, sortu bat!",
   "description": "Azalpena",
 
   "post": "Post",
   "posts": "Post-ak",
+  "no_posts": "Es dago post-ik",
   "new_post_success": "Post berria sortu da!",
   "new_post_failure": "Ezin izan da post berria sortu",
   "new_post": "Post berria",
   "last_post": "Azken posta",
   "author": "Egilea",
+  "already_reacted": "Post honi buruz zure iritzia erakutsi duzu dagoeneko",
 
   /*Students*/
   "student": "Ikaslea",
@@ -143,10 +148,12 @@
   "groups": "Taldeak",
   "students_information": "Ikaslearen informazioa",
   "not_access_student": "Barkatu, ezin duzu ikasle honen profila ikusi",
+  "insert_student_success": "Ikaslea gehitu duzu",
+  "insert_student_failure": "Baraktu, ezin izan dugu ikaslea gehitu",
 
-  "forgot_pwd": "Pasahitza ahaztu ahal duzu?",
+  "forgot_password": "Pasahitza ahaztu ahal duzu?",
+  "forgot_password_error": "Barkatu, ezin izan dugu zure pasahitza aldatu",
   "invite_users": "Erabiltzaileak gonbidatu",
-  "management_portal": "Kudeaketa ataria",
   "new_users": "Erabiltzaile berriak",
   "empty_list": "Zerrenda hutsik dago",
   "people_to_invite": "Gondbidatuen zerrenda",
@@ -164,19 +171,95 @@
   /*Knowledge generation*/
   "files": "Fitxategiak",
   "upload_files": "Fitxategiak igo",
+  "free_space": "Erabili gabeko espazioa",
+  "not_file": "Ez dugu fitxategia topatu",
 
   "folders": "Karpeta",
   "new_folder": "Karpeta berria",
+  "new_folder_success": "Karpeta berria sortu duzu",
+  "new_folder_failure": "Barkatu, ezin izan dugu karpeta berria sortu",
   "folder_name": "Karpetaren izena",
   "create_folder": "Karpeta sortu",
 
   "documents": "Dokumentuak",
   "new_document": "Dokumentu berria",
+  "new_document_success": "Dokumentu berria sortu duzu",
+  "new_document_failure": "Barkatu, ezin izan dugu dokumentu berria sortu",
   "document_name": "Dokumentuaren izena",
   "create_document": "Dokumentua sortu",
   "discard": "Desegin",
   "generate_pdf": "PDF-a sortu",
+  "remove_file": "Fitxategia ezabatu",
+  "remove_file_warn": "Kontuz, fitxategia ezabatzea betirako efektua dauka!",
+  "remove_success": "Ezabaturik",
+  "remove_failure": "Ezin izan dugu ezabatu",
+  "restore_success": "Berreskuraturik",
+  "restore_failure": "Ezin izan dugu berreskuratu",
 
   "trash": "Zakarrontzia",
-  "file_system": "Fitxategi sistema"
+  "archive_system": "Artxibo sistema",
+
+  "share": "Partekatu",
+  "shared_with": "Norekin partekatu",
+  "share_success": "Partekaturik!",
+  "share_failure": "Barkatu, ezin izan dugu partekatu",
+
+  "upload_image": "Argazkia eguneratu",
+  "not_picture": "Ez duzu argazkirik zehaztu",
+  "insert_picture_failure": "Barkatu, ezin izan dugu argazkia eguneratu",
+
+  /*Management Portal*/
+  "management_portal": "Kudeaketa ataria",
+
+  "create_poll": "Galdetegia sortu",
+  "polls": "Galdetegiak",
+  "question": "Galdera",
+  "multiple_choice": "Aukera anitzak",
+  "option": "Aukera",
+  "options": "Aukerak",
+  "add_option": "Aukera gehitu",
+  "not_options": "Galdetegi batek gutxienez 2 aukera behar ditu",
+  "empty_options": "Aukera batzuk hutsik daude",
+  "submit_poll": "Galdetegia erantzun",
+  "reply_failure": "Barkatu, ezin izan dugu zure erantzuna gorde",
+
+  "organization_information": "Erakundearen informazioa",
+  "philosophy": "Filosofia",
+  "address": "Helbidea",
+  "label": "Izena",
+  "update_information_success": "Informazioa eguneratu duzu",
+  "update_information_failure": "Baraktu, ezin izan dugu informazioa eguneratu",
+
+  "publications": "Informazioak",
+  "publish_information": "Informazioa argitaratu",
+  "publish_information_success": "Informazioa argitaratu duzu",
+  "publish_information_failure": "Baraktu, ezin izan dugu informazioa argitaratu",
+  "publish": "Argitaratu",
+  "information_type": "Informazio mota",
+  "knowledge_management": "Ezagutaren kudeaketa",
+  "tutorial": "Tutoriala",
+  "process": "Prozesua",
+  "rules_and_bp": "Arau eta jokabide zuzenak",
+
+  /*Error messages*/
+  "email_used": "That email is already in use",
+
+  /*Required*/
+  "name_required": "Mesedez, izena zehaztu",
+  "skill_required": "Mesedez, trebetasuna zehaztu",
+  "interest_required": "Mesedez, zaletasuna zehaztu",
+  "phone_required": "Mesedez, telefonoa zehaztu",
+  "surname_required": "Mesedez, abizena zehaztu",
+  "email_required": "Mesedez, posta elektronikoa zehaztu",
+  "password_required": "Mesedez, pasahitza zehaztu",
+  "username_required": "Mesedez, erabiltzaile izena zehaztu",
+
+  "body_required": "Mesedez, gorpua idatzi",
+  "topic_required": "Mesedez, gaia zehaztu",
+  "title_required": "Mesedez, izenburua zehaztu",
+  "description_required": "Mesedez, deskribapena idatzi",
+
+  "message_required": "Mesedez, mezua idatzi",
+
+  "label_required": "Mesedez, izena zehaztu"
 }

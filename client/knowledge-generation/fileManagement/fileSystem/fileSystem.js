@@ -60,7 +60,7 @@ Template.fileSystem.events({
                 });
             }
         }else{
-            Bert.alert(TAPi18n.__('not_file'), 'warning')
+            Bert.alert(TAPi18n.__('not_file'), 'warning');
         }
     }
 });

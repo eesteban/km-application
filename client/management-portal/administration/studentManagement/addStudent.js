@@ -12,10 +12,10 @@ Template.addStudent.onRendered(function(){
         },
         messages: {
             inputName: {
-                required: TAPi18next.t('required_username')
+                required: TAPi18next.t('username_required')
             },
             inputSurname: {
-                required: TAPi18next.t('required_email')
+                required: TAPi18next.t('email_required')
             }
         },
         submitHandler: function() {
@@ -24,9 +24,9 @@ Template.addStudent.onRendered(function(){
 
             Meteor.call('insertStudent', name, surname, function(error){
                 if(error){
-                    Bert.alert(TAPi18next.t('student_insert_error'), 'danger')
+                    Bert.alert(TAPi18next.t('insert_student_failure'), 'danger')
                 }else{
-                    Bert.alert(TAPi18next.t('student_insert_sucess'), 'success')
+                    Bert.alert(TAPi18next.t('insert_student_success'), 'success')
                 }
             });
         }

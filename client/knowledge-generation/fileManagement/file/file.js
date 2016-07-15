@@ -1,11 +1,13 @@
 Template.file.onCreated(function () {
     var archive = this.data;
     var fileId;
-    if(archive.type=='file'){
-        fileId = archive.fileId;
-    }else if (archive.type=='link' && archive.linkType=='file'){
+
+    if(archive.type=='link' && archive.linkType=='file'){
         fileId = archive.linkId;
+    }else{
+        fileId = archive.fileId;
     }
+
     if(fileId){
         Meteor.subscribe('userFileInformation', fileId);
     }
@@ -15,11 +17,13 @@ Template.file.helpers({
     targetFileId: function () {
         var archive = Template.instance().data;
         var fileId;
-        if(archive.type=='file'){
-            fileId = archive.fileId;
-        }else if (archive.type=='link' && archive.linkType=='file'){
+
+        if(archive.type=='link' && archive.linkType=='file'){
             fileId = archive.linkId;
+        }else{
+            fileId = archive.fileId;
         }
+
         if(fileId){
             return fileId;
         }

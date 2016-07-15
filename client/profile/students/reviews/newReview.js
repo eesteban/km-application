@@ -10,24 +10,61 @@ Template.newReview.onRendered(function(){
         },
         messages: {
             inputTitle: {
-                required: TAPi18n.__('required_title')
+                required: TAPi18n.__('title_required')
             },
             inputBody: {
-                required: TAPi18n.__('required_body')
+                required: TAPi18n.__('body_required')
             }
         },
         submitHandler: function() {
-            var title =  $('#inputTitle').val();
-            var body = $('#inputBody').val();
             var studentId = Session.get('selectedStudent');
-            
-            Meteor.call('newStudentReview', studentId, title, body, function(error){
-                if(error){
-                    Bert.alert(TAPi18n.__('new_student_review_failure'), 'danger');
+            console.log(studentId);
+            if(studentId){
+                var review = {
+                    title: $('#inputTitle').val(),
+                    body: $('#inputBody').val()
+                };
+
+                var files = $('#reviewFileInput').prop("files");
+                if(files.length>0){
+                    var path = Session.get('path');
+                    for (var i = 0, ln = files.length; i < ln; i++) {
+                        FileStorage.insert(files[i], function (error, fileObj) {
+                            if(error){
+                                Bert.alert(TAPi18n.__('insert-failure') +': '+ error.message);
+                            }else{
+                                review.file = {
+                                    name: fileObj.name(),
+                                    fileId: fileObj._id
+                                };
+                                console.log('studReview_file');
+                                Meteor.call('newStudentReview', studentId, review, function(error){
+                                    if(error){
+                                        Bert.alert(TAPi18n.__('new_student_review_failure'), 'danger');
+                                    }else{
+                                        $('#newReview').modal('toggle');
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }else{
-                    $('#newReview').modal('toggle');
+                    console.log('studReview_noFile');
+                    Meteor.call('newStudentReview', studentId, review, function(error){
+                        if(error){
+                            Bert.alert(TAPi18n.__('new_student_review_failure'), 'danger');
+                        }else{
+                            $('#newReview').modal('toggle');
+                        }
+                    });
                 }
-            });
+            }
         }
     })
+});
+
+Template.newReview.events({
+    'submit #newReviewForm': function(event){
+        event.preventDefault();
+    }
 });

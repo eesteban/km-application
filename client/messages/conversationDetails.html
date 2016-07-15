@@ -1,4 +1,18 @@
 <template name="conversationDetails">
+    <div class="row">
+        {{#if equals state 'default'}}
+            <a id="archiveConversation" href="#">
+                <i class="glyphicon glyphicon-import text-success"></i>
+            </a>
+        {{else}}
+            <a id="recoverConversation" href="#">
+                <i class="glyphicon glyphicon-export text-success"></i>
+            </a>
+        {{/if}}
+        <a id="deleteConversation" href="#">
+            <i class="glyphicon glyphicon-trash text-danger"></i>
+        </a>
+    </div>
     <div class="row messageContainer">
         <ul class="list-group">
             {{#each messages}}

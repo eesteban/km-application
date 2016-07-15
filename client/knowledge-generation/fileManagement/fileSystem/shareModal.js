@@ -8,9 +8,7 @@ Template.shareModal.onRendered(function () {
                     selectedUsers.push(user._id);
                 }
             );
-
-            console.log('submit share');
-            console.log(selectedUsers);
+            
             Meteor.call('shareArchive', archiveId, selectedUsers, function(error){
                 if(error){
                     Bert.alert(TAPi18n.__('share_failure'), 'danger');

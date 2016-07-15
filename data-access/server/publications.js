@@ -1,7 +1,11 @@
 var publicationPattern = {
     title: String,
     body: String,
-    type: Match.OneOf('knowledge_management', 'tutorial','process', 'rules_and_bp')
+    type: Match.OneOf('knowledge_management', 'tutorial','process', 'rules_and_bp'),
+    file: Match.Optional({
+        name: String,
+        fileId: String
+    })
 };
 
 Meteor.publish('latestPublications', function(){

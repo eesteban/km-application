@@ -10,10 +10,10 @@ Template.newEntry.onRendered(function(){
         },
         messages: {
             inputTitle: {
-                required: TAPi18n.__('required_title')
+                required: TAPi18n.__('title_required')
             },
             inputBody: {
-                required: TAPi18n.__('required_entry_body')
+                required: TAPi18n.__('body_required')
             }
         },
         submitHandler: function() {

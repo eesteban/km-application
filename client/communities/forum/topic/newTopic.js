@@ -13,13 +13,13 @@ Template.newTopic.onRendered(function(){
         },
         messages: {
             inputTopic: {
-                required: TAPi18n.__('required_topic')
+                required: TAPi18n.__('topic_required')
             },
             inputDescription: {
-                required: TAPi18n.__('required_description')
+                required: TAPi18n.__('description_required')
             },
             inputPost: {
-                required: TAPi18n.__('required_post_body')
+                required: TAPi18n.__('body_required')
             }
         },
         submitHandler: function() {

@@ -1,7 +1,7 @@
 <template name="publicationSlider">
     <div class="panel panel-default">
         <div class="panel-heading">
-            {{_ "information"}}
+            {{_ "publications"}}
         </div>
         <div class="panel-body">
             <div class="row">
@@ -13,6 +13,8 @@
                         <li class="list-group-item {{#if equals selectedPublicationId _id}}active{{/if}} publication-title" id="{{_id}}">
                             {{title}}
                         </li>
+                    {{else}}
+                        {{_ "empty_list"}}
                     {{/each}}
                 </ol>
             </div>

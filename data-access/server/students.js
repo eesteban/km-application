@@ -1,24 +1,11 @@
-Meteor.publish('studentsComplete', function(){
-    var userId = this.userId;
-    if(userId){
-        var userType = Meteor.users.findOne(userId, {type:1}).type;
-        if(userType==="admin"){
-            var students =  Students.find(
-                {},
-                {fields: {
-                    profile: 1,
-                    groups: 1
-                }}
-            );
-
-            if(students){
-                return students;
-            }
-        }
-    }
-    return this.ready();
-
-});
+var reviewPattern = {
+    title: String,
+    body: String,
+    file: Match.Optional({
+        name: String,
+        fileId: String
+    })
+};
 
 Meteor.publish('userStudents', function(){
     var userId = this.userId;
@@ -132,25 +119,20 @@ Meteor.methods({
             throw new Meteor.Error('logged-out', TAPi18n.__('logged-out'));
         }
     },
-    newStudentReview: function (studentId, title, body) {
+    newStudentReview: function (studentId, review) {
         check(studentId, String);
-        check(title, String);
-        check(body, String);
+        check(review, reviewPattern);
 
         var userId = Meteor.userId();
         if(userId){
-            var review = {
-                title: title,
-                body: body
-            };
             Students.update(studentId, {$addToSet: {reviews: review}});
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__('logged-out'));
         }
-    },
-    addGroupToStudent: function(studentId, groupId){
-        //Students.update({_id:studentId}, )
     }
+    // addGroupToStudent: function(studentId, groupId){
+    //     Students.update({_id:studentId}, )
+    // }
 });
 
 function hasAccess(userId, studentId){

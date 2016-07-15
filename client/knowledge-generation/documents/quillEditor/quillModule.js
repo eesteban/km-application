@@ -9,7 +9,7 @@ pdfGenerator.prototype.generatePDF = function () {
     var html = this.quill.getHTML();
     var pdf = new jsPDF();
     pdf.fromHTML(html);
-    pdf.output('save', this.docId+'.pdf');
+    pdf.output('save_', this.docId+'.pdf');
 };
 
 Quill.registerModule('pdfGenerator', pdfGenerator);

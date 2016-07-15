@@ -5,7 +5,7 @@ Template.uploadImage.events({
         if(files.length>0){
             PictureStorage.insert(files[0], function (error, fileObj) {
                 if (error) {
-                    Bert.alert(TAPi18n.__('insert-failure') + ': ' + error.message);
+                    Bert.alert(TAPi18n.__('insert_picture_failure'));
                 } else {
                     Meteor.call('setProfilePicture', fileObj._id);
                 }

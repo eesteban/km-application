@@ -7,7 +7,7 @@ Template.newPost.onRendered(function(){
         },
         messages: {
             inputPost: {
-                required: TAPi18n.__('required_post_body')
+                required: TAPi18n.__('body_required')
             }
         },
         submitHandler: function() {

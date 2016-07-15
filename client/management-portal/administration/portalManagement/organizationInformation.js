@@ -57,7 +57,7 @@ Template.organizationInformation.onRendered(function(){
         messages: {
             inputOrganizationEmail: {
                 required: TAPi18n.__("email_required"),
-                email: TAPi18n.__("valid_email")
+                email: TAPi18n.__("email_invalid")
             },
             inputEmailLabel: {
                 required: TAPi18n.__("label_required")
@@ -170,12 +170,14 @@ Template.organizationInformation.events({
 
         if(originalInformation!=actualInformation){
             Meteor.call('updateInformation', actualInformation, function(error){
-                if(!error){
-                    Bert.alert(TAPi18n.__('modified'), 'success');
+                if(error){
+                    Bert.alert(TAPi18n.__('update_information_failure'), 'warning');
+                }else{
+                    Bert.alert(TAPi18n.__('update_information_success'), 'success');
                 }
             });
         }else{
-            Bert.alert(TAPi18n.__('not_modified'), 'warning');
+            Bert.alert(TAPi18n.__('update_information_failure'), 'warning');
         }
     }
 });

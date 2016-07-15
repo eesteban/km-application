@@ -11,8 +11,6 @@
                 <p>{{philosophy}}</p>
                 <h4>{{_ "address"}}</h4>
                 <p>{{contact.address}}</p>
-                <h4>{{_ "description"}}</h4>
-                <p>{{description}}</p>
                 <h4>{{_ "phone"}}</h4>
                 {{#each contact.phones}}
                     <div class="detail-info">
@@ -23,7 +21,7 @@
                         {{_ "not_phone"}}
                     </div>
                 {{/each}}
-                <h4>{{_ "phone"}}</h4>
+                <h4>{{_ "email"}}</h4>
                 {{#each contact.emails}}
                     <div class="detail-info">
                         <b>{{this.label}}</b>:  {{this.email}}

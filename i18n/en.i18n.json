@@ -13,41 +13,35 @@
   "user": "User",
   "users": "Users",
   "username": "Username",
-  "username_required": "Please, specify a username",
   "username_length": "The username should be at least 6 character",
 
   "password": "Password",
-  "password_required": "Please, specify a password",
   "password_length": "The password should be at least 8 character",
   "password_confirmation": "Confirm password",
   "password_confirmation_fail": "Your Password and Password Confirmation must be the same",
+  "reset_password": "Reset password",
 
   "email": "Email",
-  "email_required": "Please, specify a email",
   "email_invalid": "Introduce a valid email address please (email@example.com)",
   "email_in_list": "That email is already in the list",
   "email_exist": "That email address already belongs to a user",
   "verify_email": "Verify email",
   "verified_email": "Verified email",
+  "send_email": "Send email",
 
   "name": "Name",
-  "name_required": "Please, specify a name",
 
   "surname": "Surname",
-  "surname_required": "Please, specify a surname",
 
   "phone": "Phone",
-  "phone_required": "Please, specify a phone",
   "not_phone": "No Phone available",
 
   "skill": "Skill",
-  "skill_required": "Please, specify a skill",
   "skills": "Skills",
   "skill_failure": "Sorry, we could not add that skill",
   "skill_in_list": "That skill is already in the list",
 
   "interest": "Interest",
-  "interest_required": "Please, specify a interest",
   "interests": "Interests",
   "interest_failure": "Sorry, we could not add that interest",
   "interest_in_list": "That interest is already in the list",
@@ -109,7 +103,13 @@
   "community_information": "Community information",
   "create_community": "Create community",
 
+  "archives": "Archives",
+
+  "join_community": "Join",
   "not_access_community": "Sorry, but you do not have access to this community",
+
+  "insert_community_success": "Community created",
+  "insert_community_failure": "Community can't be created!",
 
   /*Blog*/
   "blog_administration": "Blog administration",
@@ -124,17 +124,21 @@
   "topic": "Topic",
   "topics": "Topics",
   "new_topic": "New topic",
+  "new_topic_success": "You created a new topic",
+  "new_topic_failure": "Sorry, we couldn't create the new topic",
   "create_topic": "Create topic",
   "no_topics": "There is not topic available, create one!",
   "description": "Description",
 
   "post": "Post",
   "posts": "Posts",
+  "no_posts": "There isn't any post",
   "new_post": "New post",
   "new_post_success": "New post successfully created!",
   "new_post_failure": "The new post could not be created",
   "last_post": "Last post",
   "author": "Author",
+  "already_reacted": "You already reacted to this post",
 
   /*Students*/
   "student": "Student",
@@ -144,10 +148,12 @@
   "groups": "Groups",
   "students_information": "Student's infromation",
   "not_access_student": "Sorry, you do not have access to this student",
+  "insert_student_success": "You have inserted the student",
+  "insert_student_failure": "Sorry, we couldn't insert the student",
 
-  "forgot_pwd": "Forgot your password?",
+  "forgot_password": "Forgot your password?",
+  "forgot_password_error": "Sorry, we couldn't update your password",
   "invite_users": "Invite users",
-  "management_portal": "Management portal",
   "new_users": "New users",
   "empty_list": "The list is empty",
   "people_to_invite": "People to invite",
@@ -165,22 +171,95 @@
   /*Knowledge generation*/
   "files": "Files",
   "upload_files": "Upload files",
+  "free_space": "Free space",
+  "not_file": "File not found",
 
   "folders": "Folders",
   "new_folder": "New folder",
+  "new_folder_success": "You have created a new folder",
+  "new_folder_failure": "Sorry, we couldn't create a new folder",
   "folder_name": "Folder name",
   "create_folder": "Create folder",
 
   "documents": "Documents",
   "new_document": "New document",
+  "new_document_success": "You have created a new document",
+  "new_document_failure": "Sorry, we couldn't create a new document",
   "document_name": "Document name",
   "create_document": "Create document",
   "discard": "Discard",
   "generate_pdf": "Generate PDF",
+  "remove_file": "Remove file",
+  "remove_file_warn": "Be careful, removing a file has a permanent effect!",
+  "remove_success": "Removed",
+  "remove_failure": "Sorry, we can't remove",
+  "restore_success": "Restored",
+  "restore_failure": "Sorry, we can't restore",
 
   "trash": "Trash",
-  "file_system": "File system",
+  "archive_system": "Archive system",
+
+  "share": "Share",
+  "shared_with": "Shared with",
+  "share_success": "Content shared!",
+  "share_failure": "Sorry, we couldn't share the content",
+
+  "upload_image": "Upload image",
+  "not_picture": "There isn't any image selected",
+  "insert_picture_failure": "Sorry, we couldn't upload the picture",
+
+  /*Management Portal*/
+  "management_portal": "Management portal",
+
+  "create_poll": "Create Poll",
+  "polls": "Polls",
+  "question": "Question",
+  "multiple_choice": "Multiple choice",
+  "option": "Option",
+  "options": "Options",
+  "add_option": "Add option",
+  "not_options": "A Poll requires at least 2 options",
+  "empty_options": "There are empty options on your Poll",
+  "submit_poll": "Submit Poll",
+  "reply_failure": "Sorry, we couldn't save you reply",
+
+  "organization_information": "Organization's information",
+  "philosophy": "Philosophy",
+  "address": "Address",
+  "label": "Label",
+  "update_information_success": "You have updated the information",
+  "update_information_failure": "Sorry, we couldn't update the information",
+
+  "publications": "Publications",
+  "publish_information": "Publish information",
+  "publish_information_success": "You have published the information",
+  "publish_information_failure": "Sorry, we couldn't publish the information",
+  "publish": "Publish",
+  "information_type": "Information type",
+  "knowledge_management": "Knowledge Management",
+  "tutorial": "Tutorial",
+  "process": "Process",
+  "rules_and_bp": "Rules and Best Practices",
 
   /*Error messages*/
-  "email_used": "That email is already in use"
+  "email_used": "That email is already in use",
+
+  /*Required*/
+  "name_required": "Please, specify a name",
+  "skill_required": "Please, specify a skill",
+  "interest_required": "Please, specify a interest",
+  "phone_required": "Please, specify a phone",
+  "surname_required": "Please, specify a surname",
+  "email_required": "Please, specify a email",
+  "password_required": "Please, specify a password",
+  "username_required": "Please, specify a username",
+
+  "body_required": "Please, write a body",
+  "topic_required": "Please, specify a topic",
+  "title_required": "Please, specify a title",
+  "description_required": "Please, specify a description",
+
+  "message_required": "Please, specify a message",
+
+  "label_required": "Please, specify a question"
 }

@@ -15,7 +15,7 @@ Template.createCommunity.onRendered(function(){
         },
         messages: {
             inputCommunityName: {
-                required: TAPi18n.__('required_community_name')
+                required: TAPi18n.__('name_required')
             }
         },
         submitHandler: function() {

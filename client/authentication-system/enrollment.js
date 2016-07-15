@@ -55,7 +55,7 @@ Template.enrollment.onRendered(function(){
 
                     Meteor.call('enrollUser', username, name, surname, function(error){
                         if(error){
-                            Bert.alert('enrollment_failed', 'danger');
+                            Bert.alert(TAPi18n.__('enrollment_failed'), 'danger');
                         }else{
                             Session.set('enrollmentToken', null);
                             Router.go('/myProfile');

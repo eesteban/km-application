@@ -42,6 +42,9 @@ Router.route('/portal',{
     name: 'portal',
     template: 'portal',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     onBeforeAction: function(){
         if(Meteor.userId()){
             this.next();
@@ -58,6 +61,9 @@ Router.route('/search',{
     name: 'search',
     template: 'advancedSearch',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     onBeforeAction: function(){
         if(Meteor.userId()){
             this.next();
@@ -76,6 +82,7 @@ Router.route('/profile/:_id', {
     layoutTemplate: 'mainLayout',
     subscriptions: function(){
         this.subscribe('user', this.params._id).wait();
+        this.subscribe('userPrivate').wait();
     },
     data: function(){
         return {
@@ -98,6 +105,9 @@ Router.route('/community/:_id', {
     name: 'community',
     template: 'community',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     waitOn: function(){
         return this.subscribe('community', this.params._id);
     },
@@ -123,6 +133,9 @@ Router.route('/users', {
     name: 'users',
     template: 'users',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     waitOn: function(){
         return this.subscribe('otherUsersBasic');
     },
@@ -142,6 +155,9 @@ Router.route('/students', {
     name: 'students',
     template: 'students',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     waitOn: function(){
         return this.subscribe('userStudents');
     },
@@ -161,6 +177,9 @@ Router.route('/student/:_id', {
     name: 'student',
     template: 'studentProfile',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     waitOn: function(){
         return [
             this.subscribe('studentGroups'),
@@ -173,6 +192,7 @@ Router.route('/student/:_id', {
     },
     onBeforeAction: function(){
         if(Meteor.userId()){
+            Session.set('selectedStudent', this.params._id);
             this.next();
         }else {
             Router.go('/');
@@ -207,6 +227,9 @@ Router.route('/communities', {
     name: 'communities',
     template: 'communities',
     layoutTemplate: 'mainLayout',
+    subscriptions: function(){
+        this.subscribe('userPrivate').wait();
+    },
     onBeforeAction: function(){
         if(Meteor.userId()){
             this.next();
