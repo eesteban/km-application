@@ -19,7 +19,7 @@ Template.myProfile.onRendered(function(){
         },
         messages: {
             phone: {
-                required: "Please specify a new phone"
+                required: TAPi18n.__("phone_required")
             }
         },
         submitHandler: function() {
@@ -28,7 +28,7 @@ Template.myProfile.onRendered(function(){
             if(!userPhones || userPhones.indexOf(phone)<0){
                 Meteor.call('addPhone', phone);
             }else{
-                Bert.alert('That phone is already in the list', 'danger')
+                Bert.alert(TAPi18n.__("phone_in_list"), 'danger')
             }
         }
     });
@@ -41,8 +41,8 @@ Template.myProfile.onRendered(function(){
         },
         messages: {
             email: {
-                required: "Please specify a new email",
-                email: "Introduce a valid email address please (email@example.com)"
+                required: TAPi18n.__("email_required"),
+                email: TAPi18n.__("email_invalid")
             }
         },
         submitHandler: function() {
@@ -51,7 +51,7 @@ Template.myProfile.onRendered(function(){
             if(!userEmails || userEmails.indexOf(email)<0){
                 Meteor.call('addEmail', email);
             }else{
-                Bert.alert('That email is already in the list', 'danger')
+                Bert.alert(TAPi18n.__("email_in_list"), 'danger')
             }
         }
     });
@@ -96,7 +96,7 @@ Template.myProfile.events({
     'click .removeEmail': function (event){
         event.preventDefault();
         if(Meteor.user().emails.length <= 1){
-            Bert.alert("You can't delete your last Email address", 'warning');
+            Bert.alert(TAPi18n.__("last_email"), 'warning');
         }else{
             var email = this.address;
             Meteor.call('removeEmail', email);

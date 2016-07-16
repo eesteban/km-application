@@ -37,10 +37,9 @@ Template.newReview.onRendered(function(){
                                     name: fileObj.name(),
                                     fileId: fileObj._id
                                 };
-                                console.log('studReview_file');
                                 Meteor.call('newStudentReview', studentId, review, function(error){
                                     if(error){
-                                        Bert.alert(TAPi18n.__('new_student_review_failure'), 'danger');
+                                        Bert.alert(TAPi18n.__('new_review_failure'), 'danger');
                                     }else{
                                         $('#newReview').modal('toggle');
                                     }
@@ -52,7 +51,7 @@ Template.newReview.onRendered(function(){
                     console.log('studReview_noFile');
                     Meteor.call('newStudentReview', studentId, review, function(error){
                         if(error){
-                            Bert.alert(TAPi18n.__('new_student_review_failure'), 'danger');
+                            Bert.alert(TAPi18n.__('new_review_failure'), 'danger');
                         }else{
                             $('#newReview').modal('toggle');
                         }

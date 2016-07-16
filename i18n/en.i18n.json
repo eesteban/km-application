@@ -6,7 +6,7 @@
   /*Authentication*/
   "login": "Login",
   "logout": "Logout",
-  "login_failed": "Sorry, that username and password do not match. Please try again.",
+  "login_failed": "Sorry, that username and password don't match. Please try again.",
   "not_logged_user": "Not user Loged In",
 
   /*User Profile*/
@@ -16,15 +16,23 @@
   "username_length": "The username should be at least 6 character",
 
   "password": "Password",
+  "old_password": "Old password",
+  "new_password": "New password",
   "password_length": "The password should be at least 8 character",
   "password_confirmation": "Confirm password",
   "password_confirmation_fail": "Your Password and Password Confirmation must be the same",
+  "password_update_success": "You have updated your password",
+  "password_update_failure": "Sorry, we couldn't update your password",
   "reset_password": "Reset password",
+  "change_password": "Change password",
+  "change": "Change ",
 
   "email": "Email",
+  "not_email": "No Email available",
   "email_invalid": "Introduce a valid email address please (email@example.com)",
   "email_in_list": "That email is already in the list",
   "email_exist": "That email address already belongs to a user",
+  "last_email": "You can't delete your last email",
   "verify_email": "Verify email",
   "verified_email": "Verified email",
   "send_email": "Send email",
@@ -35,21 +43,25 @@
 
   "phone": "Phone",
   "not_phone": "No Phone available",
+  "phone_in_list": "That phone is already in the list",
 
   "skill": "Skill",
   "skills": "Skills",
-  "skill_failure": "Sorry, we could not add that skill",
+  "skill_failure": "Sorry, we couldn't add that skill",
   "skill_in_list": "That skill is already in the list",
 
   "interest": "Interest",
   "interests": "Interests",
-  "interest_failure": "Sorry, we could not add that interest",
+  "interest_failure": "Sorry, we couldn't add that interest",
   "interest_in_list": "That interest is already in the list",
 
   "my_profile": "My Profile",
   "my_information": "My Information",
+  "profile_picture": "Profile picture",
   "contact_information": "Contact Information",
   "about_me": "About Me",
+  "update_aboutMe_success": "You have updated the information about you",
+  "update_aboutMe_failure": "Sorry, we couldn't add that interest",
   "not_about_me": "You have not specified any information about you",
   "not_about_user": "There is no information about the user",
   "messages": "Messages",
@@ -69,6 +81,18 @@
   "not_selected_conversation": "You have not selected any conversation",
   "send": "Send",
   "new_message": "New message",
+  "new_message_success": "You have created a new message",
+  "new_message_failure": "Sorry, we couldn't create the new message",
+  "show_archived": "Show archived",
+  "hide_archived": "Hide archived",
+  "new_conversation_success": "You have created a new conversation",
+  "new_conversation_failure": "Sorry, we couldn't create the new conversation",
+  "delete_conversation_success": "You have deleted the conversation",
+  "delete_conversation_failure": "Sorry, we couldn't delete the  conversation",
+  "archive_conversation_success": "You have archived the conversation",
+  "archive_conversation_failure": "Sorry, we couldn't archive the conversation",
+  "recover_conversation_success": "You have recovered the conversation",
+  "recover_conversation_failure": "Sorry, we couldn't recover the conversation",
 
   /*Communities*/
   "community": "Community",
@@ -106,7 +130,7 @@
   "archives": "Archives",
 
   "join_community": "Join",
-  "not_access_community": "Sorry, but you do not have access to this community",
+  "not_access_community": "Sorry, but you don't have access to this community",
 
   "insert_community_success": "Community created",
   "insert_community_failure": "Community can't be created!",
@@ -114,7 +138,10 @@
   /*Blog*/
   "blog_administration": "Blog administration",
   "new_entry": "New Entry",
+  "new_entry_success": "You have added a new Entry",
+  "new_entry_failure": "Sorry, we couldn't add the new Entry",
   "publish_entry": "Publish Entry",
+  "delete_entry": "Delete Entry",
   "title": "Title",
   "body": "Body",
 
@@ -134,8 +161,8 @@
   "posts": "Posts",
   "no_posts": "There isn't any post",
   "new_post": "New post",
-  "new_post_success": "New post successfully created!",
-  "new_post_failure": "The new post could not be created",
+  "new_post_success": "You have created a new post successfully",
+  "new_post_failure": "Sorry, we couldn't create the new post",
   "last_post": "Last post",
   "author": "Author",
   "already_reacted": "You already reacted to this post",
@@ -147,9 +174,14 @@
   "add_student": "Add Student",
   "groups": "Groups",
   "students_information": "Student's infromation",
-  "not_access_student": "Sorry, you do not have access to this student",
+  "not_access_student": "Sorry, you don't have access to this student",
   "insert_student_success": "You have inserted the student",
   "insert_student_failure": "Sorry, we couldn't insert the student",
+
+  "reviews": "Reviews",
+  "new_review": "New review",
+  "create_review": "Create review",
+  "new_review_failure": "Sorry, we couldn't create the review",
 
   "forgot_password": "Forgot your password?",
   "forgot_password_error": "Sorry, we couldn't update your password",
@@ -166,9 +198,9 @@
   "management": "Management",
 
   "update": "Update",
-  "search": "Search",
 
   /*Knowledge generation*/
+  "file": "File",
   "files": "Files",
   "upload_files": "Upload files",
   "free_space": "Free space",
@@ -181,6 +213,7 @@
   "folder_name": "Folder name",
   "create_folder": "Create folder",
 
+  "document": "Document",
   "documents": "Documents",
   "new_document": "New document",
   "new_document_success": "You have created a new document",
@@ -196,6 +229,8 @@
   "restore_success": "Restored",
   "restore_failure": "Sorry, we can't restore",
 
+  "link": "Link",
+
   "trash": "Trash",
   "archive_system": "Archive system",
 
@@ -210,6 +245,7 @@
 
   /*Management Portal*/
   "management_portal": "Management portal",
+  "portal": "Portal",
 
   "create_poll": "Create Poll",
   "polls": "Polls",
@@ -241,11 +277,18 @@
   "process": "Process",
   "rules_and_bp": "Rules and Best Practices",
 
+  /*Knowledge location*/
+  "search": "Search",
+  "all": "All",
+  "staff": "Staff",
+  "administrator": "Administrator",
+
   /*Error messages*/
   "email_used": "That email is already in use",
 
   /*Required*/
   "name_required": "Please, specify a name",
+  "aboutMe_required": "Please, information about you",
   "skill_required": "Please, specify a skill",
   "interest_required": "Please, specify a interest",
   "phone_required": "Please, specify a phone",

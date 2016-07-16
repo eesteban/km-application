@@ -7,16 +7,16 @@ Template.aboutMe.onRendered(function () {
         },
         messages: {
             aboutMe: {
-                required:'Please specify some information about you'
+                required: TAPi18n.__("aboutMe_required")
             }
         },
         submitHandler: function(){
             var aboutMe = $('#aboutMeInput').val();
             Meteor.users.update(Meteor.userId(), {$set: {'profile.aboutMe': aboutMe}}, function(error){
                 if(error){
-                    Bert.alert('Error updating the personal information', 'danger');
+                    Bert.alert("update_aboutMe_failure", 'danger');
                 }else{
-                    Bert.alert('Personal information correctly updated', 'success');
+                    Bert.alert('update_aboutMe_success', 'success');
                 }
             });
         },

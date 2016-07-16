@@ -15,7 +15,7 @@
                 {{#each this.skills}}
                     <li class="tag">{{this}}</li>
                 {{else}}
-                    <li class="tag">{{_ "not_skills"}}</li>
+                    <li>{{_ "empty_list"}}</li>
                 {{/each}}
             </ul>
         </div>
@@ -25,7 +25,7 @@
                 {{#each this.interests}}
                     <li class="tag">{{this}}</li>
                 {{else}}
-                    <li class="tag">{{_ "not_interests"}}</li>
+                    <li>{{_ "empty_list"}}</li>
                 {{/each}}
             </ul>
         </div>

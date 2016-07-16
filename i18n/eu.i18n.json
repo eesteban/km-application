@@ -16,15 +16,23 @@
   "username_length": "Erabiltzaile izenak gutxienez 6 karaktere izan behar ditu",
 
   "password": "Pasahitza",
+  "old_password": "Aurreko pasahitza",
+  "new_password": "Pasahitza berria",
   "password_length": "Pasahitzak gutxienez 6 karaktere izan behar ditu",
   "password_confirmation": "Pasahitza berretsi",
   "password_confirmation_fail": "Zure pasahitza eta berrespenak ez dute bat egiten",
-  "reset_password": "Pasahitza aldatu",
+  "password_update_success": "Pasahitza eguneratu duzu",
+  "password_update_failure": "Baraktu, ezin izan dugu zure pasahitza eguneratu",
+  "reset_password": "Pasahitza berrezarri",
+  "change_password": "Pasahitza aldatu",
+  "change": "Aldatu",
 
   "email": "Posta elektronikoa",
+  "not_email": "Ez da posta elektronikorik zehaztu",
   "email_invalid": "Mesedez, balizoko posta elektronikoa erabili (email@adibidea.com)",
   "email_in_list": "Posta elektroniko hori dagoeneko zerrendan dago",
   "email_exist": "Posta elektroniko hori erabiltzaile bati dagokio",
+  "last_email": "Ezin duzu zure azken posta elektronikoa ezabatu",
   "verify_email": "Posta elektronikoa berretsi",
   "verified_email": "Berretsikatko posta elektronikoa",
   "send_email": "Mezu elektronikoa bidali",
@@ -35,6 +43,7 @@
 
   "phone": "Telefonoa",
   "not_phone": "Ez da telefonorik zehaztu",
+  "phone_in_list": "Telefono hori dagoeneko zerrendan dago",
 
   "skills": "Trebetasunak",
   "skill": "Trebetasuna",
@@ -43,13 +52,16 @@
 
   "interest": "Zaletasuna",
   "interests": "Zaletasunak",
-  "interest_failure": "Sorry, we could not add that interest",
+  "interest_failure": "Sorry, we couldn't add that interest",
   "interest_in_list": "That interest is already in the list",
 
   "my_profile": "Nire Profila",
   "my_information": "Nire informazioa",
+  "profile_picture": "Profileko argazkia",
   "contact_information": "Kontaktu Informazioa",
   "about_me": "Niri Buruz",
+  "update_aboutMe_success": "Zuri buruzko infromazioa eguneratu duzu",
+  "update_aboutMe_failure": "Baraktu, ezin izan dugu zuri burzko informazioa eguneratu",
   "not_about_me": "Ez duzu zuri buruzko informaziorik zehaztu",
   "not_about_user": "Ez dago erabiltzaileari buruzko informazioa",
   "messages": "Mezuak",
@@ -69,6 +81,18 @@
   "not_selected_conversation": "Ez duzu elkarrizketarik hautatu",
   "send": "Bidali",
   "new_message": "Mezu berria",
+  "new_message_success": "Mezu berria sortu duzu",
+  "new_message_failure": "Baraktu, ezin izan dugu mezu sortu",
+  "show_archived": "Gehiago erakutsi",
+  "hide_archived": "Ez erakutsi",
+  "new_conversation_success": "Elkarrizketa berria sortu duzu",
+  "new_conversation_failure": "Baraktu, ezin izan dugu elkarrizketa sortu",
+  "delete_conversation_success": "Elkarrizketa ezabatu duzu",
+  "delete_conversation_failure": "Baraktu, ezin izan dugu elkarrizketa ezabatu",
+  "archive_conversation_success": "Elkarrizketa gorde duzu",
+  "archive_conversation_failure": "Baraktu, ezin izan dugu elkarrizketa gorde",
+  "recover_conversation_success": "Elkarrizketa berreskuratu duzu",
+  "recover_conversation_failure": "Baraktu, ezin izan dugu elkarrizketa berreskuratu",
 
   /*Communities*/
   "community": "Taldea",
@@ -114,7 +138,10 @@
   /*Blog*/
   "blog_administration": "Blogaren kudeaketa",
   "new_entry": "Sarrera berria",
+  "new_entry_success": "Sarrera berria sortu duzu",
+  "new_entry_failure": "Barkatu, ezin izan dugu sarrera berria sortu",
   "publish_entry": "Sarrera argitaratu",
+  "delete_entry": "Sarrera ezabatu",
   "title": "Izenburua",
   "body": "Testua",
 
@@ -151,6 +178,11 @@
   "insert_student_success": "Ikaslea gehitu duzu",
   "insert_student_failure": "Baraktu, ezin izan dugu ikaslea gehitu",
 
+  "reviews": "Berrikuspenak",
+  "new_review": "Berrikuspen berria",
+  "create_review": "Berrikuspena sortu",
+  "new_review_failure": "Barkatu, ezin izan dugu berrikuspena sortu",
+
   "forgot_password": "Pasahitza ahaztu ahal duzu?",
   "forgot_password_error": "Barkatu, ezin izan dugu zure pasahitza aldatu",
   "invite_users": "Erabiltzaileak gonbidatu",
@@ -166,9 +198,9 @@
   "management": "Kudeaketa",
 
   "update": "Eguneratu",
-  "search": "Bilatu",
 
   /*Knowledge generation*/
+  "file": "Fitxategia",
   "files": "Fitxategiak",
   "upload_files": "Fitxategiak igo",
   "free_space": "Erabili gabeko espazioa",
@@ -181,6 +213,7 @@
   "folder_name": "Karpetaren izena",
   "create_folder": "Karpeta sortu",
 
+  "document": "Dokumentua",
   "documents": "Dokumentuak",
   "new_document": "Dokumentu berria",
   "new_document_success": "Dokumentu berria sortu duzu",
@@ -196,6 +229,8 @@
   "restore_success": "Berreskuraturik",
   "restore_failure": "Ezin izan dugu berreskuratu",
 
+  "link": "Esteka",
+
   "trash": "Zakarrontzia",
   "archive_system": "Artxibo sistema",
 
@@ -210,6 +245,7 @@
 
   /*Management Portal*/
   "management_portal": "Kudeaketa ataria",
+  "portal": "Ataria",
 
   "create_poll": "Galdetegia sortu",
   "polls": "Galdetegiak",
@@ -241,11 +277,18 @@
   "process": "Prozesua",
   "rules_and_bp": "Arau eta jokabide zuzenak",
 
+  /*Knowledge location*/
+  "search": "Bilatu",
+  "all": "Guztiak",
+  "staff": "Langilea",
+  "administrator": "Administratzailea",
+
   /*Error messages*/
   "email_used": "That email is already in use",
 
   /*Required*/
   "name_required": "Mesedez, izena zehaztu",
+  "aboutMe_required": "Mesedez, zuri buruzko informazioa idatzi",
   "skill_required": "Mesedez, trebetasuna zehaztu",
   "interest_required": "Mesedez, zaletasuna zehaztu",
   "phone_required": "Mesedez, telefonoa zehaztu",
