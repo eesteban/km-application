@@ -28,6 +28,7 @@
   "change": "Aldatu",
 
   "email": "Posta elektronikoa",
+  "add_email": "Posta gehitu",
   "not_email": "Ez da posta elektronikorik zehaztu",
   "email_invalid": "Mesedez, balizoko posta elektronikoa erabili (email@adibidea.com)",
   "email_in_list": "Posta elektroniko hori dagoeneko zerrendan dago",
@@ -42,6 +43,7 @@
   "surname": "Abizena",
 
   "phone": "Telefonoa",
+  "add_phone": "Telefonoa gehitu",
   "not_phone": "Ez da telefonorik zehaztu",
   "phone_in_list": "Telefono hori dagoeneko zerrendan dago",
 
@@ -76,10 +78,12 @@
   /*Conversations*/
   "participants": "Parteartzaileak",
   "conversation": "Elkarrizketa",
+  "conversations": "Elkarrizketak",
   "new_conversation": "Elkarrizketa berria",
   "create_conversation": "Elkarrizketa sortu",
   "not_selected_conversation": "Ez duzu elkarrizketarik hautatu",
   "send": "Bidali",
+  "send_message": "Bidali mezua",
   "new_message": "Mezu berria",
   "new_message_success": "Mezu berria sortu duzu",
   "new_message_failure": "Baraktu, ezin izan dugu mezu sortu",
@@ -172,6 +176,9 @@
   "students": "Ikasleak",
   "new_student": "Ikasle berriak",
   "add_student": "Ikaslea gehitu",
+  "add_student_to_group": "Ikaslea taldera gehitu",
+  "add_student_community_success": "Ikasleak taldera gehitu dituzu",
+  "add_student_community_failure": "Barkatu, ezin izan dugu ikaslea gehitu. Baliteke ikasle guztiak taldean egotea.",
   "groups": "Taldeak",
   "students_information": "Ikaslearen informazioa",
   "not_access_student": "Barkatu, ezin duzu ikasle honen profila ikusi",
@@ -258,6 +265,7 @@
   "empty_options": "Aukera batzuk hutsik daude",
   "submit_poll": "Galdetegia erantzun",
   "reply_failure": "Barkatu, ezin izan dugu zure erantzuna gorde",
+  "poll_replied": "Galdetegi hau dagoneko erantzun duzu, mila esker!",
 
   "organization_information": "Erakundearen informazioa",
   "philosophy": "Filosofia",
@@ -265,6 +273,11 @@
   "label": "Izena",
   "update_information_success": "Informazioa eguneratu duzu",
   "update_information_failure": "Baraktu, ezin izan dugu informazioa eguneratu",
+
+  "add_user_to_group": "Erabiltzailea taldera gehitu",
+  "add_user": "Erabiltzailea gehitu",
+  "add_users_community_success": "Erabiltzailea taldera gehitu duzu",
+  "add_users_community_failure": "Baraktu, ezin izan dugu erabiltzailea taldera gehitu",
 
   "publications": "Informazioak",
   "publish_information": "Informazioa argitaratu",
@@ -279,6 +292,7 @@
 
   /*Knowledge location*/
   "search": "Bilatu",
+  "search_parameters": "Bilaketaren ezaugariak",
   "all": "Guztiak",
   "staff": "Langilea",
   "administrator": "Administratzailea",

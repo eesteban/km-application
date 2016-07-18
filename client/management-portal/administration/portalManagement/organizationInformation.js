@@ -33,7 +33,8 @@ Template.organizationInformation.onRendered(function(){
                 number: $('#inputPhone').val(),
                 label:   $('#inputPhoneLabel').val()
             };
-            
+
+            console.log(phone);
             var information = Session.get('organizationInformation');
             if(!information.contact.phones){
                 information.contact.phones = [phone];

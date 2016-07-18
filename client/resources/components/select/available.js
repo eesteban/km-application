@@ -6,7 +6,7 @@ Template.available.helpers({
         }else if(targetCollection === 'users'){
             return Meteor.users.find({_id: { $ne: Meteor.userId()}, selected: { $not: true}});
         }else if(targetCollection === 'studentGroups'){
-            return Communities.find({type: 'student', selected: { $not: true}});
+            return Communities.find({type: 'student_group', selected: { $not: true}});
         }
    },
     targetCollection: function(){

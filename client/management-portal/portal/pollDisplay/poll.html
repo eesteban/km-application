@@ -1,6 +1,9 @@
 <template name="poll">
     {{#with this}}
         <h4>{{question}}</h4>
+        {{#if userReplied}}
+            {{_ "poll_replied"}}
+        {{else}}
             <form id="pollReplyForm">
                 <div class="form-group" id="optionGroup">
                     {{#each options}}
@@ -12,5 +15,6 @@
                 </div>
             </form>
         <button type="submit" class="btn btn-block btn-primary" form="pollReplyForm">{{_ "submit_poll"}}</button>
+        {{/if}}
     {{/with}}
 </template>

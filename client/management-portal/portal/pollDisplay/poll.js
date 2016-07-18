@@ -25,5 +25,8 @@ Template.poll.events({
 Template.poll.helpers({
     multipleChoice: function(){
         return Template.instance().data.multipleChoice;
+    },
+    userReplied: function () {
+        return $.inArray(Meteor.userId(), Template.instance().data.users)>=0;
     }
 });

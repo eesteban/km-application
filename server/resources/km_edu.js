@@ -57,11 +57,13 @@ Meteor.methods({
     fastSetup: function(){
         createOrganization();
 
-        var userIdArray = createUsers(Meteor.userId(), 4);
-
-        var studentIdArray = createStudents(5);
-
-        createCommunities(userIdArray, studentIdArray, 4);
+        createUsers(Meteor.userId(), 4);
+        createStudents(30);
+        // var userIdArray = createUsers(Meteor.userId(), 4);
+        //
+        // var studentIdArray = createStudents(5);
+        //
+        // createCommunities(userIdArray, studentIdArray, 4);
     }
 });
 
@@ -71,7 +73,7 @@ function createOrganization() {
     if(!existingOrganization){
         var organization = {
             information: {
-                philosophy: 'philosophy of my school',
+                philosophy: 'Philosophy of my school',
                 contact: {
                     address: 'main street 1, Paris, 75016',
                     emails: [
@@ -93,39 +95,117 @@ function createUsers(adminId, number){
     /*Meteor.users.update({_id: adminId},{communities:[]});*/
 
     console.log('Creating users');
-    var userIdArray = [];
-    for(var i=0; i<number;i++){
-        var user= {
-            type : "staff",
-            username : "UserN"+i,
-            profile : {
-                name : "Name"+i,
-                surname : "Surname"+i,
-                completeName: "Name"+i+' '+ "Surname"+i
-            },
-            password: "12345678",
-            enrolled: true
-        };
-        userIdArray.push(Accounts.createUser(user));
-    }
+    // var userIdArray = [];
+    // for(var i=0; i<number;i++){
+    //     var user= {
+    //         type : "staff",
+    //         username : "UserN"+i,
+    //         profile : {
+    //             name : "Name"+i,
+    //             surname : "Surname"+i,
+    //             completeName: "Name"+i+' '+ "Surname"+i
+    //         },
+    //         password: "12345678",
+    //         enrolled: true
+    //     };
+    //     userIdArray.push(Accounts.createUser(user));
+    // }
 
-    console.log('Users created: '+ userIdArray);
-    return userIdArray;
+    var user= {
+        type : "staff",
+        username : "adam123",
+        profile : {
+            name : "Adam",
+            surname : "Smith",
+            completeName: "Adam Smith"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user);
+
+    var user2= {
+        type : "staff",
+        username : "alexander123",
+        profile : {
+            name : "Alexander",
+            surname : "Jhonson",
+            completeName: "Alexander Jhonson"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user2);
+
+    var user3= {
+        type : "staff",
+        username : "emma123",
+        profile : {
+            name : "Emma",
+            surname : "Brown",
+            completeName: "Emma Brown"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user3);
+
+    var user4= {
+        type : "staff",
+        username : "mary123",
+        profile : {
+            name : "Mary",
+            surname : "Moore",
+            completeName: "Mary Moore"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user4);
+
+    var user5= {
+        type : "staff",
+        username : "rebeca123",
+        profile : {
+            name : "Rebeca",
+            surname : "Davis",
+            completeName: "Rebeca Davis"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user5);
+
+    var user6= {
+        type : "staff",
+        username : "michel123",
+        profile : {
+            name : "Michel",
+            surname : "Anderson",
+            completeName: "Michel Anderson"
+        },
+        password: "12345678",
+        enrolled: true
+    };
+    Accounts.createUser(user6);
 }
 
 function createStudents(number){
     Students.remove({});
 
     console.log('Creating students');
+    var names = ['Liam', 'Noah', 'James', 'William', 'Oliver', 'Joseph, Owen', 'Gabriel', 'Alexander',
+        'Michael', 'Wyatt', 'Jackson', 'Jacob', 'Benjamin', 'Logan', 'Samuel',
+        'Olivia', 'Emma', 'Aurora', 'Amelia', 'Ava', 'Abigail', 'Harper', 'Sophia',
+        'Elizabeth', 'Emily', 'Evelyn', 'Hazel', 'Madison', 'Lillian', 'Scarlett'];
+    var surnames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor',
+        'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Martinez', 'Robinson'];
     var studentIdArray = [];
-    for(var i=0; i<number;i++){
-        var name = "Student";
-        var surname = "Number"+ i;
-        studentIdArray.push(Meteor.call('insertStudent', name, surname));
+    for(var i=0, lN = names.length, lS=surnames.length; i<number;i++){
+        var name = names[Math.floor((Math.random() * lN))];
+        var surname = surnames[Math.floor((Math.random() * lS))];
+        Meteor.call('insertStudent', name, surname);
     }
-
-    console.log('Students created: '+ studentIdArray);
-    return studentIdArray;
 }
 
 function createCommunities(userIdArray, studentIdArray, number){

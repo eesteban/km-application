@@ -83,6 +83,7 @@ Router.route('/profile/:_id', {
     subscriptions: function(){
         this.subscribe('user', this.params._id).wait();
         this.subscribe('userPrivate').wait();
+        this.subscribe("profilePictureInformation", this.params._id);
     },
     data: function(){
         return {

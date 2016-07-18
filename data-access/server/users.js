@@ -117,7 +117,7 @@ Meteor.publish("otherUsersBasic", function () {
     var otherUserBasic =  Meteor.users.find(
         {_id: { $ne: userId}, enrolled: true},
         {fields: {
-            'profile.image': 1,
+            'profile.picture': 1,
             'profile.completeName': 1
         }}
     );

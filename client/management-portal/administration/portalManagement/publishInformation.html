@@ -14,7 +14,7 @@
                     <textarea class="form-control" id="inputBody" name="inputBody" placeholder="{{_ "body"}}"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="inputType">{{_ "type"}}</label>
+                    <label for="inputType">{{_ "information_type"}}</label>
                     <select class="form-control" id="inputType" name="inputType">
                         <option value="knowledge_management">{{_ "knowledge_management"}}</option>
                         <option value="tutorial">{{_ "tutorial"}}</option>
@@ -26,9 +26,11 @@
                     <label for="informationFileInput">{{_ "file"}}</label>
                     <input type="file" id="informationFileInput">
                 </div>
-                <button class="btn btn-primary btn-block" type="submit" form="publicationForm">
-                    {{_ "publish"}}
-                </button>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" form="publicationForm">
+                        {{_ "publish"}}
+                    </button>
+                </div>
             </form>
         </div>
     </div>

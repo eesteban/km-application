@@ -129,21 +129,37 @@ Meteor.publish("communityForum", function (communityId) {
 Meteor.publish("studentGroups", function () {
     var userId = this.userId;
 
-    var communities =  Communities.find(
-        {type: 'student_group', users: userId},
-        {fields: {
-            name: 1,
-            users: 1,
-            type: 1,
-            information: 1
-        }}
-    );
+    if(userId){
+        var communities;
+        if(Meteor.users.findOne(this.userId).type==='admin'){
+            communities = Communities.find(
+                {type: 'student_group'},
+                {fields: {
+                    name: 1,
+                    users: 1,
+                    type: 1,
+                    information: 1
+                }}
+            );
+            console.log('admin_student_group');
+        }else{
+            communities = Communities.find(
+                {type: 'student_group', users: userId},
+                {fields: {
+                    name: 1,
+                    users: 1,
+                    type: 1,
+                    information: 1
+                }}
+            );
+        }
 
-    if(communities){
-        return communities;
+        if(communities){
+            return communities;
+        }
+
+        return this.ready();
     }
-
-    return this.ready();
 });
 
 Meteor.methods({
@@ -306,6 +322,68 @@ Meteor.methods({
             }
         }else{
             throw new Meteor.Error('logged-out', TAPi18n.__("post_not_created"));
+        }
+    },
+    addStudentsToCommunity: function(communitiesId, students){
+        check(communitiesId, [String]);
+        check(students, [String]);
+
+        var userId = Meteor.userId();
+        if(userId){
+            for(var c=0, n=communitiesId.length; c<n; c++){
+                var communityId=communitiesId[c];
+                var community = Communities.findOne(communityId);
+                if(Meteor.user().type==="admin" && community && community.type === 'student_group'){
+                    // var existingStudents = community.information.students;
+                    // for(var i=0, k=existingStudents.length; i<k; i++){
+                    //     for(var m=0, l=students.length; m<l; m++){
+                    //         if(existingStudents[i]===students[m]){
+                    //             students.splice(m, 1);
+                    //             m--;
+                    //         }
+                    //     }
+                    // }
+
+                    if(students.length>0){
+                        Communities.update(communityId, {$addToSet: {'information.students': {$each: students}}});
+                    }
+                }else{
+                    throw new Meteor.Error('add-students', TAPi18n.__("students_not_added"));
+                }
+            }
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("students_not_added"));
+        }
+    },
+    addUsersToCommunity: function(communitiesId, users){
+        check(communitiesId, [String]);
+        check(users, [String]);
+
+        var userId = Meteor.userId();
+        if(userId){
+            for(var c=0, n=communitiesId.length; c<n; c++){
+                var communityId=communitiesId[c];
+                var community = Communities.findOne(communityId);
+                if(Meteor.user().type==="admin" && community && community.type === 'student_group'){
+                    var existingStudents = community.users;
+                    for(var i=0, k=existingStudents.length; i<k; i++){
+                        for(var m=0, l=users.length; m<l; m++){
+                            if(existingStudents[i]===users[m]){
+                                users.splice(m, 1);
+                                m--;
+                            }
+                        }
+                    }
+
+                    if(users.length>0){
+                        Communities.update(communityId, {$addToSet: {'users': {$each: users}}});
+                    }
+                }else{
+                    throw new Meteor.Error('add-users', TAPi18n.__("userss_not_added"));
+                }
+            }
+        }else{
+            throw new Meteor.Error('logged-out', TAPi18n.__("users_not_added"));
         }
     }
 });

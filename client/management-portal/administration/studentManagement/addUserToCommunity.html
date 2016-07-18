@@ -1,0 +1,20 @@
+<template name="addUserToCommunity">
+    <div class="panel">
+        <div class="panel-heading">
+            {{_ "add_user_to_group"}}
+        </div>
+        <div class="panel-body">
+            <div class="form-group row">
+                <label class="form-control-label">{{_ "student_group"}}</label>
+                {{> selectFromCollection targetCollection='studentGroups'}}
+            </div>
+            <div class="form-group row">
+                <label class="form-control-label">{{_ "users"}}</label>
+                {{> selectFromCollection targetCollection='users'}}
+            </div>
+            <div class="form-group row">
+                <button type="button" class="btn btn-block btn-primary" id="addUserToCommunity">{{_ "add_user"}}</button>
+            </div>
+        </div>
+    </div>
+</template>

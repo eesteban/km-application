@@ -28,6 +28,7 @@
   "change": "Change ",
 
   "email": "Email",
+  "add_email": "Add email",
   "not_email": "No Email available",
   "email_invalid": "Introduce a valid email address please (email@example.com)",
   "email_in_list": "That email is already in the list",
@@ -42,6 +43,7 @@
   "surname": "Surname",
 
   "phone": "Phone",
+  "add_phone": "Add Phone",
   "not_phone": "No Phone available",
   "phone_in_list": "That phone is already in the list",
 
@@ -76,10 +78,12 @@
   /*Conversations*/
   "participants": "Participants",
   "conversation": "Conversation",
+  "conversations": "Conversations",
   "new_conversation": "New conversation",
   "create_conversation": "Create conversation",
   "not_selected_conversation": "You have not selected any conversation",
   "send": "Send",
+  "send_message": "Send message",
   "new_message": "New message",
   "new_message_success": "You have created a new message",
   "new_message_failure": "Sorry, we couldn't create the new message",
@@ -172,8 +176,11 @@
   "students": "Students",
   "new_student": "New Student",
   "add_student": "Add Student",
+  "add_student_to_group": "Add Student to Group",
+  "add_student_community_success": "You have added some students to the communities",
+  "add_student_community_failure": "Sorry, we couldn't add the students. Maybe all the students are in the group already",
   "groups": "Groups",
-  "students_information": "Student's infromation",
+  "students_information": "Student's information",
   "not_access_student": "Sorry, you don't have access to this student",
   "insert_student_success": "You have inserted the student",
   "insert_student_failure": "Sorry, we couldn't insert the student",
@@ -258,6 +265,7 @@
   "empty_options": "There are empty options on your Poll",
   "submit_poll": "Submit Poll",
   "reply_failure": "Sorry, we couldn't save you reply",
+  "poll_replied": "You have already replied this poll, thank you!",
 
   "organization_information": "Organization's information",
   "philosophy": "Philosophy",
@@ -265,6 +273,11 @@
   "label": "Label",
   "update_information_success": "You have updated the information",
   "update_information_failure": "Sorry, we couldn't update the information",
+
+  "add_user_to_group": "Add user to group",
+  "add_user": "Add user",
+  "add_users_community_success": "You have added some users to the communities",
+  "add_users_community_failure": "Sorry, we couldn't add the users",
 
   "publications": "Publications",
   "publish_information": "Publish information",
@@ -279,6 +292,7 @@
 
   /*Knowledge location*/
   "search": "Search",
+  "search_parameters": "Search parameters",
   "all": "All",
   "staff": "Staff",
   "administrator": "Administrator",

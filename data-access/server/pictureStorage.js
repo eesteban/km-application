@@ -9,7 +9,7 @@ PictureStorage.allow({
         return false;
     },
     download:function(userId, picture){
-        return !!userId;
+        return true;
     }
 });
 
@@ -21,6 +21,7 @@ Meteor.publish("profilePictureInformation", function (userId) {
     }
 
     var user = Meteor.users.findOne(userId, {profile: 1});
+
     if(user){
         return PictureStorage.find(user.profile.picture);
     }

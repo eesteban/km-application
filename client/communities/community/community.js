@@ -32,6 +32,6 @@ Template.community.helpers({
         }
     },
     notMember: function () {
-        return Template.instance().data.community.users.indexOf(Meteor.userId()) < 1;
+        return Template.instance().data.community.users.indexOf(Meteor.userId()) < 0;
     }
 });

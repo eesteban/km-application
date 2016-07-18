@@ -21,21 +21,21 @@ Meteor.publish('userStudents', function(){
         if(userType==='admin'){
             students = Students.find({}, projection);
         } else {
-            var usersStudents = Communities.aggregate(
-                {$match: {
-                    type: "student_group",
-                    users: userId
-                }},
-                {$group: {
-                    _id:null,
-                    studentsId:{$addToSet: "$information.students"}
-                }}
-            )[0];
-            if(usersStudents){
-                var usersStudentsId = usersStudents.studentsId;
-                console.log(usersStudentsId);
+            var userStudentGroups = Communities.find({type: 'student_group', users: userId},  {'information.students': 1});
+            if(userStudentGroups){
+                var userStudents = [];
+                userStudentGroups.forEach(function (studentGroup) {
+                    var candidateStudents = studentGroup.information.students;
+                    for(var i=0, k=candidateStudents.length; i<k; i++){
+                        userStudents.push(candidateStudents[i]);
+                    }
+                });
+                if(userStudents){
+                    console.log('All the users students');
+                    console.log(userStudents);
 
-                students = Students.find({_id: {$in: usersStudentsId}}, projection);
+                    students = Students.find({_id: {$in: userStudents}}, projection);
+                }
             }
         }
         if(students){
@@ -138,6 +138,6 @@ Meteor.methods({
 function hasAccess(userId, studentId){
     var user = Meteor.users.findOne(userId, {type: 1});
     if(user){
-        return user.type==="admin" || Communities.find({type:'student_group', users: userId, students: studentId}).count()>0;
+        return user.type==="admin" || Communities.find({type:'student_group', users: userId, 'information.students': studentId}).count()>0;
     }
 }

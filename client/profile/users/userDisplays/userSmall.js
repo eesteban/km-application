@@ -1,5 +1,7 @@
 Template.userSmall.onCreated(function () {
     var templateInfo = this.data;
+    
+    Meteor.subscribe()
 
     if(typeof templateInfo == 'string'){
         Meteor.subscribe("profilePictureInformation", templateInfo);

@@ -20,27 +20,33 @@ Template.pollDisplay.helpers({
 Template.pollDisplay.events({
     'click #previous': function (event) {
         event.preventDefault();
-        var pollIndex = Session.get('pollIndex');
+        var polls = Session.get('polls');
+        if(polls.length>0){
+            var pollIndex = Session.get('pollIndex');
 
-        if(pollIndex>0){
-            pollIndex = pollIndex-1;
-        }else{
-            pollIndex = Session.get('pollNumber');
+            if(pollIndex>0){
+                pollIndex = pollIndex-1;
+            }else{
+                pollIndex = Session.get('pollNumber');
+            }
+
+            Session.set('pollIndex', pollIndex)
         }
-
-        Session.set('pollIndex', pollIndex)
     },
     'click #next': function (event) {
         event.preventDefault();
-        var pollIndex = Session.get('pollIndex');
-        var pollNumber = Session.get('pollNumber');
+        var polls = Session.get('polls');
+        if(polls.length>0){
+            var pollIndex = Session.get('pollIndex');
+            var pollNumber = Session.get('pollNumber');
 
-        if(pollIndex<pollNumber){
-            pollIndex = pollIndex+1;
-        }else{
-            pollIndex = 0;
+            if(pollIndex<pollNumber){
+                pollIndex = pollIndex+1;
+            }else{
+                pollIndex = 0;
+            }
+
+            Session.set('pollIndex', pollIndex)
         }
-
-        Session.set('pollIndex', pollIndex)
     }
 });
